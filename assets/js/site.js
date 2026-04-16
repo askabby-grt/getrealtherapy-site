@@ -2,6 +2,8 @@ document.addEventListener("DOMContentLoaded", async function () {
   await loadIncludes();
   setYear();
   loadGoogleTag();
+  setupMobileNav();
+  setupSubmenus();
 });
 
 async function loadIncludes() {
@@ -28,10 +30,13 @@ async function loadIncludes() {
 }
 
 function setYear() {
-  const yearEl = document.getElementById("year");
-  if (yearEl) {
-    yearEl.textContent = new Date().getFullYear();
-  }
+  const yearNodes = document.querySelectorAll("[data-year], #year");
+  if (!yearNodes.length) return;
+
+  const year = String(new Date().getFullYear());
+  yearNodes.forEach(function (node) {
+    node.textContent = year;
+  });
 }
 
 function loadGoogleTag() {
@@ -53,4 +58,39 @@ function loadGoogleTag() {
 
   window.gtag("js", new Date());
   window.gtag("config", GA_ID);
+}
+
+function setupMobileNav() {
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector(".site-nav");
+  if (!toggle || !nav) return;
+
+  toggle.addEventListener("click", function () {
+    const isOpen = nav.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
+    document.body.classList.toggle("nav-open", isOpen);
+  });
+
+  nav.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      nav.classList.remove("is-open");
+      toggle.setAttribute("aria-expanded", "false");
+      document.body.classList.remove("nav-open");
+    });
+  });
+}
+
+function setupSubmenus() {
+  const toggles = document.querySelectorAll(".site-nav__submenu-toggle");
+  if (!toggles.length) return;
+
+  toggles.forEach(function (toggle) {
+    toggle.addEventListener("click", function () {
+      const parent = toggle.closest(".site-nav__item--has-submenu");
+      if (!parent) return;
+
+      const isOpen = parent.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+  });
 }
