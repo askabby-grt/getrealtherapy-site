@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contact | Get Real Therapy</title>
+  <meta name="description" content="Book a consultation with Get Real Therapy. Reach out for support with anxiety, trauma, depression, relationship challenges, and life transitions.">
+  <meta name="keywords" content="contact therapist, book therapy consultation, Fort Lauderdale therapy, online therapy Florida, anxiety therapy consultation">
+  <meta name="author" content="Get Real Therapy">
+  <meta name="theme-color" content="#F5F1EC">
+  <link rel="canonical" href="https://getrealtherapy.com/contact/">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Get Real Therapy">
+  <meta property="og:title" content="Contact | Get Real Therapy">
+  <meta property="og:description" content="Take the next step toward support with a consultation request at Get Real Therapy.">
+  <meta property="og:url" content="https://getrealtherapy.com/contact/">
+  <meta property="og:image" content="https://getrealtherapy.com/assets/images/abby_01.jpg">
+  <meta property="og:image:alt" content="Warm portrait representing therapy consultation support">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Contact | Get Real Therapy">
+  <meta name="twitter:description" content="Take the next step toward support with a consultation request at Get Real Therapy.">
+  <meta name="twitter:image" content="https://getrealtherapy.com/assets/images/abby_01.jpg">
+
+  <link rel="stylesheet" href="/assets/css/site.css">
+
+  <style>
+    .contact-hero {
+      padding: 48px 0 36px;
+      background: var(--color-beige);
+      text-align: center;
+    }
+
+    .contact-hero .section-title {
+      max-width: 900px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .contact-hero .section-copy {
+      margin-left: auto;
+      margin-right: auto;
+      max-width: 760px;
+    }
+
+    .contact-layout {
+      padding: 28px 0 96px;
+      background: var(--color-beige);
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(320px, 0.85fr);
+      gap: 32px;
+      align-items: start;
+    }
+
+    .contact-form-card,
+    .contact-info-card {
+      background: var(--color-soft-white);
+      border: 1px solid var(--color-light-ui-gray);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-soft);
+      overflow: hidden;
+    }
+
+    .contact-form-card {
+      padding: 0;
+    }
+
+    .contact-card-header {
+      padding: 30px 30px 18px;
+      border-bottom: 1px solid var(--color-light-ui-gray);
+      background: linear-gradient(180deg, rgba(232,220,210,0.5), rgba(245,241,236,0.2));
+    }
+
+    .contact-card-header h2 {
+      margin: 0 0 10px;
+      color: var(--color-near-black);
+      font-size: clamp(1.6rem, 2vw, 2rem);
+    }
+
+    .contact-card-header p {
+      margin: 0;
+      color: var(--color-muted-gray);
+    }
+
+    .contact-form-body {
+      padding: 30px;
+    }
+
+    .contact-meta {
+      margin-bottom: 28px;
+      padding: 18px 20px;
+      border: 1px solid var(--color-light-ui-gray);
+      border-radius: var(--radius-md);
+      background: var(--color-beige);
+    }
+
+    .contact-meta strong {
+      display: block;
+      margin-bottom: 10px;
+      color: var(--color-near-black);
+      font-size: 1rem;
+    }
+
+    .contact-form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px 16px;
+    }
+
+    .field {
+      display: grid;
+      gap: 8px;
+    }
+
+    .field--full {
+      grid-column: 1 / -1;
+    }
+
+    .field label {
+      font-weight: 700;
+      color: var(--color-near-black);
+      font-size: 0.95rem;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      border: 1px solid #CFC6BD;
+      border-radius: 12px;
+      padding: 14px 16px;
+      background: var(--color-beige);
+      color: var(--color-charcoal);
+      outline: none;
+      transition: border-color var(--transition-base), box-shadow var(--transition-base), background var(--transition-base);
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--color-cta-teal);
+      box-shadow: 0 0 0 4px rgba(79, 157, 166, 0.12);
+      background: #fff;
+    }
+
+    .field textarea {
+      min-height: 130px;
+      resize: vertical;
+    }
+
+    .consent {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 12px;
+      align-items: start;
+      margin-top: 8px;
+      font-size: 0.92rem;
+      color: var(--color-muted-gray);
+    }
+
+    .consent input {
+      margin-top: 4px;
+    }
+
+    .contact-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 22px;
+    }
+
+    .contact-info-card {
+      padding: 30px;
+      display: grid;
+      gap: 22px;
+    }
+
+    .info-block h3 {
+      margin: 0 0 10px;
+      font-size: 1.1rem;
+      color: var(--color-near-black);
+    }
+
+    .info-block p,
+    .info-block li {
+      color: var(--color-charcoal);
+    }
+
+    .info-list {
+      display: grid;
+      gap: 10px;
+      padding-left: 18px;
+    }
+
+    .mini-cta {
+      padding: 20px;
+      border-radius: var(--radius-md);
+      background: var(--color-plum-dark);
+      color: var(--color-soft-white);
+    }
+
+    .mini-cta h3 {
+      margin: 0 0 10px;
+      color: var(--color-soft-white);
+    }
+
+    .mini-cta p {
+      color: rgba(250,250,250,0.92);
+      margin-bottom: 14px;
+    }
+
+    @media (max-width: 980px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .contact-form-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .contact-card-header,
+      .contact-form-body,
+      .contact-info-card {
+        padding: 22px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div id="siteHeader"></div>
+
+  <main id="main" class="site-main">
+    <section class="contact-hero">
+      <div class="container">
+        <span class="eyebrow">Schedule a Consultation</span>
+        <h1 class="section-title">Take the first step toward support that feels grounded, clear, and personal</h1>
+        <p class="section-copy">
+          Ready to start now? This short form helps us understand what kind of support you are looking for and guide you toward the next right step.
+          We offer support for anxiety, trauma, depression, relationship challenges, and real life change in Fort Lauderdale and online across Florida.
+        </p>
+      </div>
+    </section>
+
+    <section class="contact-layout">
+      <div class="container">
+        <div class="contact-grid">
+          <div class="contact-form-card">
+            <div class="contact-card-header">
+              <h2>15-Minute Consultation Request</h2>
+              <p>Share a few details so we can learn more about your needs, pace, and goals before we connect.</p>
+            </div>
+
+            <div class="contact-form-body">
+              <div class="contact-meta">
+                <strong>What to expect</strong>
+                <p>
+                  This is a simple intake form, not a commitment to therapy. Once submitted, the practice can follow up to answer questions,
+                  recommend the best next step, and help you schedule a consultation.
+                </p>
+              </div>
+
+              <form action="#" method="post">
+                <div class="contact-form-grid">
+                  <div class="field">
+                    <label for="first-name">First Name *</label>
+                    <input id="first-name" name="first_name" type="text" placeholder="First Name" required>
+                  </div>
+
+                  <div class="field">
+                    <label for="last-name">Last Name</label>
+                    <input id="last-name" name="last_name" type="text" placeholder="Last Name">
+                  </div>
+
+                  <div class="field">
+                    <label for="phone">Phone</label>
+                    <input id="phone" name="phone" type="tel" placeholder="Phone">
+                  </div>
+
+                  <div class="field">
+                    <label for="email">Email *</label>
+                    <input id="email" name="email" type="email" placeholder="Email" required>
+                  </div>
+
+                  <div class="field field--full">
+                    <label for="contact-method">Preferred Method of Contact</label>
+                    <select id="contact-method" name="contact_method">
+                      <option value="">Select one</option>
+                      <option>Email</option>
+                      <option>Phone</option>
+                      <option>Text</option>
+                    </select>
+                  </div>
+
+                  <div class="field field--full">
+                    <label for="concerns">What are you hoping to address in treatment?</label>
+                    <textarea id="concerns" name="concerns" placeholder="Share what has been feeling hardest lately, what kind of support you want, or what you hope will change."></textarea>
+                  </div>
+
+                  <div class="field field--full">
+                    <label for="services">Which services are you interested in?</label>
+                    <select id="services" name="services">
+                      <option value="">Select one</option>
+                      <option>Anxiety Therapy</option>
+                      <option>Trauma Therapy</option>
+                      <option>Depression Therapy</option>
+                      <option>Relationship Counseling</option>
+                      <option>Life Coaching</option>
+                    </select>
+                  </div>
+
+                  <div class="field field--full">
+                    <label for="source">How did you find us?</label>
+                    <select id="source" name="source">
+                      <option value="">Select one</option>
+                      <option>Google Search</option>
+                      <option>Instagram</option>
+                      <option>Referral</option>
+                      <option>Friend or Family</option>
+                      <option>Blog Article</option>
+                      <option>Other</option>
+                    </select>
+                  </div>
+
+                  <div class="field field--full">
+                    <label class="consent" for="consent">
+                      <input id="consent" name="consent" type="checkbox">
+                      <span>
+                        By checking this box, I consent to receive follow-up communication related to my inquiry, including appointment scheduling
+                        and consultation updates. Message and data rates may apply if text messaging is used.
+                      </span>
+                    </label>
+                  </div>
+                </div>
+
+                <div class="contact-actions">
+                  <button class="button button--primary" type="submit">Continue</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <aside class="contact-info-card" aria-label="Contact page sidebar">
+            <div class="info-block">
+              <h3>Private-pay support</h3>
+              <p>
+                This practice can position itself as private-pay and personalized, with care that is paced and tailored to the client rather than shaped by insurance limits.
+              </p>
+            </div>
+
+            <div class="info-block">
+              <h3>Helpful details to include</h3>
+              <ul class="info-list">
+                <li>Primary location served</li>
+                <li>Online therapy availability across Florida</li>
+                <li>Response timeframe for new inquiries</li>
+                <li>Whether you offer a consultation or discovery call</li>
+              </ul>
+            </div>
+
+            <div class="info-block">
+              <h3>Suggested reassurance copy</h3>
+              <p>
+                All information is reviewed with care and kept private. This form is simply an invitation to start the conversation, not pressure to commit before you are ready.
+              </p>
+            </div>
+
+            <div class="mini-cta">
+              <h3>Need more clarity first?</h3>
+              <p>Direct visitors to your What to Expect page if they want to understand the process before reaching out.</p>
+              <a class="button button--secondary" href="/what-to-expect" style="border-color:#FAFAFA;color:#FAFAFA;">What to Expect</a>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <div id="siteFooter"></div>
+  <script src="/assets/js/site.js"></script>
+</body>
+</html>
