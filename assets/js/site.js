@@ -63,20 +63,46 @@ function loadGoogleTag() {
 function setupMobileNav() {
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".site-nav");
-  if (!toggle || !nav) return;
+  const overlay = document.querySelector(".site-nav-overlay");
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    nav.classList.add("is-open");
+    overlay.hidden = false;
+    overlay.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.classList.add("nav-open");
+  }
+
+  function closeNav() {
+    nav.classList.remove("is-open");
+    overlay.classList.remove("is-open");
+    overlay.hidden = true;
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("nav-open");
+  }
 
   toggle.addEventListener("click", function () {
-    const isOpen = nav.classList.toggle("is-open");
-    toggle.setAttribute("aria-expanded", String(isOpen));
-    document.body.classList.toggle("nav-open", isOpen);
+    const isOpen = nav.classList.contains("is-open");
+    if (isOpen) {
+      closeNav();
+    } else {
+      openNav();
+    }
   });
+
+  overlay.addEventListener("click", closeNav);
 
   nav.querySelectorAll("a").forEach(function (link) {
     link.addEventListener("click", function () {
-      nav.classList.remove("is-open");
-      toggle.setAttribute("aria-expanded", "false");
-      document.body.classList.remove("nav-open");
+      closeNav();
     });
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closeNav();
+    }
   });
 }
 
@@ -85,9 +111,14 @@ function setupSubmenus() {
   if (!toggles.length) return;
 
   toggles.forEach(function (toggle) {
-    toggle.addEventListener("click", function () {
+    toggle.addEventListener("click", function (event) {
       const parent = toggle.closest(".site-nav__item--has-submenu");
       if (!parent) return;
+
+      const isDesktop = window.matchMedia("(min-width: 981px)").matches;
+      if (!isDesktop) {
+        event.preventDefault();
+      }
 
       const isOpen = parent.classList.toggle("is-open");
       toggle.setAttribute("aria-expanded", String(isOpen));
