@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Therapy for Anxiety, Trauma, and Real Life Change | Get Real Therapy</title>
-  <meta name="description" content="Get Real Therapy offers support for anxiety, trauma, depression, relationship challenges, and real life change in Fort Lauderdale and online across Florida.">
-  <meta name="keywords" content="therapy for anxiety, trauma therapy, depression therapy, relationship counseling, life coaching, Fort Lauderdale therapy, online therapy Florida">
+  <meta name="description" content="Get Real Therapy offers trauma-informed therapy for anxiety, trauma, depression, relationship challenges, and real life change in Fort Lauderdale and online across Florida.">
+  <meta name="keywords" content="therapy Florida, Fort Lauderdale therapist, anxiety therapy, trauma therapy, depression therapy, relationship counseling, life coaching, EMDR therapy, IFS therapy">
   <meta name="author" content="Get Real Therapy">
   <meta name="theme-color" content="#F5F1EC">
   <link rel="canonical" href="https://getrealtherapy.com/">
@@ -13,222 +13,560 @@
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Get Real Therapy">
   <meta property="og:title" content="Therapy for Anxiety, Trauma, and Real Life Change | Get Real Therapy">
-  <meta property="og:description" content="Feel better. Think clearer. Move forward with support that actually works.">
+  <meta property="og:description" content="Trauma-informed therapy for anxiety, trauma, depression, relationship challenges, and real life change in Fort Lauderdale and online across Florida.">
   <meta property="og:url" content="https://getrealtherapy.com/">
   <meta property="og:image" content="https://getrealtherapy.com/assets/images/abby_01.jpg">
   <meta property="og:image:alt" content="Warm portrait representing therapy support at Get Real Therapy">
 
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="Therapy for Anxiety, Trauma, and Real Life Change | Get Real Therapy">
-  <meta name="twitter:description" content="Feel better. Think clearer. Move forward with support that actually works.">
+  <meta name="twitter:description" content="Trauma-informed therapy for anxiety, trauma, depression, relationship challenges, and real life change in Fort Lauderdale and online across Florida.">
   <meta name="twitter:image" content="https://getrealtherapy.com/assets/images/abby_01.jpg">
 
   <!-- Favicon -->
-  <link rel="icon" type="image/png" sizes="32x32" href="/grt_logo_round_transparent.png?v=1">
-  <link rel="icon" type="image/png" sizes="16x16" href="/grt_logo_round_transparent.png?v=1">
-  <link rel="apple-touch-icon" sizes="180x180" href="/grt_logo_round_transparent.png?v=1">
-  <link rel="shortcut icon" href="/grt_logo_round_transparent.png?v=1">
-  
+  <link rel="icon" type="image/png" sizes="32x32" href="/grt_logo_round_transparent.png?v=2">
+  <link rel="icon" type="image/png" sizes="16x16" href="/grt_logo_round_transparent.png?v=2">
+  <link rel="apple-touch-icon" sizes="180x180" href="/grt_logo_round_transparent.png?v=2">
+  <link rel="shortcut icon" href="/grt_logo_round_transparent.png?v=2">
+
   <link rel="stylesheet" href="/assets/css/site.css">
+
+  <style>
+    .home-hero {
+      padding: 70px 0 96px;
+      background:
+        radial-gradient(circle at top left, rgba(207, 227, 228, 0.58), transparent 34%),
+        linear-gradient(180deg, var(--color-beige), #fbf8f5);
+    }
+
+    .home-hero__grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(320px, 0.95fr);
+      gap: 52px;
+      align-items: center;
+    }
+
+    .home-hero__copy {
+      max-width: 690px;
+    }
+
+    .home-hero__title {
+      margin: 0 0 18px;
+      font-family: var(--font-heading);
+      font-size: clamp(2.75rem, 6vw, 5.5rem);
+      line-height: 0.98;
+      letter-spacing: -0.035em;
+      color: var(--color-near-black);
+    }
+
+    .home-hero__lead {
+      max-width: 640px;
+      font-size: clamp(1.06rem, 1.65vw, 1.24rem);
+      color: var(--color-charcoal);
+    }
+
+    .home-hero__media {
+      position: relative;
+    }
+
+    .home-hero__card {
+      overflow: hidden;
+      border-radius: var(--radius-lg);
+      background: var(--color-soft-white);
+      box-shadow: var(--shadow-soft);
+    }
+
+    .home-hero__image {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+    }
+
+    .home-hero__note {
+      position: absolute;
+      left: -18px;
+      bottom: 24px;
+      max-width: 330px;
+      padding: 16px 18px;
+      border-radius: var(--radius-md);
+      background: var(--color-warm-sand);
+      color: var(--color-near-black);
+      box-shadow: var(--shadow-soft);
+      font-weight: 700;
+      line-height: 1.35;
+    }
+
+    .home-section {
+      padding: 88px 0;
+    }
+
+    .home-section--white {
+      background: var(--color-soft-white);
+    }
+
+    .home-section--beige {
+      background: var(--color-beige);
+    }
+
+    .home-section--teal {
+      background: var(--color-soft-teal-tint);
+    }
+
+    .home-section--sand {
+      background: var(--color-warm-sand);
+    }
+
+    .home-section--plum {
+      background: linear-gradient(135deg, var(--color-plum-dark), var(--color-plum));
+      color: var(--color-soft-white);
+    }
+
+    .home-section--plum .section-title,
+    .home-section--plum .home-intro,
+    .home-section--plum p,
+    .home-section--plum li {
+      color: var(--color-soft-white);
+    }
+
+    .home-intro {
+      max-width: 820px;
+      font-size: 1.08rem;
+      color: var(--color-charcoal);
+    }
+
+    .home-grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      margin-top: 34px;
+    }
+
+    .home-grid-2 {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+      margin-top: 34px;
+    }
+
+    .home-card {
+      padding: 28px;
+      border-radius: var(--radius-lg);
+      background: var(--color-soft-white);
+      border: 1px solid var(--color-light-ui-gray);
+      box-shadow: 0 8px 24px rgba(26, 26, 26, 0.04);
+    }
+
+    .home-card h3 {
+      margin: 0 0 12px;
+      color: var(--color-near-black);
+      font-size: 1.22rem;
+    }
+
+    .home-card p {
+      color: var(--color-charcoal);
+    }
+
+    .home-card a {
+      display: inline-flex;
+      margin-top: 12px;
+      color: var(--color-plum);
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .pathway-list {
+      display: grid;
+      gap: 14px;
+      padding: 0;
+      margin: 30px 0 0;
+      list-style: none;
+    }
+
+    .pathway-list li {
+      padding: 18px 20px;
+      border-radius: var(--radius-md);
+      background: rgba(111, 175, 178, 0.12);
+      border: 1px solid rgba(111, 175, 178, 0.24);
+      color: var(--color-charcoal);
+      font-weight: 600;
+    }
+
+    .content-split {
+      display: grid;
+      grid-template-columns: minmax(0, 0.95fr) minmax(300px, 0.55fr);
+      gap: 42px;
+      align-items: start;
+    }
+
+    .support-card {
+      padding: 30px;
+      border-radius: var(--radius-lg);
+      background: var(--color-soft-white);
+      border: 1px solid var(--color-light-ui-gray);
+      box-shadow: 0 8px 24px rgba(26, 26, 26, 0.04);
+    }
+
+    .support-card h3 {
+      margin: 0 0 14px;
+      color: var(--color-near-black);
+    }
+
+    .support-card ul {
+      display: grid;
+      gap: 10px;
+      padding-left: 20px;
+      color: var(--color-charcoal);
+    }
+
+    .blog-link-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+      margin-top: 34px;
+    }
+
+    .blog-link-card {
+      display: grid;
+      gap: 12px;
+      padding: 24px;
+      border-radius: var(--radius-md);
+      background: var(--color-soft-white);
+      border: 1px solid var(--color-light-ui-gray);
+      box-shadow: 0 8px 24px rgba(26, 26, 26, 0.04);
+    }
+
+    .blog-link-card strong {
+      color: var(--color-near-black);
+    }
+
+    .blog-link-card a {
+      color: var(--color-plum);
+      font-weight: 800;
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+
+    .final-cta {
+      padding: 42px;
+      border-radius: var(--radius-lg);
+      background: rgba(250, 250, 250, 0.08);
+      border: 1px solid rgba(250, 250, 250, 0.18);
+    }
+
+    .final-cta h2 {
+      margin: 0 0 14px;
+      font-family: var(--font-heading);
+      font-size: clamp(2rem, 4vw, 3.25rem);
+      line-height: 1.04;
+      color: var(--color-soft-white);
+    }
+
+    @media (max-width: 980px) {
+      .home-hero__grid,
+      .home-grid-3,
+      .home-grid-2,
+      .content-split,
+      .blog-link-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .home-hero__note {
+        position: static;
+        margin-top: 16px;
+      }
+
+      .home-section {
+        padding: 72px 0;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .home-hero {
+        padding: 42px 0 64px;
+      }
+
+      .home-card,
+      .support-card,
+      .final-cta {
+        padding: 22px;
+      }
+    }
+  </style>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://getrealtherapy.com/#website",
+        "url": "https://getrealtherapy.com/",
+        "name": "Get Real Therapy",
+        "description": "Trauma-informed therapy for anxiety, trauma, depression, relationship challenges, and real life change in Fort Lauderdale and online across Florida."
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://getrealtherapy.com/#webpage",
+        "url": "https://getrealtherapy.com/",
+        "name": "Therapy for Anxiety, Trauma, and Real Life Change | Get Real Therapy",
+        "description": "Get Real Therapy offers trauma-informed therapy for anxiety, trauma, depression, relationship challenges, and real life change in Fort Lauderdale and online across Florida.",
+        "isPartOf": {
+          "@id": "https://getrealtherapy.com/#website"
+        },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": "https://getrealtherapy.com/assets/images/abby_01.jpg"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://getrealtherapy.com/#organization",
+        "name": "Get Real Therapy",
+        "url": "https://getrealtherapy.com/",
+        "logo": "https://getrealtherapy.com/grt_logo_round_transparent.png",
+        "sameAs": [
+          "https://instagram.com/getrealtherapy",
+          "https://youtube.com/@getrealtherapy",
+          "https://x.com/@getrealtherapy",
+          "https://open.spotify.com/show/5l7GNTw4dkmmTxA31V2MDl"
+        ]
+      }
+    ]
+  }
+  </script>
 </head>
-<body>
+<body data-page-type="trust_page" data-service="general" data-primary-goal="book_consultation">
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-header">
-    <div class="container header-inner">
-      <a href="/" aria-label="Get Real Therapy home">Get Real Therapy</a>
-      <nav aria-label="Primary">
-        <a href="/about">About</a>
-        <a href="/services">Services</a>
-        <a href="/what-to-expect">What to Expect</a>
-        <a href="/blog">Blog</a>
-        <a href="/contact">Contact</a>
-      </nav>
-    </div>
-  </header>
+  <div id="siteHeader"></div>
 
   <main id="main" class="site-main">
-
-    <section class="hero">
-      <div class="container hero-inner">
-        <div class="hero-copy">
+    <section class="home-hero">
+      <div class="container home-hero__grid">
+        <div class="home-hero__copy">
           <span class="eyebrow">Fort Lauderdale + Online Therapy in Florida</span>
-          <h1 class="hero-title">Therapy for Anxiety, Trauma, and Real Life Change</h1>
-          <p class="hero-subheadline">Feel better. Think clearer. Move forward with support that actually works.</p>
+          <h1 class="home-hero__title">Therapy for Anxiety, Trauma, and Real Life Change</h1>
+          <p class="home-hero__lead">
+            Feel better. Think clearer. Move forward with trauma-informed support that helps you understand what is happening beneath the surface and build real, lasting change.
+          </p>
           <div class="button-row">
-            <a class="button button--primary" href="/book-consultation">Book a Consultation</a>
-            <a class="button button--secondary" href="/contact">Start Your Healing Journey</a>
+            <a class="button button--primary" href="/book-consultation" data-track-event="cta_click_book_consultation" data-track-category="conversion" data-track-label="Book a Consultation" data-cta-location="home_hero" data-destination-page="/book-consultation">Book a Consultation</a>
+            <a class="button button--secondary" href="/contact" data-track-event="cta_click_start_healing_journey" data-track-category="conversion" data-track-label="Start Your Healing Journey" data-cta-location="home_hero" data-destination-page="/contact">Start Your Healing Journey</a>
           </div>
         </div>
 
-        <div class="hero-media">
-          <div class="hero-card">
-            <img class="hero-image" src="/assets/images/abby_01.jpg" alt="Portrait placeholder for Get Real Therapy homepage">
+        <div class="home-hero__media">
+          <div class="home-hero__card">
+            <img class="home-hero__image" src="/assets/images/abby_01.jpg" alt="Warm portrait representing therapy support at Get Real Therapy">
           </div>
-          <div class="hero-note">Compassionate support for people ready to feel less stuck and more grounded.</div>
+          <div class="home-hero__note">
+            Compassionate support for people ready to feel less stuck and more grounded.
+          </div>
         </div>
       </div>
     </section>
 
-    <section class="section section--white">
-      <div class="container">
-        <span class="eyebrow">Welcome</span>
-        <h2 class="section-title">Support that helps you feel more like yourself again</h2>
-        <p class="section-copy">
-          Get Real Therapy is a modern therapy practice for people navigating anxiety, trauma, depression, relationship stress, and major life transitions.
-          The goal is not just to talk about what is hard, but to help you move through it with clarity, practical tools, and real emotional support.
-        </p>
-
-        <div class="quick-intro-grid" style="margin-top: 32px;">
-          <article class="card">
-            <h3 class="card-title">Anxiety Support</h3>
-            <p class="card-copy">Understand the patterns keeping you on edge and build tools that help you feel calmer and more in control.</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">Trauma Recovery</h3>
-            <p class="card-copy">Process painful experiences with care and build a life that feels safer, steadier, and more connected.</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">Real Life Change</h3>
-            <p class="card-copy">Move through relationship strain, burnout, grief, identity shifts, and personal growth with support that fits real life.</p>
-          </article>
+    <section class="home-section home-section--white">
+      <div class="container content-split">
+        <div>
+          <span class="eyebrow">Welcome</span>
+          <h2 class="section-title">Support that helps you feel more like yourself again</h2>
+          <p class="home-intro">
+            Get Real Therapy is for people navigating anxiety, trauma, depression, relationship stress, emotional overwhelm, and major life transitions.
+          </p>
+          <p>
+            Therapy here is not about quick fixes or surface-level coping. It is a space to understand the patterns keeping you stuck, work with your nervous system instead of against it, and move toward a more grounded version of yourself.
+          </p>
+          <p>
+            If you look fine on the outside but feel overwhelmed, tense, disconnected, or exhausted inside, support can begin before you reach a breaking point.
+          </p>
         </div>
+
+        <aside class="support-card">
+          <h3>You may be looking for support with:</h3>
+          <ul>
+            <li>Anxiety, overthinking, panic, or constant tension</li>
+            <li>Trauma, unresolved experiences, or nervous system activation</li>
+            <li>Depression, emotional heaviness, or feeling disconnected</li>
+            <li>Relationship patterns, conflict, communication, or trust</li>
+            <li>Life transitions, identity shifts, burnout, or feeling stuck</li>
+          </ul>
+        </aside>
       </div>
     </section>
 
-    <section class="section section--soft-teal">
+    <section class="home-section home-section--teal">
       <div class="container">
         <span class="eyebrow">Services</span>
-        <h2 class="section-title">Specialized support for what you are carrying</h2>
-        <p class="section-copy">
-          Each service page should speak directly to the emotional experience behind the problem, explain how therapy helps, and guide visitors toward a consultation.
+        <h2 class="section-title">Specialized therapy for what you are carrying</h2>
+        <p class="home-intro">
+          Each service pathway is designed to help you understand what is happening, feel less alone, and take a clear next step toward support.
         </p>
 
-        <div class="services-grid" style="margin-top: 32px;">
-          <div class="service-item"><strong>Anxiety Therapy</strong>For chronic worry, overthinking, panic, and feeling on edge.</div>
-          <div class="service-item"><strong>Trauma Therapy</strong>For people ready to process painful experiences with support.</div>
-          <div class="service-item"><strong>Depression Therapy</strong>For heaviness, disconnection, and difficulty moving forward.</div>
-          <div class="service-item"><strong>Relationship Counseling</strong>For patterns, conflict, trust, and communication struggles.</div>
-          <div class="service-item"><strong>Life Coaching</strong>For growth, accountability, and making meaningful change.</div>
-          <div class="service-item"><strong>What to Expect</strong>For new clients who want clarity before booking the first step.</div>
+        <div class="home-grid-3">
+          <article class="home-card">
+            <h3>Anxiety Therapy</h3>
+            <p>Support for chronic worry, overthinking, panic, nervous system overwhelm, and feeling on edge.</p>
+            <a href="/anxiety-therapy" data-track-event="internal_link_click" data-track-category="internal_link" data-track-label="Anxiety Therapy" data-cta-location="home_services" data-destination-page="/anxiety-therapy">Explore Anxiety Therapy</a>
+          </article>
+
+          <article class="home-card">
+            <h3>Trauma Therapy</h3>
+            <p>Trauma-informed support for unresolved experiences, emotional triggers, and feeling stuck in survival mode.</p>
+            <a href="/trauma-therapy" data-track-event="internal_link_click" data-track-category="internal_link" data-track-label="Trauma Therapy" data-cta-location="home_services" data-destination-page="/trauma-therapy">Explore Trauma Therapy</a>
+          </article>
+
+          <article class="home-card">
+            <h3>Depression Therapy</h3>
+            <p>Support for heaviness, low motivation, disconnection, and the kind of depression that is not always visible.</p>
+            <a href="/depression-therapy" data-track-event="internal_link_click" data-track-category="internal_link" data-track-label="Depression Therapy" data-cta-location="home_services" data-destination-page="/depression-therapy">Explore Depression Therapy</a>
+          </article>
+
+          <article class="home-card">
+            <h3>Relationship Counseling</h3>
+            <p>Support for patterns, communication, trust, conflict, emotional burnout, and healthier connection.</p>
+            <a href="/relationship-counseling" data-track-event="internal_link_click" data-track-category="internal_link" data-track-label="Relationship Counseling" data-cta-location="home_services" data-destination-page="/relationship-counseling">Explore Relationship Counseling</a>
+          </article>
+
+          <article class="home-card">
+            <h3>Life Coaching</h3>
+            <p>Support for life transitions, identity shifts, emotional stuckness, personal growth, and meaningful change.</p>
+            <a href="/life-coaching" data-track-event="internal_link_click" data-track-category="internal_link" data-track-label="Life Coaching" data-cta-location="home_services" data-destination-page="/life-coaching">Explore Life Coaching</a>
+          </article>
+
+          <article class="home-card">
+            <h3>Book a Consultation</h3>
+            <p>Start with a simple consultation request so we can understand what kind of support you are looking for.</p>
+            <a href="/book-consultation" data-track-event="cta_click_book_consultation" data-track-category="conversion" data-track-label="Book a Consultation" data-cta-location="home_services" data-destination-page="/book-consultation">Book a Consultation</a>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section section--warm-sand">
+    <section class="home-section home-section--beige">
+      <div class="container content-split">
+        <div>
+          <span class="eyebrow">Approach</span>
+          <h2 class="section-title">A deeper approach to therapy, emotional regulation, and real change</h2>
+          <p class="home-intro">
+            Anxiety, trauma, depression, and relationship patterns are not just mindset problems. They often involve your nervous system, attachment history, emotional patterns, and protective strategies that developed for a reason.
+          </p>
+          <p>
+            Therapy may include trauma-informed support, EMDR, Internal Family Systems, AEDP-informed emotional processing, and nervous system focused work.
+          </p>
+          <p>
+            The goal is not to force yourself into change. The goal is to create enough safety, clarity, and support that change becomes possible.
+          </p>
+          <div class="button-row">
+            <a class="button button--secondary" href="/about" data-track-event="internal_link_click" data-track-category="internal_link" data-track-label="About" data-cta-location="home_approach" data-destination-page="/about">Learn About the Approach</a>
+            <a class="button button--secondary" href="/what-to-expect" data-track-event="internal_link_click" data-track-category="internal_link" data-track-label="What to Expect" data-cta-location="home_approach" data-destination-page="/what-to-expect">What to Expect</a>
+          </div>
+        </div>
+
+        <aside class="support-card">
+          <h3>The work may support you in:</h3>
+          <ul>
+            <li>Understanding your triggers and patterns</li>
+            <li>Building emotional regulation and distress tolerance</li>
+            <li>Processing unresolved experiences</li>
+            <li>Softening protective parts that feel extreme or overwhelmed</li>
+            <li>Creating more internal safety, flexibility, and self-trust</li>
+          </ul>
+        </aside>
+      </div>
+    </section>
+
+    <section class="home-section home-section--sand">
       <div class="container">
         <span class="eyebrow">Who This Is For</span>
-        <h2 class="section-title">Therapy for people who are tired of coping alone</h2>
-
-        <div class="audience-grid" style="margin-top: 32px;">
-          <div class="card">
-            <h3 class="card-title">You may be a good fit if you:</h3>
-            <ul>
-              <li>overthink constantly</li>
-              <li>feel emotionally exhausted</li>
-              <li>struggle with relationships</li>
-              <li>feel stuck in old patterns</li>
-              <li>want more than surface-level coping</li>
-            </ul>
-          </div>
-          <div class="card">
-            <h3 class="card-title">You may be looking for:</h3>
-            <ul>
-              <li>a safe place to process</li>
-              <li>practical tools for everyday life</li>
-              <li>clarity around what you feel</li>
-              <li>support through life transitions</li>
-              <li>a more grounded version of yourself</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section--white">
-      <div class="container">
-        <span class="eyebrow">What to Expect</span>
-        <h2 class="section-title">A process that feels supportive, thoughtful, and clear</h2>
-        <p class="section-copy">
-          Therapy should feel approachable. New visitors should understand what the first consultation includes, how sessions work, whether online support is available, and what kinds of goals therapy can support.
+        <h2 class="section-title">For people who are tired of coping alone</h2>
+        <p class="home-intro">
+          You do not need to be in crisis to begin therapy. You may simply know that what has been working is not working anymore.
         </p>
 
-        <div class="link-list">
-          <div class="link-item"><strong>Consultation</strong>An initial conversation to understand your goals and what support you need right now.</div>
-          <div class="link-item"><strong>Tailored Sessions</strong>Ongoing therapy shaped around your needs, pace, and lived experience.</div>
-          <div class="link-item"><strong>Practical + Emotional Support</strong>Space for both processing what hurts and learning tools that help.</div>
-          <div class="link-item"><strong>Flexible Access</strong>Support for in-person or online therapy, depending on your practice setup.</div>
+        <div class="home-grid-2">
+          <article class="home-card">
+            <h3>You may be a good fit if you:</h3>
+            <ul class="pathway-list">
+              <li>Overthink constantly or feel mentally exhausted</li>
+              <li>Feel disconnected from yourself or others</li>
+              <li>Notice repeated relationship or emotional patterns</li>
+              <li>Feel stuck even though life looks fine on paper</li>
+              <li>Want more than temporary coping strategies</li>
+            </ul>
+            <a href="/who-this-is-for" data-track-event="internal_link_click" data-track-category="internal_link" data-track-label="Who This Is For" data-cta-location="home_who" data-destination-page="/who-this-is-for">See Who This Is For</a>
+          </article>
+
+          <article class="home-card">
+            <h3>You may be looking for:</h3>
+            <ul class="pathway-list">
+              <li>A safe place to process honestly</li>
+              <li>Practical tools that fit real life</li>
+              <li>Support through anxiety, trauma, or change</li>
+              <li>More clarity around what you feel and need</li>
+              <li>A steadier, more grounded version of yourself</li>
+            </ul>
+            <a href="/what-to-expect" data-track-event="internal_link_click" data-track-category="internal_link" data-track-label="What to Expect" data-cta-location="home_who" data-destination-page="/what-to-expect">Learn What to Expect</a>
+          </article>
         </div>
       </div>
     </section>
 
-    <section class="section section--plum">
+    <section class="home-section home-section--white">
       <div class="container">
-        <span class="eyebrow" style="color: #CFE3E4;">Approach</span>
-        <h2 class="section-title" style="color: #FAFAFA;">Warm, grounded, and focused on meaningful progress</h2>
-        <p class="section-copy" style="color: rgba(250,250,250,0.92);">
-          This section should explain your approach in plain English. Avoid jargon. Focus on how clients feel in the room, how therapy works with you, and why your process feels different from generic talk therapy.
+        <span class="eyebrow">Resources</span>
+        <h2 class="section-title">Start learning what may be happening beneath the surface</h2>
+        <p class="home-intro">
+          These articles help explain common emotional patterns and can guide visitors toward the right service page.
         </p>
 
-        <div class="quick-intro-grid" style="margin-top: 32px;">
-          <article class="card card--plum">
-            <h3 class="card-title">Collaborative</h3>
-            <p class="card-copy">Therapy works best when clients feel included, heard, and respected.</p>
+        <div class="blog-link-grid">
+          <article class="blog-link-card">
+            <strong>How to Know If You Have Anxiety or Just Stress</strong>
+            <span>Understand anxiety, stress, and when therapy may help.</span>
+            <a href="/blog/anxiety-vs-stress" data-track-event="related_blog_click" data-track-category="internal_link" data-track-label="Anxiety vs Stress" data-cta-location="home_resources" data-destination-page="/blog/anxiety-vs-stress">Read the article</a>
           </article>
-          <article class="card card--plum">
-            <h3 class="card-title">Compassionate</h3>
-            <p class="card-copy">Support should feel emotionally safe, never cold or performative.</p>
+
+          <article class="blog-link-card">
+            <strong>Signs You May Be Carrying Unresolved Trauma</strong>
+            <span>Explore how unresolved trauma can affect daily life.</span>
+            <a href="/blog/signs-of-unresolved-trauma" data-track-event="related_blog_click" data-track-category="internal_link" data-track-label="Signs of Unresolved Trauma" data-cta-location="home_resources" data-destination-page="/blog/signs-of-unresolved-trauma">Read the article</a>
           </article>
-          <article class="card card--plum">
-            <h3 class="card-title">Practical</h3>
-            <p class="card-copy">Insight matters, but so do tools you can actually use in everyday life.</p>
+
+          <article class="blog-link-card">
+            <strong>What to Expect From Your First Therapy Consultation</strong>
+            <span>Feel more prepared before taking the first step.</span>
+            <a href="/blog/first-therapy-consultation" data-track-event="related_blog_click" data-track-category="internal_link" data-track-label="First Therapy Consultation" data-cta-location="home_resources" data-destination-page="/blog/first-therapy-consultation">Read the article</a>
           </article>
+        </div>
+
+        <div class="button-row">
+          <a class="button button--secondary" href="/blog" data-track-event="internal_link_click" data-track-category="internal_link" data-track-label="Blog" data-cta-location="home_resources" data-destination-page="/blog">Visit the Blog</a>
+          <a class="button button--secondary" href="/resources" data-track-event="internal_link_click" data-track-category="internal_link" data-track-label="Resources" data-cta-location="home_resources" data-destination-page="/resources">Explore Resources</a>
         </div>
       </div>
     </section>
 
-    <section class="section section--white">
+    <section class="home-section home-section--plum">
       <div class="container">
-        <span class="eyebrow">From the Blog</span>
-        <h2 class="section-title">Mental health insights that meet people where they are</h2>
-
-        <div class="blog-grid" style="margin-top: 32px;">
-          <article class="card">
-            <h3 class="card-title">How to Know If You Have Anxiety or Just Stress</h3>
-            <p class="card-copy">A clear look at common differences, what each can feel like, and when support may help.</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">Signs You May Be Carrying Unresolved Trauma</h3>
-            <p class="card-copy">Not all trauma looks obvious. Learn how old pain can still affect your present life.</p>
-          </article>
-          <article class="card">
-            <h3 class="card-title">How Therapy Can Help You Move Forward After Emotional Burnout</h3>
-            <p class="card-copy">Understand what burnout can do to your emotional life and how therapy can help rebuild steadiness.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <section class="section">
-      <div class="container">
-        <div class="cta-panel">
+        <div class="final-cta">
+          <span class="eyebrow" style="color:#CFE3E4;">Start Here</span>
           <h2>You do not have to keep carrying this alone</h2>
-          <p>If you are ready to feel more grounded, supported, and clear about what comes next, the first step can be simple.</p>
+          <p>
+            If you are ready to feel more grounded, supported, and clear about what comes next, the first step can be simple.
+          </p>
           <div class="button-row">
-            <a class="button button--primary" href="/book-consultation">Book a Consultation</a>
-            <a class="button button--secondary" href="/contact" style="border-color:#FAFAFA;color:#FAFAFA;">Start Your Healing Journey</a>
+            <a class="button button--primary" href="/book-consultation" data-track-event="cta_click_book_consultation" data-track-category="conversion" data-track-label="Book a Consultation" data-cta-location="home_final_cta" data-destination-page="/book-consultation">Book a Consultation</a>
+            <a class="button button--secondary" href="/contact" style="border-color:#FAFAFA;color:#FAFAFA;" data-track-event="cta_click_start_healing_journey" data-track-category="conversion" data-track-label="Start Your Healing Journey" data-cta-location="home_final_cta" data-destination-page="/contact">Start Your Healing Journey</a>
           </div>
         </div>
       </div>
     </section>
-
   </main>
 
-  <footer class="site-footer">
-    <div class="container">
-      <p>Get Real Therapy | Fort Lauderdale + Online Therapy in Florida</p>
-      <p>&copy; 2026 Get Real Therapy. All rights reserved.</p>
-    </div>
-  </footer>
+  <div id="siteFooter"></div>
+
+  <script src="/assets/js/site.js"></script>
 </body>
 </html>
