@@ -1,0 +1,142 @@
+GET REAL THERAPY - GLOBAL ANALYTICS PLAN
+
+Goal:
+Create one global analytics layer that works across the entire site, then add page-specific event attributes to money pages, SEO pages, blog posts, forms, and CTAs.
+
+Global GA4 Measurement ID:
+G-8YW12523HN
+
+GLOBAL EVENTS TRACKED SITEWIDE
+
+1. site_page_view
+Tracks every page view after the global JS loads.
+
+Parameters:
+- page_type
+- service
+- page_slug
+- page_title
+- primary_goal
+
+2. scroll_depth
+Tracks 25%, 50%, 75%, and 90% page scroll.
+
+Parameters:
+- scroll_percent
+- page_type
+- service
+- page_slug
+
+3. outbound_link_click
+Tracks clicks to external URLs such as Instagram, YouTube, X, Spotify, etc.
+
+Parameters:
+- event_label
+- link_url
+- page_slug
+
+4. form_start
+Tracks when someone first interacts with a form.
+
+Parameters:
+- form_name
+- page_type
+- page_slug
+
+5. form_validation_error
+Tracks when a form is submitted with invalid or missing required fields.
+
+Parameters:
+- form_name
+- invalid_field_count
+- invalid_fields
+- page_slug
+
+6. form_submit_attempt
+Tracks when a valid form submission is attempted.
+
+Parameters:
+- form_name
+- page_slug
+
+7. faq_view
+Tracks when FAQ blocks enter the viewport.
+
+Parameters:
+- faq_question
+- page_slug
+
+PAGE-SPECIFIC MONEY PAGE EVENTS
+
+1. cta_click_book_consultation
+Tracks clicks to /book-consultation.
+
+Parameters:
+- cta_location
+- destination_page
+- service
+- page_type
+
+2. cta_click_start_healing_journey
+Tracks clicks to /contact.
+
+Parameters:
+- cta_location
+- destination_page
+- service
+- page_type
+
+3. related_blog_click
+Tracks links from service pages to supporting blog posts.
+
+Parameters:
+- event_label
+- cta_location
+- destination_page
+- service
+
+4. internal_link_click
+Tracks strategic internal links to related service/support pages.
+
+Parameters:
+- event_label
+- cta_location
+- destination_page
+
+BODY DATA ATTRIBUTES FOR EACH PAGE
+
+Money page example:
+<body data-page-type="money_page" data-service="anxiety_therapy" data-primary-goal="book_consultation">
+
+Blog post example:
+<body data-page-type="blog_post" data-service="anxiety_therapy" data-primary-goal="service_page_click">
+
+Support page example:
+<body data-page-type="support_page" data-service="" data-primary-goal="book_consultation">
+
+RECOMMENDED PAGE TYPES
+
+- money_page
+- blog_post
+- support_page
+- trust_page
+- contact_page
+- booking_page
+- resources_page
+
+RECOMMENDED SERVICES
+
+- anxiety_therapy
+- trauma_therapy
+- depression_therapy
+- relationship_counseling
+- life_coaching
+- general
+
+NEXT IMPLEMENTATION STEPS
+
+1. Replace /assets/js/site.js with the updated complete analytics JS.
+2. Replace /anxiety-therapy/index.html with the updated complete page that includes body data attributes and tracked CTA links.
+3. Update the global header and footer links with data-track-event attributes next.
+4. Update Contact and Book Consultation forms with form names and validation-friendly fields.
+5. Build all future money pages using the same data attributes and CTA tracking pattern.
