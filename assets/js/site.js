@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", async function () {
   loadGoogleTag();
   setupMobileNav();
   setupSubmenus();
+  setupAnalyticsTracking();
 });
 
 async function loadIncludes() {
@@ -125,3 +126,201 @@ function setupSubmenus() {
     });
   });
 }
+
+/* =========================================
+   GET REAL THERAPY - ANALYTICS TRACKING
+   ========================================= */
+
+function getPageContext() {
+  const body = document.body || {};
+  return {
+    page_type: body.dataset.pageType || "unknown",
+    service: body.dataset.service || "",
+    page_slug: window.location.pathname,
+    page_title: document.title || "",
+    primary_goal: body.dataset.primaryGoal || ""
+  };
+}
+
+function trackEvent(eventName, eventParams) {
+  const params = Object.assign({}, getPageContext(), eventParams || {});
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(Object.assign({ event: eventName }, params));
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, params);
+  }
+}
+
+function setupAnalyticsTracking() {
+  trackEvent("site_page_view", {
+    event_category: "engagement"
+  });
+
+  setupTrackedClicks();
+  setupOutboundTracking();
+  setupScrollDepthTracking();
+  setupFormTracking();
+  setupFaqTracking();
+}
+
+function setupTrackedClicks() {
+  document.querySelectorAll("[data-track-event]").forEach(function (el) {
+    if (el.dataset.trackingBound === "true") return;
+    el.dataset.trackingBound = "true";
+
+    el.addEventListener("click", function () {
+      trackEvent(el.dataset.trackEvent, {
+        event_category: el.dataset.trackCategory || "click",
+        event_label: el.dataset.trackLabel || el.textContent.trim(),
+        link_url: el.getAttribute("href") || "",
+        cta_location: el.dataset.ctaLocation || "",
+        destination_page: el.dataset.destinationPage || ""
+      });
+    });
+  });
+}
+
+function setupOutboundTracking() {
+  document.querySelectorAll('a[href^="http"]').forEach(function (link) {
+    if (link.dataset.outboundBound === "true") return;
+    link.dataset.outboundBound = "true";
+
+    link.addEventListener("click", function () {
+      const url = new URL(link.href);
+      if (url.hostname === window.location.hostname) return;
+
+      trackEvent("outbound_link_click", {
+        event_category: "outbound",
+        event_label: link.textContent.trim(),
+        link_url: link.href
+      });
+    });
+  });
+}
+
+function setupScrollDepthTracking() {
+  const milestones = [25, 50, 75, 90];
+  const fired = {};
+
+  function onScroll() {
+    const doc = document.documentElement;
+    const scrollTop = window.scrollY || doc.scrollTop;
+    const scrollHeight = doc.scrollHeight - window.innerHeight;
+    if (scrollHeight <= 0) return;
+
+    const percent = Math.round((scrollTop / scrollHeight) * 100);
+
+    milestones.forEach(function (milestone) {
+      if (percent >= milestone && !fired[milestone]) {
+        fired[milestone] = true;
+        trackEvent("scroll_depth", {
+          event_category: "engagement",
+          scroll_percent: milestone
+        });
+      }
+    });
+
+    if (fired[90]) {
+      window.removeEventListener("scroll", throttledScroll);
+    }
+  }
+
+  const throttledScroll = throttle(onScroll, 400);
+  window.addEventListener("scroll", throttledScroll, { passive: true });
+}
+
+function setupFormTracking() {
+  document.querySelectorAll("form").forEach(function (form) {
+    if (form.dataset.formTrackingBound === "true") return;
+    form.dataset.formTrackingBound = "true";
+
+    const formName = form.dataset.formName || form.getAttribute("name") || form.id || "unnamed_form";
+
+    form.addEventListener("focusin", function () {
+      if (form.dataset.formStarted === "true") return;
+      form.dataset.formStarted = "true";
+
+      trackEvent("form_start", {
+        event_category: "form",
+        form_name: formName
+      });
+    });
+
+    form.addEventListener("submit", function () {
+      const invalidFields = Array.from(form.querySelectorAll(":invalid"));
+
+      if (invalidFields.length) {
+        trackEvent("form_validation_error", {
+          event_category: "form",
+          form_name: formName,
+          invalid_field_count: invalidFields.length,
+          invalid_fields: invalidFields.map(function (field) {
+            return field.name || field.id || field.type || "unknown_field";
+          }).join(",")
+        });
+        return;
+      }
+
+      trackEvent("form_submit_attempt", {
+        event_category: "form",
+        form_name: formName
+      });
+    });
+  });
+}
+
+function setupFaqTracking() {
+  const faqItems = document.querySelectorAll(".faq-item, details");
+  if (!faqItems.length) return;
+
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
+
+      const item = entry.target;
+      if (item.dataset.faqViewed === "true") return;
+      item.dataset.faqViewed = "true";
+
+      const question = item.querySelector("h3, summary")?.textContent?.trim() || "FAQ item";
+
+      trackEvent("faq_view", {
+        event_category: "engagement",
+        faq_question: question
+      });
+
+      observer.unobserve(item);
+    });
+  }, { threshold: 0.5 });
+
+  faqItems.forEach(function (item) {
+    observer.observe(item);
+  });
+}
+
+function throttle(callback, wait) {
+  let timeout = null;
+  let previous = 0;
+
+  return function () {
+    const now = Date.now();
+    const remaining = wait - (now - previous);
+    const context = this;
+    const args = arguments;
+
+    if (remaining <= 0) {
+      clearTimeout(timeout);
+      timeout = null;
+      previous = now;
+      callback.apply(context, args);
+    } else if (!timeout) {
+      timeout = setTimeout(function () {
+        previous = Date.now();
+        timeout = null;
+        callback.apply(context, args);
+      }, remaining);
+    }
+  };
+}
+
