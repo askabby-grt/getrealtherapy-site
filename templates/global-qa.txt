@@ -1,0 +1,482 @@
+GET REAL THERAPY GLOBAL QA + ANALYTICS + SEO MAXIMIZATION TEMPLATE
+
+Use this prompt whenever I upload one or more Get Real Therapy HTML pages and ask you to audit, update, or prepare them for launch.
+
+GOAL
+Audit and fully update the uploaded page files so they are ready to go live. Return complete downloadable .txt files. Do not return partial snippets unless I explicitly ask for snippets.
+
+SITE CONTEXT
+Site: Get Real Therapy
+Domain: https://getrealtherapy.com
+Primary goal: book_consultation
+Secondary goal: contact / start healing journey
+Business type: therapy, counseling, coaching, mental health support
+Location focus: Fort Lauderdale + online therapy across Florida
+Language: English only
+No language switch is needed.
+
+SITEMAP
+Home: /
+About: /about
+Services: /services
+Anxiety Therapy: /services/anxiety-therapy
+Trauma Therapy: /services/trauma-therapy
+Depression Therapy: /services/depression-therapy
+Relationship Counseling: /services/relationship-counseling
+Life Coaching: /services/life-coaching
+Who This Is For: /who-this-is-for
+What to Expect: /what-to-expect
+Blog: /blog
+Resources: /resources
+Contact: /contact
+Book Consultation: /book-consultation
+
+PAGE INFORMATION
+- Page URL:
+- Page type:
+- Service:
+- Primary goal:
+- Priority:
+
+PAGE TYPES
+Use these page types consistently in body data attributes and analytics:
+- trust_page: Home, About, Who This Is For, What to Expect
+- services_hub: /services
+- money_page: individual service pages
+- blog_hub: /blog
+- blog_post: individual blog pages
+- resources_page: /resources
+- contact_page: /contact
+- booking_page: /book-consultation
+- legal_page: policies, disclaimers, privacy pages if created
+
+CENTRAL EXECUTION STANDARD
+All analytics execution must be centralized in:
+/assets/js/site.js
+
+Page files should NOT duplicate page-level analytics scripts for:
+- page_view_enhanced / site_page_view
+- scroll_depth
+- click listeners for [data-track-event]
+- form tracking
+- FAQ tracking
+
+Each page should only provide:
+- correct body data-page-type, data-service, and data-primary-goal
+- correct data-track-* attributes on tracked elements
+- correct #siteHeader / #siteFooter placeholders
+- one global script include for /assets/js/site.js
+- correct canonical / Open Graph / Twitter metadata
+- correct schema
+- correct global CSS link
+
+GLOBAL HEADER / FOOTER STANDARD
+Every page must include these placeholders:
+
+<div id="siteHeader"></div>
+<div id="siteFooter"></div>
+
+Every page must load the global script once:
+
+<script src="/assets/js/site.js"></script>
+
+Rules:
+- Do not hardcode the header or footer inside individual pages.
+- Do not duplicate header/footer markup per page.
+- Do not add page-specific header/footer injection scripts if /assets/js/site.js already loads includes.
+- The current site.js already loads /assets/includes/header.html and /assets/includes/footer.html through loadIncludes().
+- Do not add a second include loader.
+- Do not include /assets/js/site.js more than once.
+- Header and footer links should remain tracked through their existing data-track-* attributes.
+
+GLOBAL CSS STANDARD
+Every page must use the global stylesheet:
+
+<link rel="stylesheet" href="/assets/css/site.css">
+
+Rules:
+- Use existing global classes from site.css whenever possible.
+- Do not add page-level CSS unless absolutely necessary.
+- Do not restyle header or footer in page files.
+- Do not create one-off layout systems when current global classes can handle the page.
+- If page-level CSS remains, explain why in the QA summary.
+- Optimize for both mobile and desktop using global patterns already present in site.css.
+
+CURRENT GLOBAL ASSETS TO RESPECT
+Header include:
+- /assets/includes/header.html
+
+Footer include:
+- /assets/includes/footer.html
+
+Global CSS:
+- /assets/css/site.css
+
+Global JS:
+- /assets/js/site.js
+
+Current site.js responsibilities:
+- Loads global header/footer includes.
+- Sets footer year.
+- Loads GA4 with measurement ID G-8YW12523HN.
+- Sets up mobile navigation and submenus.
+- Sends a page-level event.
+- Tracks [data-track-event] clicks.
+- Tracks outbound links.
+- Tracks scroll_depth at 25, 50, 75, 90.
+- Tracks form_start and form_submit_attempt.
+- Tracks form validation errors.
+- Tracks FAQ visibility.
+
+Before handoff, confirm:
+- [ ] /assets/js/site.js is loaded exactly once
+- [ ] no conflicting page-level analytics script exists
+- [ ] no duplicate include loader exists
+- [ ] important CTAs have data-track-event
+- [ ] important internal links have data-track-event
+- [ ] outbound links are handled or explicitly tracked
+- [ ] forms have data-form-name where applicable
+- [ ] FAQ blocks use .faq-item or details so site.js can track FAQ engagement
+- [ ] global CSS is used
+
+ANALYTICS NAMING STANDARD
+
+Current legacy attributes are:
+- data-track-event
+- data-track-category
+- data-track-label
+- data-cta-location
+- data-destination-page
+
+Continue using these unless we intentionally refactor site.js later.
+
+Do not mix in Experience Ecuador attributes such as:
+- data-analytics-event
+- data-analytics-label
+- data-analytics-page-type
+
+For Get Real Therapy, use:
+- data-track-event
+- data-track-category
+- data-track-label
+- data-cta-location
+- data-destination-page
+- data-form-name where applicable
+
+BODY DATA ATTRIBUTES
+Every page must include:
+<body data-page-type="PAGE_TYPE" data-service="SERVICE_SLUG" data-primary-goal="book_consultation">
+
+Examples:
+Homepage:
+<body data-page-type="trust_page" data-service="general" data-primary-goal="book_consultation">
+
+Anxiety page:
+<body data-page-type="money_page" data-service="anxiety_therapy" data-primary-goal="book_consultation">
+
+Trauma page:
+<body data-page-type="money_page" data-service="trauma_therapy" data-primary-goal="book_consultation">
+
+Service hub:
+<body data-page-type="services_hub" data-service="all_services" data-primary-goal="book_consultation">
+
+Contact:
+<body data-page-type="contact_page" data-service="general" data-primary-goal="contact">
+
+Booking:
+<body data-page-type="booking_page" data-service="general" data-primary-goal="book_consultation">
+
+SITEWIDE ANALYTICS REQUIRED
+Confirm which of these apply:
+- site_page_view
+- scroll_depth
+- internal_link_click
+- outbound_link_click
+- header_nav_click
+- cta_click_book_consultation
+- cta_click_start_healing_journey
+- form_start
+- form_submit_attempt
+- form_validation_error
+- form_submit_success, if page-level form system supports success callback
+- form_submit_error, if page-level form system supports error callback
+- faq_view
+- faq_expand, if FAQ is interactive/collapsible
+- related_blog_click
+- service_interest_click
+- service_to_cta_click
+- blog_to_service_click
+- contact_method_click
+
+CONVERSION EVENTS
+Use these consistently:
+- cta_click_book_consultation
+- cta_click_start_healing_journey
+- contact_method_click
+- form_start
+- form_submit_attempt
+- form_validation_error
+- form_submit_success
+- form_submit_error
+
+SERVICE / MONEY PAGE EVENTS
+Use these consistently:
+- service_interest_click
+- service_to_cta_click
+- related_blog_click
+- internal_link_click
+- faq_view
+- faq_expand if interactive
+
+BLOG / RESOURCE EVENTS
+Use these consistently:
+- related_blog_click
+- blog_to_service_click
+- blog_to_consultation_click
+- internal_link_click
+- cta_click_book_consultation
+
+HEADER / FOOTER EVENTS
+Header is already using:
+- header_logo_click
+- header_nav_click
+- cta_click_book_consultation
+
+Footer links should use either:
+- footer_nav_click
+- internal_link_click
+- outbound_link_click
+- cta_click_book_consultation
+
+REQUIRED DATA ATTRIBUTES FOR TRACKED LINKS
+Add these to tracked elements where relevant:
+- data-track-event
+- data-track-category
+- data-track-label
+- data-cta-location
+- data-destination-page
+
+Examples:
+
+Primary booking CTA:
+<a class="button button--primary"
+   href="/book-consultation"
+   data-track-event="cta_click_book_consultation"
+   data-track-category="conversion"
+   data-track-label="Book a Consultation"
+   data-cta-location="hero"
+   data-destination-page="/book-consultation">Book a Consultation</a>
+
+Contact CTA:
+<a class="button button--secondary"
+   href="/contact"
+   data-track-event="cta_click_start_healing_journey"
+   data-track-category="conversion"
+   data-track-label="Start Your Healing Journey"
+   data-cta-location="hero"
+   data-destination-page="/contact">Start Your Healing Journey</a>
+
+Service card:
+<a href="/services/trauma-therapy"
+   data-track-event="service_interest_click"
+   data-track-category="service_interest"
+   data-track-label="Trauma Therapy"
+   data-cta-location="services_grid"
+   data-destination-page="/services/trauma-therapy">Explore Trauma Therapy</a>
+
+Related blog:
+<a href="/blog/signs-of-unresolved-trauma"
+   data-track-event="related_blog_click"
+   data-track-category="internal_link"
+   data-track-label="Signs of Unresolved Trauma"
+   data-cta-location="related_resources"
+   data-destination-page="/blog/signs-of-unresolved-trauma">Read the article</a>
+
+CTA / LINK TRACKING RULES
+- Primary Book Consultation CTAs use cta_click_book_consultation.
+- Start Your Healing Journey / Contact CTAs use cta_click_start_healing_journey.
+- Service page links from hub/home use service_interest_click.
+- Related blog links use related_blog_click.
+- Blog to service links use blog_to_service_click.
+- Blog to booking links use blog_to_consultation_click.
+- Normal internal links use internal_link_click.
+- Header links use header_nav_click.
+- Footer links use footer_nav_click or internal_link_click.
+- External links use outbound_link_click, or rely on site.js outbound tracking if no explicit attribute exists.
+- FAQ cards should use .faq-item so site.js can track faq_view.
+- If FAQs are expandable details elements, track faq_expand.
+
+FORM TRACKING STANDARD
+Every form should include:
+- id
+- name
+- data-form-name
+
+Example:
+<form id="consultationForm" name="consultationForm" data-form-name="book_consultation_form">
+
+Minimum tracked form states:
+- form_start
+- form_submit_attempt
+- form_validation_error
+- form_submit_success if supported
+- form_submit_error if supported
+
+Success and error messages must be visible and accessible:
+- role="status" or aria-live="polite"
+- clear success state
+- clear error state
+
+SEO MAXIMIZATION STANDARD
+Every page must include:
+- <!DOCTYPE html>
+- <html lang="en">
+- unique <title>
+- unique meta description
+- canonical URL
+- robots index,follow unless intentionally noindex
+- Open Graph title, description, URL, image, image alt
+- Twitter card title, description, image
+- favicon links
+- theme-color
+- global CSS
+- JSON-LD schema
+- one clear H1
+- logical H2/H3 hierarchy
+- internal links to relevant services, blog posts, resources, contact, and booking
+- descriptive image alt text
+- no keyword stuffing
+- no duplicate titles/descriptions across pages
+
+SCHEMA STANDARD
+Use the most appropriate schema:
+Homepage:
+- WebSite
+- WebPage
+- Organization
+
+Service pages:
+- WebPage
+- Service
+- BreadcrumbList
+- FAQPage when FAQ exists
+
+About page:
+- AboutPage
+- Organization
+- Person if appropriate
+- BreadcrumbList
+
+Contact page:
+- ContactPage
+- Organization
+- BreadcrumbList
+
+Book consultation page:
+- WebPage
+- Service or ContactPage where appropriate
+- BreadcrumbList
+
+Blog posts:
+- BlogPosting
+- BreadcrumbList
+- FAQPage if FAQ exists
+
+Schema URLs must match canonical URLs exactly.
+
+LOCAL SEO STANDARD
+Where relevant, include:
+- Florida
+- Fort Lauderdale
+- online therapy across Florida
+- service-specific phrase, for example anxiety therapy in Florida
+- trauma-informed therapy
+- consultation / therapy support language
+
+Do not overdo local terms. Use naturally.
+
+MOBILE + DESKTOP QA
+Confirm:
+- responsive layout works with global CSS
+- no page-level CSS breaks mobile
+- hero image scales correctly
+- buttons stack nicely on mobile
+- cards stack correctly on mobile
+- touch targets are large enough
+- header drawer works because site.js loads
+- no duplicate nav
+- no horizontal overflow
+- form fields are mobile-friendly
+
+ACCESSIBILITY QA
+Confirm:
+- skip link exists
+- images have useful alt text
+- buttons/links have clear labels
+- form fields have labels
+- FAQ structure is semantic
+- color contrast is acceptable
+- only one H1
+- headings follow logical order
+
+CONTENT QUALITY QA
+Confirm:
+- copy is warm, grounded, and ethical for a therapy site
+- no medical overpromising
+- no guaranteed outcomes
+- no manipulative urgency
+- no stigmatizing language
+- no language that suggests crisis services unless crisis resources are actually provided
+- clear boundary that therapy/consultation is the next step, not instant diagnosis
+
+REQUIRED FINAL QA CHECKLIST
+Before saying ready, confirm:
+- [ ] Valid HTML structure and doctype
+- [ ] Correct html lang
+- [ ] Correct body data-page-type
+- [ ] Correct body data-service
+- [ ] Correct body data-primary-goal
+- [ ] #siteHeader exists
+- [ ] #siteFooter exists
+- [ ] /assets/js/site.js loaded once
+- [ ] No duplicate header/footer include loader
+- [ ] No page-level duplicate analytics engine
+- [ ] /assets/css/site.css loaded
+- [ ] No unnecessary page-level CSS
+- [ ] Canonical is correct
+- [ ] og:url matches canonical
+- [ ] Schema URLs match canonical
+- [ ] Breadcrumb schema is correct where applicable
+- [ ] FAQ schema matches visible FAQ where applicable
+- [ ] Important CTAs tracked
+- [ ] Important internal links tracked
+- [ ] Service links tracked
+- [ ] Related blog links tracked
+- [ ] Forms have data-form-name where applicable
+- [ ] Mobile layout passes
+- [ ] Desktop layout passes
+- [ ] No unresolved placeholders
+- [ ] No broken obvious internal paths
+- [ ] No duplicate H1
+- [ ] SEO metadata is unique and compelling
+- [ ] Therapy copy is ethical and does not overpromise
+
+FINAL RESPONSE FORMAT
+When returning files, always state:
+
+Ready to go live: YES or NO
+
+Then list:
+- Updated file(s)
+
+Then give a short QA summary:
+- Header/footer: passed/failed
+- Global CSS: passed/failed
+- Analytics: passed/failed
+- SEO metadata: passed/failed
+- Schema: passed/failed
+- Mobile/desktop: passed/failed
+- Accessibility: passed/failed
+- Ethical therapy copy: passed/failed
+
+If not ready, explain exactly what is still blocking.
