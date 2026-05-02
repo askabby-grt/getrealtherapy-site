@@ -41,7 +41,7 @@ function setYear() {
 }
 
 function loadGoogleTag() {
-  const GA_ID = "G-8YW12523HN";
+  const GA_ID = "G-44SL3FKFTY";
 
   if (!GA_ID) return;
   if (document.querySelector('script[data-gtag="true"]')) return;
