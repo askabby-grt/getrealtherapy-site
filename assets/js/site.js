@@ -62,17 +62,23 @@ function loadGoogleTag() {
 }
 
 function setupMobileNav() {
+  const header = document.querySelector(".site-header");
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".site-nav");
   const overlay = document.querySelector(".site-nav-overlay");
+
   if (!toggle || !nav || !overlay) return;
+  if (toggle.dataset.navBound === "true") return;
+  toggle.dataset.navBound = "true";
 
   function openNav() {
     nav.classList.add("is-open");
     overlay.hidden = false;
     overlay.classList.add("is-open");
     toggle.setAttribute("aria-expanded", "true");
+    toggle.setAttribute("aria-label", "Close menu");
     document.body.classList.add("nav-open");
+    if (header) header.classList.add("is-menu-open");
   }
 
   function closeNav() {
@@ -80,50 +86,73 @@ function setupMobileNav() {
     overlay.classList.remove("is-open");
     overlay.hidden = true;
     toggle.setAttribute("aria-expanded", "false");
+    toggle.setAttribute("aria-label", "Open menu");
     document.body.classList.remove("nav-open");
+    if (header) header.classList.remove("is-menu-open");
+
+    nav.querySelectorAll(".site-nav__item--has-submenu.is-open").forEach(function (item) {
+      item.classList.remove("is-open");
+      const submenuToggle = item.querySelector(".site-nav__submenu-toggle");
+      if (submenuToggle) submenuToggle.setAttribute("aria-expanded", "false");
+    });
   }
 
-  toggle.addEventListener("click", function () {
-    const isOpen = nav.classList.contains("is-open");
-    if (isOpen) {
+  function toggleNav() {
+    if (nav.classList.contains("is-open")) {
       closeNav();
     } else {
       openNav();
     }
-  });
+  }
 
+  toggle.addEventListener("click", toggleNav);
   overlay.addEventListener("click", closeNav);
 
-  nav.querySelectorAll("a").forEach(function (link) {
-    link.addEventListener("click", function () {
-      closeNav();
-    });
+  nav.addEventListener("click", function (event) {
+    const submenuToggle = event.target.closest(".site-nav__submenu-toggle");
+    if (submenuToggle) return;
+
+    const link = event.target.closest("a");
+    if (link) closeNav();
   });
 
   document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape") {
-      closeNav();
-    }
+    if (event.key === "Escape") closeNav();
+  });
+
+  window.addEventListener("resize", function () {
+    if (window.matchMedia("(min-width: 981px)").matches) closeNav();
   });
 }
 
 function setupSubmenus() {
-  const toggles = document.querySelectorAll(".site-nav__submenu-toggle");
-  if (!toggles.length) return;
+  const nav = document.querySelector(".site-nav");
+  if (!nav || nav.dataset.submenusBound === "true") return;
+  nav.dataset.submenusBound = "true";
 
-  toggles.forEach(function (toggle) {
-    toggle.addEventListener("click", function (event) {
-      const parent = toggle.closest(".site-nav__item--has-submenu");
-      if (!parent) return;
+  nav.addEventListener("click", function (event) {
+    const toggle = event.target.closest(".site-nav__submenu-toggle");
+    if (!toggle) return;
 
-      const isDesktop = window.matchMedia("(min-width: 981px)").matches;
-      if (!isDesktop) {
-        event.preventDefault();
-      }
+    const parent = toggle.closest(".site-nav__item--has-submenu");
+    if (!parent) return;
 
-      const isOpen = parent.classList.toggle("is-open");
-      toggle.setAttribute("aria-expanded", String(isOpen));
-    });
+    event.preventDefault();
+    event.stopPropagation();
+
+    const isDesktop = window.matchMedia("(min-width: 981px)").matches;
+
+    if (!isDesktop) {
+      nav.querySelectorAll(".site-nav__item--has-submenu.is-open").forEach(function (item) {
+        if (item === parent) return;
+        item.classList.remove("is-open");
+        const otherToggle = item.querySelector(".site-nav__submenu-toggle");
+        if (otherToggle) otherToggle.setAttribute("aria-expanded", "false");
+      });
+    }
+
+    const isOpen = parent.classList.toggle("is-open");
+    toggle.setAttribute("aria-expanded", String(isOpen));
   });
 }
 
