@@ -1933,49 +1933,70 @@ select.input-success {
   }
 }
 
-
 /* =========================================
-   MOBILE NAV STABILITY PATCH
-   Ensures the injected header drawer opens, closes, and layers correctly.
+   DEFINITIVE MOBILE NAV FIX - 2026-05-03
+   Keep this block at the very end of site.css.
    ========================================= */
 
+html.nav-open,
+body.nav-open {
+  overflow: hidden !important;
+  height: 100% !important;
+}
+
 @media (max-width: 980px) {
-  body.nav-open {
-    overflow: hidden !important;
-    touch-action: none;
-  }
-
   .site-header {
-    z-index: 5000 !important;
+    position: sticky !important;
+    top: 0 !important;
+    z-index: 10000 !important;
+    background: transparent !important;
   }
 
-  .site-header.is-menu-open .header-inner {
-    background: rgba(245, 241, 236, 0.98);
+  .site-header .header-inner {
+    position: relative !important;
+    z-index: 10003 !important;
   }
 
   .nav-toggle {
     display: inline-flex !important;
-    flex: 0 0 auto;
+    position: relative !important;
+    z-index: 10006 !important;
+    flex: 0 0 auto !important;
   }
 
-  body.nav-open .nav-toggle {
+  body.nav-open .nav-toggle,
+  html.nav-open .nav-toggle {
     position: fixed !important;
-    top: 18px !important;
-    right: 20px !important;
-    z-index: 5003 !important;
-    background: #FAFAFA !important;
+    top: max(16px, env(safe-area-inset-top)) !important;
+    right: 18px !important;
+    z-index: 10008 !important;
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(1) {
+    transform: translateY(6px) rotate(45deg) !important;
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(2) {
+    opacity: 0 !important;
+  }
+
+  .nav-toggle[aria-expanded="true"] .nav-toggle__bar:nth-child(3) {
+    transform: translateY(-6px) rotate(-45deg) !important;
   }
 
   .site-nav-overlay {
     position: fixed !important;
     inset: 0 !important;
-    z-index: 5001 !important;
     display: block !important;
-    background: rgba(26, 26, 26, 0.46) !important;
+    width: 100vw !important;
+    height: 100dvh !important;
+    z-index: 10001 !important;
+    background: rgba(26, 26, 26, 0.58) !important;
     border: 0 !important;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+    opacity: 0 !important;
+    visibility: hidden !important;
+    pointer-events: none !important;
+    transition: opacity 220ms ease, visibility 220ms ease !important;
   }
 
   .site-nav-overlay.is-open {
@@ -1986,28 +2007,33 @@ select.input-success {
 
   .site-nav {
     position: fixed !important;
-    top: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
+    top: max(10px, env(safe-area-inset-top)) !important;
+    right: 10px !important;
+    bottom: max(10px, env(safe-area-inset-bottom)) !important;
     left: auto !important;
-    width: min(92vw, 390px) !important;
-    height: 100dvh !important;
+    width: min(86vw, 390px) !important;
+    height: auto !important;
+    max-height: calc(100dvh - max(20px, env(safe-area-inset-top)) - max(10px, env(safe-area-inset-bottom))) !important;
     margin: 0 !important;
-    padding: 92px 22px 28px !important;
-    background: #FAFAFA !important;
-    border-left: 1px solid rgba(107, 114, 128, 0.18) !important;
-    box-shadow: -24px 0 55px rgba(26, 26, 26, 0.24) !important;
-    transform: translateX(105%) !important;
-    opacity: 1 !important;
-    visibility: visible !important;
+    padding: 88px 20px 22px !important;
+    z-index: 10004 !important;
     overflow-y: auto !important;
     overscroll-behavior: contain !important;
-    z-index: 5002 !important;
-    transition: transform 220ms ease !important;
+    -webkit-overflow-scrolling: touch !important;
+    background: rgba(250, 250, 250, 0.98) !important;
+    border: 1px solid rgba(107, 114, 128, 0.18) !important;
+    border-radius: 0 !important;
+    box-shadow: -24px 0 55px rgba(26, 26, 26, 0.25) !important;
+    transform: translateX(calc(100% + 24px)) !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    pointer-events: none !important;
+    transition: transform 240ms ease !important;
   }
 
   .site-nav.is-open {
     transform: translateX(0) !important;
+    pointer-events: auto !important;
   }
 
   .site-nav__list {
@@ -2022,7 +2048,7 @@ select.input-success {
 
   .site-nav__list > li {
     width: 100% !important;
-    border-bottom: 1px solid rgba(107, 114, 128, 0.14) !important;
+    border-bottom: 1px solid rgba(107, 114, 128, 0.16) !important;
   }
 
   .site-nav a,
@@ -2037,6 +2063,8 @@ select.input-success {
     font-size: 1rem !important;
     font-weight: 800 !important;
     text-align: left !important;
+    background: transparent !important;
+    border: 0 !important;
   }
 
   .site-nav__submenu {
@@ -2044,11 +2072,10 @@ select.input-success {
     display: none !important;
     width: 100% !important;
     min-width: 0 !important;
+    padding: 4px 0 12px 14px !important;
     margin: 0 !important;
-    padding: 2px 0 12px 16px !important;
     background: transparent !important;
     border: 0 !important;
-    border-radius: 0 !important;
     box-shadow: none !important;
     opacity: 1 !important;
     visibility: visible !important;
@@ -2067,39 +2094,46 @@ select.input-success {
 
   .site-nav__submenu a {
     min-height: 40px !important;
-    padding: 9px 0 !important;
-    color: var(--color-charcoal) !important;
+    padding: 8px 0 !important;
     font-size: 0.95rem !important;
     font-weight: 650 !important;
+    color: var(--color-charcoal) !important;
   }
 
   .site-nav__cta {
-    margin-top: 14px !important;
+    margin-top: 12px !important;
     border-bottom: 0 !important;
   }
 
   .site-nav__cta a {
+    min-height: 52px !important;
     justify-content: center !important;
-    min-height: 50px !important;
-    padding: 0 20px !important;
+    padding: 0 18px !important;
     color: var(--color-soft-white) !important;
     background: var(--color-cta-teal) !important;
+    border-radius: 999px !important;
   }
 
   .site-nav__mobile-footer {
     display: block !important;
     margin-top: 22px !important;
+    padding: 20px !important;
+    border-radius: 22px !important;
+    background: var(--color-warm-sand) !important;
+    border: 1px solid rgba(107, 58, 91, 0.12) !important;
   }
 }
 
 @media (max-width: 640px) {
-  body.nav-open .nav-toggle {
-    top: 15px !important;
-    right: 17px !important;
+  body.nav-open .nav-toggle,
+  html.nav-open .nav-toggle {
+    top: max(14px, env(safe-area-inset-top)) !important;
+    right: 16px !important;
   }
 
   .site-nav {
-    width: min(92vw, 360px) !important;
-    padding: 84px 18px 22px !important;
+    right: 8px !important;
+    width: min(88vw, 360px) !important;
+    padding: 82px 18px 20px !important;
   }
 }
