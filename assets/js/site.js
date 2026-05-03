@@ -1,845 +1,326 @@
-/* /assets/js/site.js
-   Mindo Bird Watching global site controller and analytics engine
-   Updated: 2026-05-03
-   Production refinements added: device_type context, normalized label field, centralized analytics only
+document.addEventListener("DOMContentLoaded", async function () {
+  await loadIncludes();
+  setYear();
+  loadGoogleTag();
+  setupMobileNav();
+  setupSubmenus();
+  setupAnalyticsTracking();
+});
 
-   Central responsibilities:
-   - Load and initialize GA4 with G-1ZYLW22XWP
-   - Expose window.gtag and window.mbwAnalyticsTrack
-   - Send page_view_enhanced once per page load
-   - Send scroll_depth at 25, 50, 75, and 90 percent
-   - Listen globally for clicks on [data-analytics-event]
-   - Infer basic link analytics for ordinary links without data attributes
-   - Track language switch, CTAs, internal links, outbound links, WhatsApp, email, phone, FAQ, and forms
-   - Provide central form success/error hooks for custom forms
-   - Preserve MBW mobile drill-down menu and WhatsApp smart CTA behavior
-*/
+async function loadIncludes() {
+  const includeTargets = [
+    { selector: "#siteHeader", path: "/assets/includes/header.html" },
+    { selector: "#siteFooter", path: "/assets/includes/footer.html" }
+  ];
 
-(function () {
-  "use strict";
+  for (const item of includeTargets) {
+    const target = document.querySelector(item.selector);
+    if (!target) continue;
 
-  var GA_ID = "G-1ZYLW22XWP";
-  var SCROLL_MILESTONES = [25, 50, 75, 90];
-  var sentScroll = {};
-  var startedForms = {};
-  var submittedForms = {};
-  var visibleFormStates = {};
-
-  function ready(fn) {
-    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fn);
-    else fn();
-  }
-
-  function absUrl(value) {
-    try { return new URL(value || window.location.href, window.location.origin).href; }
-    catch (e) { return value || ""; }
-  }
-
-  function cleanText(value) {
-    return (value || "").toString().replace(/\s+/g, " ").trim();
-  }
-
-  function safeDataset(el, key) {
-    if (!el || !el.dataset) return "";
-    return el.dataset[key] || "";
-  }
-
-  function getMeta(name) {
-    var el = document.querySelector('meta[name="' + name + '"]') || document.querySelector('meta[property="' + name + '"]');
-    return el ? (el.getAttribute("content") || "") : "";
-  }
-
-  function getCanonical() {
-    var el = document.querySelector('link[rel="canonical"]');
-    return el ? absUrl(el.getAttribute("href") || "") : window.location.href;
-  }
-
-  function getPageType() {
-    return document.body ? (document.body.getAttribute("data-page-type") || document.body.getAttribute("data-analytics-page-type") || "unknown") : "unknown";
-  }
-
-  function getPageLanguage() {
-    var htmlLang = document.documentElement ? document.documentElement.getAttribute("lang") : "";
-    return document.body ? (document.body.getAttribute("data-page-language") || htmlLang || "unknown") : (htmlLang || "unknown");
-  }
-
-  function getDeviceType() {
-    var width = window.innerWidth || (document.documentElement && document.documentElement.clientWidth) || 0;
-    if (width > 0 && width < 768) return "mobile";
-    if (width >= 768 && width < 1024) return "tablet";
-    return "desktop";
-  }
-
-  function basePayload(extra) {
-    var payload = {
-      page_type: getPageType(),
-      page_language: getPageLanguage(),
-      page_path: window.location.pathname,
-      page_url: window.location.href,
-      page_title: document.title || "",
-      canonical_url: getCanonical(),
-      device_type: getDeviceType()
-    };
-
-    if (extra) {
-      Object.keys(extra).forEach(function (key) {
-        if (extra[key] !== undefined && extra[key] !== null && extra[key] !== "") payload[key] = extra[key];
-      });
-    }
-
-    return payload;
-  }
-
-  function ensureGtag() {
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = window.gtag || function () { window.dataLayer.push(arguments); };
-
-    if (!document.querySelector('script[src*="googletagmanager.com/gtag/js?id=' + GA_ID + '"]')) {
-      var s = document.createElement("script");
-      s.async = true;
-      s.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
-      (document.head || document.documentElement).appendChild(s);
-    }
-
-    if (!window.__mbwGa4Configured) {
-      window.__mbwGa4Configured = true;
-      window.gtag("js", new Date());
-      window.gtag("config", GA_ID, { send_page_view: false });
+    try {
+      const response = await fetch(item.path, { cache: "no-store" });
+      if (!response.ok) {
+        throw new Error("Failed to load " + item.path);
+      }
+      const html = await response.text();
+      target.innerHTML = html;
+    } catch (error) {
+      console.error(error);
     }
   }
+}
 
-  function sendEvent(name, payload) {
-    if (!name) return;
-    ensureGtag();
-    window.gtag("event", name, basePayload(payload || {}));
-  }
+function setYear() {
+  const yearNodes = document.querySelectorAll("[data-year], #year");
+  if (!yearNodes.length) return;
 
-  window.mbwAnalyticsTrack = sendEvent;
+  const year = String(new Date().getFullYear());
+  yearNodes.forEach(function (node) {
+    node.textContent = year;
+  });
+}
 
-  window.mbwAnalyticsFormSuccess = function (formName, extra) {
-    var payload = extra || {};
-    payload.form_name = formName || payload.form_name || "form";
-    sendEvent("form_submit_success", payload);
+function loadGoogleTag() {
+  const GA_ID = "G-44SL3FKFTY";
+
+  if (!GA_ID) return;
+  if (document.querySelector('script[data-gtag="true"]')) return;
+
+  const gtagScript = document.createElement("script");
+  gtagScript.async = true;
+  gtagScript.src = "https://www.googletagmanager.com/gtag/js?id=" + GA_ID;
+  gtagScript.setAttribute("data-gtag", "true");
+  document.head.appendChild(gtagScript);
+
+  window.dataLayer = window.dataLayer || [];
+  window.gtag = function () {
+    window.dataLayer.push(arguments);
   };
 
-  window.mbwAnalyticsFormError = function (formName, errorMessage, extra) {
-    var payload = extra || {};
-    payload.form_name = formName || payload.form_name || "form";
-    payload.error_message = errorMessage || payload.error_message || "Form submission error";
-    sendEvent("form_submit_error", payload);
+  window.gtag("js", new Date());
+  window.gtag("config", GA_ID);
+}
+
+function setupMobileNav() {
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector(".site-nav");
+  const overlay = document.querySelector(".site-nav-overlay");
+  if (!toggle || !nav || !overlay) return;
+
+  function openNav() {
+    nav.classList.add("is-open");
+    overlay.hidden = false;
+    overlay.classList.add("is-open");
+    toggle.setAttribute("aria-expanded", "true");
+    document.body.classList.add("nav-open");
+  }
+
+  function closeNav() {
+    nav.classList.remove("is-open");
+    overlay.classList.remove("is-open");
+    overlay.hidden = true;
+    toggle.setAttribute("aria-expanded", "false");
+    document.body.classList.remove("nav-open");
+  }
+
+  toggle.addEventListener("click", function () {
+    const isOpen = nav.classList.contains("is-open");
+    if (isOpen) {
+      closeNav();
+    } else {
+      openNav();
+    }
+  });
+
+  overlay.addEventListener("click", closeNav);
+
+  nav.querySelectorAll("a").forEach(function (link) {
+    link.addEventListener("click", function () {
+      closeNav();
+    });
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape") {
+      closeNav();
+    }
+  });
+}
+
+function setupSubmenus() {
+  const toggles = document.querySelectorAll(".site-nav__submenu-toggle");
+  if (!toggles.length) return;
+
+  toggles.forEach(function (toggle) {
+    toggle.addEventListener("click", function (event) {
+      const parent = toggle.closest(".site-nav__item--has-submenu");
+      if (!parent) return;
+
+      const isDesktop = window.matchMedia("(min-width: 981px)").matches;
+      if (!isDesktop) {
+        event.preventDefault();
+      }
+
+      const isOpen = parent.classList.toggle("is-open");
+      toggle.setAttribute("aria-expanded", String(isOpen));
+    });
+  });
+}
+
+/* =========================================
+   GET REAL THERAPY - ANALYTICS TRACKING
+   ========================================= */
+
+function getPageContext() {
+  const body = document.body || {};
+  return {
+    page_type: body.dataset.pageType || "unknown",
+    service: body.dataset.service || "",
+    page_slug: window.location.pathname,
+    page_title: document.title || "",
+    primary_goal: body.dataset.primaryGoal || ""
   };
+}
 
-  function isSameHost(url) {
-    try { return new URL(url, window.location.origin).hostname === window.location.hostname; }
-    catch (e) { return false; }
+function trackEvent(eventName, eventParams) {
+  const params = Object.assign({}, getPageContext(), eventParams || {});
+
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push(Object.assign({ event: eventName }, params));
+
+  if (typeof window.gtag === "function") {
+    window.gtag("event", eventName, params);
   }
+}
 
-  function classifyLink(a) {
-    var href = a.getAttribute("href") || "";
-    var lower = href.toLowerCase();
+function setupAnalyticsTracking() {
+  trackEvent("site_page_view", {
+    event_category: "engagement"
+  });
 
-    if (!href || href.charAt(0) === "#") return "anchor";
-    if (lower.indexOf("wa.me/") !== -1 || lower.indexOf("api.whatsapp.com") !== -1 || lower.indexOf("whatsapp://") === 0) return "whatsapp";
-    if (lower.indexOf("mailto:") === 0) return "email";
-    if (lower.indexOf("tel:") === 0) return "phone";
-    if (isSameHost(href)) return "internal";
-    return "outbound";
-  }
+  setupTrackedClicks();
+  setupOutboundTracking();
+  setupScrollDepthTracking();
+  setupFormTracking();
+  setupFaqTracking();
+}
 
-  function inferLinkEvent(a) {
-    var linkType = classifyLink(a);
-    if (linkType === "whatsapp") return "whatsapp_click";
-    if (linkType === "email") return "email_click";
-    if (linkType === "phone") return "phone_click";
-    if (linkType === "internal" || linkType === "anchor") return "internal_link_click";
-    if (linkType === "outbound") return "outbound_link_click";
-    return "link_click";
-  }
+function setupTrackedClicks() {
+  document.querySelectorAll("[data-track-event]").forEach(function (el) {
+    if (el.dataset.trackingBound === "true") return;
+    el.dataset.trackingBound = "true";
 
-  function payloadFromElement(el) {
-    var d = el.dataset || {};
-    var label = d.analyticsLabel || cleanText(el.textContent) || el.getAttribute("aria-label") || el.getAttribute("title") || "";
-    var payload = {
-      label: label,
-      event_label: label,
-      cta_label: d.analyticsLabel,
-      cta_location: d.analyticsLocation,
-      link_text: label,
-      section_name: d.analyticsSection,
-      page_type: d.analyticsPageType || getPageType(),
-      region: d.analyticsRegion,
-      bird_name: d.analyticsBird,
-      tour_name: d.analyticsTour,
-      guide_name: d.analyticsGuide,
-      experience_type: d.analyticsExperience,
-      partner_name: d.analyticsPartner,
-      form_name: d.analyticsForm,
-      target_language: d.analyticsTargetLanguage
-    };
-
-    if (el.tagName && el.tagName.toLowerCase() === "a") {
-      payload.link_url = absUrl(el.getAttribute("href") || "");
-      payload.link_type = classifyLink(el);
-    }
-
-    return payload;
-  }
-
-  function trackAttributedClick(e) {
-    var el = e.target && e.target.closest ? e.target.closest("[data-analytics-event]") : null;
-    if (!el) return false;
-    sendEvent(el.getAttribute("data-analytics-event"), payloadFromElement(el));
-    return true;
-  }
-
-  function trackUnattributedLink(e) {
-    var a = e.target && e.target.closest ? e.target.closest("a[href]") : null;
-    if (!a) return;
-    if (a.closest("[data-analytics-event]")) return;
-
-    var eventName = inferLinkEvent(a);
-    var payload = payloadFromElement(a);
-    payload.event_label = cleanText(a.textContent) || a.getAttribute("aria-label") || a.getAttribute("title") || payload.link_url;
-    payload.label = payload.event_label;
-    payload.link_text = payload.event_label;
-    sendEvent(eventName, payload);
-  }
-
-  function initCustomFaqClickTracking() {
-    if (document.__mbwCustomFaqBound) return;
-    document.__mbwCustomFaqBound = true;
-
-    document.addEventListener("click", function (e) {
-      var el = e.target && e.target.closest ? e.target.closest("[data-faq-question], .faq-question, .faq-toggle, .faq-card, .faq-item button, [aria-controls][aria-expanded]") : null;
-      if (!el) return;
-      if (el.closest("[data-analytics-event]")) return;
-      if (el.tagName && el.tagName.toLowerCase() === "a") return;
-
-      var expanded = el.getAttribute("aria-expanded");
-      if (expanded === "false") return;
-
-      var faqLabel = cleanText(el.textContent) || el.getAttribute("aria-label") || "FAQ expanded";
-      sendEvent("faq_expand", {
-        label: faqLabel,
-        event_label: faqLabel,
-        section_name: "faq"
+    el.addEventListener("click", function () {
+      trackEvent(el.dataset.trackEvent, {
+        event_category: el.dataset.trackCategory || "click",
+        event_label: el.dataset.trackLabel || el.textContent.trim(),
+        link_url: el.getAttribute("href") || "",
+        cta_location: el.dataset.ctaLocation || "",
+        destination_page: el.dataset.destinationPage || ""
       });
-    }, true);
-  }
-
-  function trackPageView() {
-    if (window.__mbwPageViewEnhancedSent) return;
-    window.__mbwPageViewEnhancedSent = true;
-    sendEvent("page_view_enhanced", {
-      meta_description: getMeta("description"),
-      og_url: getMeta("og:url"),
-      referrer: document.referrer || "",
-      viewport_width: window.innerWidth || 0,
-      viewport_height: window.innerHeight || 0
     });
-  }
+  });
+}
 
-  function getScrollPercent() {
-    var doc = document.documentElement;
-    var body = document.body;
-    var scrollTop = window.pageYOffset || doc.scrollTop || (body && body.scrollTop) || 0;
-    var scrollHeight = Math.max(
-      body ? body.scrollHeight : 0,
-      body ? body.offsetHeight : 0,
-      doc.clientHeight,
-      doc.scrollHeight,
-      doc.offsetHeight
-    );
-    var winHeight = window.innerHeight || doc.clientHeight || 0;
-    var trackLength = Math.max(scrollHeight - winHeight, 1);
-    return Math.min(100, Math.round((scrollTop / trackLength) * 100));
-  }
+function setupOutboundTracking() {
+  document.querySelectorAll('a[href^="http"]').forEach(function (link) {
+    if (link.dataset.outboundBound === "true") return;
+    link.dataset.outboundBound = "true";
 
-  function checkScrollDepth() {
-    var pct = getScrollPercent();
-    SCROLL_MILESTONES.forEach(function (m) {
-      if (!sentScroll[m] && pct >= m) {
-        sentScroll[m] = true;
-        sendEvent("scroll_depth", { scroll_percent: m });
+    link.addEventListener("click", function () {
+      const url = new URL(link.href);
+      if (url.hostname === window.location.hostname) return;
+
+      trackEvent("outbound_link_click", {
+        event_category: "outbound",
+        event_label: link.textContent.trim(),
+        link_url: link.href
+      });
+    });
+  });
+}
+
+function setupScrollDepthTracking() {
+  const milestones = [25, 50, 75, 90];
+  const fired = {};
+
+  function onScroll() {
+    const doc = document.documentElement;
+    const scrollTop = window.scrollY || doc.scrollTop;
+    const scrollHeight = doc.scrollHeight - window.innerHeight;
+    if (scrollHeight <= 0) return;
+
+    const percent = Math.round((scrollTop / scrollHeight) * 100);
+
+    milestones.forEach(function (milestone) {
+      if (percent >= milestone && !fired[milestone]) {
+        fired[milestone] = true;
+        trackEvent("scroll_depth", {
+          event_category: "engagement",
+          scroll_percent: milestone
+        });
       }
     });
-  }
 
-  function initScrollTracking() {
-    var ticking = false;
-    function onScroll() {
-      if (ticking) return;
-      ticking = true;
-      window.requestAnimationFrame(function () {
-        ticking = false;
-        checkScrollDepth();
-      });
+    if (fired[90]) {
+      window.removeEventListener("scroll", throttledScroll);
     }
-    window.addEventListener("scroll", onScroll, { passive: true });
-    window.addEventListener("resize", onScroll, { passive: true });
-    checkScrollDepth();
   }
 
-  function initNativeDetailsFaqTracking() {
-    document.addEventListener("toggle", function (e) {
-      var details = e.target;
-      if (!details || details.tagName !== "DETAILS" || !details.open) return;
-      if (details.getAttribute("data-analytics-event")) return;
-      var summary = details.querySelector("summary");
-      var faqLabel = summary ? cleanText(summary.textContent) : "FAQ expanded";
-      sendEvent("faq_expand", {
-        label: faqLabel,
-        event_label: faqLabel,
-        section_name: "faq"
+  const throttledScroll = throttle(onScroll, 400);
+  window.addEventListener("scroll", throttledScroll, { passive: true });
+}
+
+function setupFormTracking() {
+  document.querySelectorAll("form").forEach(function (form) {
+    if (form.dataset.formTrackingBound === "true") return;
+    form.dataset.formTrackingBound = "true";
+
+    const formName = form.dataset.formName || form.getAttribute("name") || form.id || "unnamed_form";
+
+    form.addEventListener("focusin", function () {
+      if (form.dataset.formStarted === "true") return;
+      form.dataset.formStarted = "true";
+
+      trackEvent("form_start", {
+        event_category: "form",
+        form_name: formName
       });
-    }, true);
-  }
-
-  function getFormName(form) {
-    return form.getAttribute("data-analytics-form") || form.getAttribute("name") || form.getAttribute("id") || "form";
-  }
-
-  function formPayload(form, extra) {
-    var payload = extra || {};
-    payload.form_name = getFormName(form);
-    payload.section_name = safeDataset(form, "analyticsSection") || payload.section_name;
-    return payload;
-  }
-
-  function initFormTracking() {
-    document.addEventListener("focusin", function (e) {
-      var field = e.target;
-      if (!field || !field.closest) return;
-      var form = field.closest("form");
-      if (!form) return;
-      var name = getFormName(form);
-      if (startedForms[name]) return;
-      startedForms[name] = true;
-      sendEvent("form_start", formPayload(form));
     });
 
-    document.addEventListener("submit", function (e) {
-      var form = e.target;
-      if (!form || form.tagName !== "FORM") return;
-      var name = getFormName(form);
-      submittedForms[name] = Date.now();
+    form.addEventListener("submit", function () {
+      const invalidFields = Array.from(form.querySelectorAll(":invalid"));
 
-      var explicit = form.getAttribute("data-analytics-event");
-      if (explicit) {
-        sendEvent(explicit, payloadFromElement(form));
-        return;
-      }
-      sendEvent("form_submit_attempt", formPayload(form));
-    }, true);
-
-    document.addEventListener("mbw:form-success", function (e) {
-      var detail = e.detail || {};
-      window.mbwAnalyticsFormSuccess(detail.form_name || detail.formName || "form", detail);
-    });
-
-    document.addEventListener("mbw:form-error", function (e) {
-      var detail = e.detail || {};
-      window.mbwAnalyticsFormError(detail.form_name || detail.formName || "form", detail.error_message || detail.errorMessage || "Form submission error", detail);
-    });
-  }
-
-  function elementIsVisible(el) {
-    if (!el) return false;
-    var style = window.getComputedStyle ? window.getComputedStyle(el) : null;
-    if (style && (style.display === "none" || style.visibility === "hidden" || style.opacity === "0")) return false;
-    return !!(el.offsetWidth || el.offsetHeight || el.getClientRects().length);
-  }
-
-  function detectVisibleFormStates() {
-    var successSelectors = [
-      "[data-form-success]",
-      ".form-success",
-      ".success-message",
-      ".contact-success",
-      "[role='status']"
-    ];
-
-    var errorSelectors = [
-      "[data-form-error]",
-      ".form-error",
-      ".error-message",
-      ".contact-error",
-      "[role='alert']"
-    ];
-
-    successSelectors.forEach(function (sel) {
-      Array.prototype.slice.call(document.querySelectorAll(sel)).forEach(function (el) {
-        if (!elementIsVisible(el)) return;
-        var formName = el.getAttribute("data-analytics-form") || el.getAttribute("data-form-success") || "form";
-        var key = "success:" + formName + ":" + cleanText(el.textContent);
-        if (visibleFormStates[key]) return;
-        visibleFormStates[key] = true;
-        var successLabel = cleanText(el.textContent) || "Form success";
-        sendEvent("form_submit_success", {
-          label: successLabel,
+      if (invalidFields.length) {
+        trackEvent("form_validation_error", {
+          event_category: "form",
           form_name: formName,
-          event_label: successLabel
+          invalid_field_count: invalidFields.length,
+          invalid_fields: invalidFields.map(function (field) {
+            return field.name || field.id || field.type || "unknown_field";
+          }).join(",")
         });
-      });
-    });
-
-    errorSelectors.forEach(function (sel) {
-      Array.prototype.slice.call(document.querySelectorAll(sel)).forEach(function (el) {
-        if (!elementIsVisible(el)) return;
-        var formName = el.getAttribute("data-analytics-form") || el.getAttribute("data-form-error") || "form";
-        var msg = cleanText(el.textContent) || "Form submission error";
-        var key = "error:" + formName + ":" + msg;
-        if (visibleFormStates[key]) return;
-        visibleFormStates[key] = true;
-        sendEvent("form_submit_error", {
-          label: msg,
-          form_name: formName,
-          error_message: msg,
-          event_label: msg
-        });
-      });
-    });
-  }
-
-  function initVisibleFormStateObserver() {
-    detectVisibleFormStates();
-    if (!window.MutationObserver || window.__mbwFormStateObserver) return;
-    window.__mbwFormStateObserver = new MutationObserver(function () {
-      detectVisibleFormStates();
-    });
-    window.__mbwFormStateObserver.observe(document.documentElement || document.body, {
-      childList: true,
-      subtree: true,
-      attributes: true,
-      attributeFilter: ["class", "style", "hidden", "aria-hidden"]
-    });
-  }
-
-  function bootAnalytics() {
-    ensureGtag();
-    trackPageView();
-    initScrollTracking();
-    initNativeDetailsFaqTracking();
-    initCustomFaqClickTracking();
-    initFormTracking();
-    initVisibleFormStateObserver();
-
-    if (!document.__mbwAnalyticsClickBound) {
-      document.__mbwAnalyticsClickBound = true;
-      document.addEventListener("click", function (e) {
-        if (trackAttributedClick(e)) return;
-        trackUnattributedLink(e);
-      }, true);
-    }
-  }
-
-  ready(bootAnalytics);
-})();
-
-
-/* /assets/js/site.js
-   MBW mobile menu controller (drill-down) - STABLE
-   Works even if:
-   - header is <div class="topbar"> (not <header>)
-   - data-mbw-header attribute is missing
-   - menu button/panel use ids (#menuBtn/#menuPanel) or classes (.menuBtn/.menuPanel)
-   - legacy CSS shipped submenus visible
-
-   Behavior:
-   - Hamburger toggles panel
-   - On open: show main menu only, hide all submenus
-   - .m-next opens submenu via data-target selector
-   - .m-back goes back via data-back selector
-*/
-
-(function () {
-  function qs(root, sel) { return (root || document).querySelector(sel); }
-  function qsa(root, sel) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
-
-  function findBtn(header) {
-    return qs(header, ".menuBtn") || qs(header, "#menuBtn") || qs(header, "[data-menu-btn]");
-  }
-
-  function findPanel(header) {
-    return qs(header, ".menuPanel") || qs(header, "#menuPanel") || qs(header, "[data-menu-panel]");
-  }
-
-  function forceHide(el) {
-    if (!el) return;
-    el.setAttribute("hidden", "");
-    el.style.display = "none";
-    el.setAttribute("aria-hidden", "true");
-  }
-
-  function forceShow(el) {
-    if (!el) return;
-    el.removeAttribute("hidden");
-    el.style.display = "";
-    el.setAttribute("aria-hidden", "false");
-  }
-
-  function initHeader(topbar) {
-    if (!topbar) return;
-
-    var btn = findBtn(topbar);
-    var panel = findPanel(topbar);
-    if (!btn || !panel) return;
-
-    var mainView =
-      qs(panel, ".m-main") ||
-      qs(panel, ".menuList") ||
-      panel;
-
-    var subViews = qsa(panel, ".m-submenu");
-
-    if (subViews.length === 0) {
-      qsa(panel, "[id^='m-']").forEach(function (el) {
-        if (el !== mainView) subViews.push(el);
-      });
-    }
-
-    function legacySubmenuBlocks() {
-      return qsa(panel, ".submenu, .subMenu, .submenuList, .menuSub, ul ul, ol ol");
-    }
-
-    function resetDrilldown() {
-      subViews.forEach(forceHide);
-      legacySubmenuBlocks().forEach(function (el) {
-        if (el === mainView) return;
-        forceHide(el);
-      });
-      forceShow(mainView);
-    }
-
-    function openPanel() {
-      panel.classList.add("is-open");
-      btn.setAttribute("aria-expanded", "true");
-      resetDrilldown();
-    }
-
-    function closePanel() {
-      panel.classList.remove("is-open");
-      btn.setAttribute("aria-expanded", "false");
-      resetDrilldown();
-    }
-
-    function togglePanel(e) {
-      if (e) e.preventDefault();
-      if (panel.classList.contains("is-open")) closePanel();
-      else openPanel();
-    }
-
-    if (!btn.__mbwBound) {
-      btn.__mbwBound = true;
-      btn.addEventListener("click", togglePanel, { passive: false });
-      btn.addEventListener("touchend", togglePanel, { passive: false });
-    }
-
-    if (!document.__mbwDocBound) {
-      document.__mbwDocBound = true;
-      document.addEventListener("click", function (e) {
-        var openPanels = qsa(document, "#siteHeader .menuPanel.is-open, #siteHeader #menuPanel.is-open");
-        if (openPanels.length === 0) return;
-
-        openPanels.forEach(function (p) {
-          var h = p.closest("#siteHeader .topbar") || p.closest(".topbar");
-          if (h && h.contains(e.target)) return;
-          p.classList.remove("is-open");
-        });
-      });
-    }
-
-    if (!panel.__mbwBound) {
-      panel.__mbwBound = true;
-      panel.addEventListener("click", function (e) {
-        var el = e.target;
-
-        while (el && el !== panel && !(el.classList && el.classList.contains("m-next"))) {
-          el = el.parentNode;
-        }
-        if (el && el.classList && el.classList.contains("m-next")) {
-          var targetSel = el.getAttribute("data-target");
-          if (!targetSel) return;
-          var targetMenu = qs(panel, targetSel);
-          if (!targetMenu) return;
-
-          forceHide(mainView);
-          subViews.forEach(forceHide);
-          forceShow(targetMenu);
-          e.preventDefault();
-          return;
-        }
-
-        el = e.target;
-        while (el && el !== panel && !(el.classList && el.classList.contains("m-back"))) {
-          el = el.parentNode;
-        }
-        if (el && el.classList && el.classList.contains("m-back")) {
-          var backSel = el.getAttribute("data-back");
-
-          subViews.forEach(forceHide);
-
-          if (backSel) {
-            var backMenu = qs(panel, backSel);
-            if (backMenu) forceShow(backMenu);
-            else forceShow(mainView);
-          } else {
-            forceShow(mainView);
-          }
-
-          e.preventDefault();
-          return;
-        }
-      });
-    }
-
-    resetDrilldown();
-    btn.setAttribute("aria-expanded", "false");
-  }
-
-  function boot() {
-    var bars = qsa(document, "#siteHeader .topbar");
-    if (bars.length === 0) bars = qsa(document, ".topbar");
-    bars.forEach(initHeader);
-  }
-
-  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);
-  else boot();
-
-  if (!window.__mbwHeaderObserver && "MutationObserver" in window) {
-    window.__mbwHeaderObserver = new MutationObserver(function () { boot(); });
-    window.__mbwHeaderObserver.observe(document.documentElement || document.body, { childList: true, subtree: true });
-  }
-})();
-
-/* WhatsApp Smart CTA (MBW) v4 */
-
-(function () {
-  function getInlineWaQuestions() {
-    var el = document.getElementById("mbwWaQuestions");
-    if (!el) return null;
-    try { return JSON.parse(el.textContent || el.innerText || "{}"); } catch (e) { return null; }
-  }
-
-  function normalizePath(p) {
-    p = p || "/";
-    if (p.length > 1 && p.charAt(p.length - 1) !== "/") p = p + "/";
-    return p;
-  }
-
-  function isSpanishPath(p) {
-    return p === "/es/" || p.indexOf("/es/") === 0;
-  }
-
-  function qs(sel, root) { return (root || document).querySelector(sel); }
-  function qsa(sel, root) { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); }
-
-  function cleanText(value) {
-    return (value || "").toString().replace(/\s+/g, " ").trim();
-  }
-
-  function isMobileLike() {
-    var byWidth = window.matchMedia && window.matchMedia("(max-width: 900px)").matches;
-    var byPointer = window.matchMedia && window.matchMedia("(hover: none) and (pointer: coarse)").matches;
-    var byTouch = ("ontouchstart" in window) || (navigator && navigator.maxTouchPoints && navigator.maxTouchPoints > 0);
-    return !!(byWidth || byPointer || byTouch);
-  }
-
-  function getPageLabel() {
-    var t = document.title || "";
-    t = t.replace(/\s*\|\s*Mindo Bird Watching\s*$/i, "");
-    return t.trim();
-  }
-
-  function setImgForViewport(root) {
-    var img = qs(".mbwWaBirdImg", root);
-    if (!img) return;
-
-    var d = (root.getAttribute("data-wa-img-desktop") || "").toString();
-    var m = (root.getAttribute("data-wa-img-mobile") || "").toString();
-    var target = isMobileLike() ? (m || d) : (d || m);
-
-    if (target && img.getAttribute("src") !== target) img.setAttribute("src", target);
-  }
-
-  function init(root) {
-    if (!root || root.__mbwWaBirdInit) return;
-    root.__mbwWaBirdInit = true;
-
-    var btn = qs(".mbwWaBirdBtn", root);
-    var closeBtn = qs(".mbwWaBirdClose", root);
-    var backdrop = qs(".mbwWaBirdBackdrop", root);
-    var actions = qsa(".mbwWaBirdAction", root);
-
-    (function applyPerPageQuestions() {
-      if (!actions || actions.length < 4) return;
-      var data = getInlineWaQuestions();
-      if (!data || !data.pages) return;
-
-      var p = normalizePath(window.location.pathname || "/");
-      var row = data.pages[p];
-      if (!row) {
-        var def = isSpanishPath(p) ? data.default_es : data.default_en;
-        if (!def) return;
-        row = def;
-      }
-
-      if (row.q1) actions[0].textContent = row.q1;
-      if (row.q2) actions[1].textContent = row.q2;
-      if (row.q3) actions[2].textContent = row.q3;
-      if (row.q4) actions[3].textContent = row.q4;
-
-      if (row.t1) actions[0].setAttribute("data-wa-template", row.t1);
-      if (row.t2) actions[1].setAttribute("data-wa-template", row.t2);
-      if (row.t3) actions[2].setAttribute("data-wa-template", row.t3);
-      if (row.t4) actions[3].setAttribute("data-wa-template", row.t4);
-    })();
-
-    if (!btn) return;
-
-    function buildLink(template) {
-      var numRaw = (root.getAttribute("data-wa-number") || "").toString();
-      var num = numRaw.replace(/[^\d]/g, "");
-      if (!num) return "";
-
-      var url = window.location.href;
-      var msg = (template || "").replace("{url}", url);
-      return "https://wa.me/" + num + "?text=" + encodeURIComponent(msg);
-    }
-
-    function openPanel() {
-      root.classList.add("is-open");
-      btn.setAttribute("aria-expanded", "true");
-    }
-
-    function closePanel() {
-      root.classList.remove("is-open");
-      btn.setAttribute("aria-expanded", "false");
-    }
-
-    function trackWhatsApp(label, location, link) {
-      if (window.mbwAnalyticsTrack) {
-        window.mbwAnalyticsTrack("whatsapp_click", {
-          label: label,
-          event_label: label,
-          cta_label: label,
-          cta_location: location,
-          link_url: link,
-          link_type: "whatsapp"
-        });
-      }
-    }
-
-    function getPrimaryTemplate() {
-      var data = getInlineWaQuestions();
-      var p = normalizePath(window.location.pathname || "/");
-      var row = (data && data.pages) ? data.pages[p] : null;
-      if (!row && data) row = isSpanishPath(p) ? data.default_es : data.default_en;
-      return (row && row.t1) ? row.t1 : ("Hi! I am interested in:\n" + (getPageLabel() || "a birding tour") + "\n\nPage: {url}");
-    }
-
-    function goWhatsApp(template, label, location) {
-      var link = buildLink(template);
-      if (!link) return;
-      trackWhatsApp(label || "WhatsApp smart CTA", location || "floating_whatsapp", link);
-      window.location.href = link;
-    }
-
-    function onBtnClick(e) {
-      e.preventDefault();
-
-      if (isMobileLike()) {
-        goWhatsApp(getPrimaryTemplate(), "WhatsApp smart CTA", "floating_whatsapp_mobile");
         return;
       }
 
-      if (root.classList.contains("is-open")) closePanel();
-      else openPanel();
-    }
-
-    setImgForViewport(root);
-    window.addEventListener("resize", function () { setImgForViewport(root); }, { passive: true });
-
-    btn.addEventListener("click", onBtnClick, { passive: false });
-
-    btn.addEventListener("touchstart", function (e) {
-      if (!isMobileLike()) return;
-      e.preventDefault();
-      e.stopPropagation();
-      onBtnClick(e);
-    }, { passive: false });
-
-    if (closeBtn) closeBtn.addEventListener("click", function (e) { e.preventDefault(); closePanel(); }, { passive: false });
-    if (backdrop) backdrop.addEventListener("click", function () { closePanel(); }, { passive: true });
-
-    actions.forEach(function (a) {
-      a.addEventListener("click", function (e) {
-        e.preventDefault();
-        e.stopPropagation();
-
-        if (isMobileLike()) {
-          goWhatsApp(getPrimaryTemplate(), "WhatsApp smart CTA", "floating_whatsapp_mobile");
-          return;
-        }
-
-        var template = a.getAttribute("data-wa-template") || "";
-        var link = buildLink(template);
-        if (!link) return;
-
-        trackWhatsApp(cleanText(a.textContent) || "WhatsApp smart CTA option", "floating_whatsapp_panel", link);
-        closePanel();
-        window.open(link, "_blank", "noopener,noreferrer");
-      }, { passive: false });
+      trackEvent("form_submit_attempt", {
+        event_category: "form",
+        form_name: formName
+      });
     });
-  }
+  });
+}
 
-  function boot() { qsa(".mbwWaBirdFab").forEach(init); }
+function setupFaqTracking() {
+  const faqItems = document.querySelectorAll(".faq-item, details");
+  if (!faqItems.length) return;
 
-  function bootSoon() {
-    boot();
-    window.setTimeout(boot, 400);
-    window.setTimeout(boot, 1200);
-    window.setTimeout(boot, 2500);
-  }
+  const observer = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (!entry.isIntersecting) return;
 
-  bootSoon();
+      const item = entry.target;
+      if (item.dataset.faqViewed === "true") return;
+      item.dataset.faqViewed = "true";
 
-  if (!window.__mbwWaBirdObserver && "MutationObserver" in window) {
-    window.__mbwWaBirdObserver = new MutationObserver(function () {
-      boot();
+      const question = item.querySelector("h3, summary")?.textContent?.trim() || "FAQ item";
+
+      trackEvent("faq_view", {
+        event_category: "engagement",
+        faq_question: question
+      });
+
+      observer.unobserve(item);
     });
-    window.__mbwWaBirdObserver.observe(document.documentElement || document.body, { childList: true, subtree: true });
-  }
-})();
+  }, { threshold: 0.5 });
 
-/* WhatsApp Legacy Cleanup (FINAL)
-   This removes older widgets from previous attempts and prevents duplicate UI on mobile.
-*/
+  faqItems.forEach(function (item) {
+    observer.observe(item);
+  });
+}
 
-(function () {
-  function removeAll(sel) {
-    document.querySelectorAll(sel).forEach(function (n) { n.remove(); });
-  }
+function throttle(callback, wait) {
+  let timeout = null;
+  let previous = 0;
 
-  function cleanup() {
-    removeAll(".mbwWaFab");
+  return function () {
+    const now = Date.now();
+    const remaining = wait - (now - previous);
+    const context = this;
+    const args = arguments;
 
-    var birds = Array.prototype.slice.call(document.querySelectorAll(".mbwWaBirdFab"));
-    if (birds.length > 1) {
-      birds.slice(0, birds.length - 1).forEach(function (n) { n.remove(); });
+    if (remaining <= 0) {
+      clearTimeout(timeout);
+      timeout = null;
+      previous = now;
+      callback.apply(context, args);
+    } else if (!timeout) {
+      timeout = setTimeout(function () {
+        previous = Date.now();
+        timeout = null;
+        callback.apply(context, args);
+      }, remaining);
     }
+  };
+}
 
-    removeAll(".mbwWaFabPanel");
-    removeAll(".mbwWaFabBackdrop");
-    removeAll(".mbwWaFabActions");
-  }
-
-  cleanup();
-  window.setTimeout(cleanup, 500);
-  window.setTimeout(cleanup, 1500);
-
-  if (!window.__mbwWaCleanupObserver && "MutationObserver" in window) {
-    window.__mbwWaCleanupObserver = new MutationObserver(function () { cleanup(); });
-    window.__mbwWaCleanupObserver.observe(document.documentElement || document.body, { childList: true, subtree: true });
-  }
-})();
