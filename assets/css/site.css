@@ -2377,3 +2377,95 @@ select.input-success {
     font-size: 0.82rem !important;
   }
 }
+
+
+/* =========================================
+   HOME HEADER MENU POLISH
+   Desktop nav/CTA sizing and final CTA secondary color.
+   Keep this block at the end of /assets/css/site.css.
+   ========================================= */
+
+@media (min-width: 981px) {
+  .site-header .header-inner {
+    overflow: visible;
+  }
+
+  .site-header .site-nav,
+  #siteHeader .site-nav {
+    position: static !important;
+    display: block !important;
+    width: auto !important;
+    height: auto !important;
+    margin-left: auto !important;
+    padding: 0 !important;
+    background: transparent !important;
+    border: 0 !important;
+    box-shadow: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+    overflow: visible !important;
+  }
+
+  .site-header .site-nav__list,
+  #siteHeader .site-nav__list {
+    display: flex !important;
+    align-items: center !important;
+    gap: 12px !important;
+  }
+
+  .site-header .site-nav a,
+  .site-header .site-nav__submenu-toggle,
+  #siteHeader .site-nav a,
+  #siteHeader .site-nav__submenu-toggle {
+    font-size: 0.88rem !important;
+    font-weight: 750 !important;
+    white-space: nowrap !important;
+  }
+
+  .site-header .site-nav__cta a,
+  #siteHeader .site-nav__cta a {
+    min-height: 38px !important;
+    height: 38px !important;
+    padding: 0 14px !important;
+    font-size: 0.84rem !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+  }
+
+  #siteHeader .nav-toggle,
+  .site-header .nav-toggle {
+    display: none !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1180px) {
+  .site-header .site-nav__list,
+  #siteHeader .site-nav__list {
+    gap: 9px !important;
+  }
+
+  .site-header .site-nav a,
+  .site-header .site-nav__submenu-toggle,
+  #siteHeader .site-nav a,
+  #siteHeader .site-nav__submenu-toggle {
+    font-size: 0.8rem !important;
+  }
+
+  .site-header .site-nav__cta a,
+  #siteHeader .site-nav__cta a {
+    padding: 0 11px !important;
+    font-size: 0.78rem !important;
+  }
+}
+
+.service-section--plum .button--secondary,
+.home-section--plum .button--secondary {
+  color: var(--color-soft-white);
+  border-color: var(--color-soft-white);
+}
+
+.service-section--plum .button--secondary:hover,
+.home-section--plum .button--secondary:hover {
+  background: rgba(250, 250, 250, 0.12);
+}
