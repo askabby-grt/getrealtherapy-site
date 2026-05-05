@@ -732,7 +732,7 @@ Global JS:
 Current site.js responsibilities:
 - Loads global header/footer includes.
 - Sets footer year.
-- Loads GA4 with measurement ID G-8YW12523HN.
+- Loads GA4 with measurement ID G-44SL3FKFTY.
 - Sets up mobile navigation and submenus.
 - Sends a page-level event.
 - Tracks [data-track-event] clicks.
