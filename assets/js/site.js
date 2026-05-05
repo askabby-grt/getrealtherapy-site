@@ -41,6 +41,7 @@ function setYear() {
 }
 
 function loadGoogleTag() {
+  // LIVE GA4 MEASUREMENT ID from Google Analytics Web Stream: Get Real Therapy
   const GA_ID = "G-44SL3FKFTY";
 
   if (!GA_ID) return;
