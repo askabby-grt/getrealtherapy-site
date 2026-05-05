@@ -2323,3 +2323,57 @@ select.input-success {
     right: 16px !important;
   }
 }
+
+
+/* =========================================
+   HEADER CTA DESKTOP SIZE FIX
+   Keep this block at the very end of /assets/css/site.css.
+   ========================================= */
+
+@media (min-width: 981px) {
+  .site-header .site-nav__list {
+    gap: 12px !important;
+  }
+
+  .site-header .site-nav__cta a,
+  #siteHeader .site-nav__cta a {
+    min-height: 38px !important;
+    height: 38px !important;
+    padding: 0 14px !important;
+    font-size: 0.86rem !important;
+    line-height: 1 !important;
+    white-space: nowrap !important;
+    flex-shrink: 0 !important;
+  }
+
+  .site-header .site-brand {
+    flex-shrink: 0 !important;
+  }
+
+  .site-header .site-nav {
+    min-width: 0 !important;
+  }
+}
+
+@media (min-width: 981px) and (max-width: 1180px) {
+  .site-header .site-brand__text {
+    font-size: 0.92rem !important;
+  }
+
+  .site-header .site-nav__list {
+    gap: 10px !important;
+  }
+
+  .site-header .site-nav a,
+  .site-header .site-nav__submenu-toggle,
+  #siteHeader .site-nav a,
+  #siteHeader .site-nav__submenu-toggle {
+    font-size: 0.84rem !important;
+  }
+
+  .site-header .site-nav__cta a,
+  #siteHeader .site-nav__cta a {
+    padding: 0 12px !important;
+    font-size: 0.82rem !important;
+  }
+}
