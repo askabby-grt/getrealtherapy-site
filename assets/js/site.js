@@ -70,12 +70,37 @@ function setupMobileNav() {
 
   if (!toggle || !nav || !overlay) return;
 
-  if (nav.parentElement !== document.body) {
-    document.body.appendChild(nav);
+  const navOriginalParent = nav.parentElement;
+  const navOriginalNextSibling = nav.nextSibling;
+  const overlayOriginalParent = overlay.parentElement;
+  const overlayOriginalNextSibling = overlay.nextSibling;
+
+  function isMobileNav() {
+    return window.matchMedia("(max-width: 980px)").matches;
   }
 
-  if (overlay.parentElement !== document.body) {
-    document.body.appendChild(overlay);
+  function moveNavToBodyForMobile() {
+    if (!isMobileNav()) return;
+
+    if (nav.parentElement !== document.body) {
+      document.body.appendChild(nav);
+    }
+
+    if (overlay.parentElement !== document.body) {
+      document.body.appendChild(overlay);
+    }
+  }
+
+  function restoreNavToHeaderForDesktop() {
+    if (isMobileNav()) return;
+
+    if (navOriginalParent && nav.parentElement !== navOriginalParent) {
+      navOriginalParent.insertBefore(nav, navOriginalNextSibling);
+    }
+
+    if (overlayOriginalParent && overlay.parentElement !== overlayOriginalParent) {
+      overlayOriginalParent.insertBefore(overlay, overlayOriginalNextSibling);
+    }
   }
 
   function menuIsOpen() {
@@ -91,6 +116,8 @@ function setupMobileNav() {
   }
 
   function openMenu() {
+    moveNavToBodyForMobile();
+
     overlay.hidden = false;
     overlay.classList.add("is-open");
     nav.classList.add("is-open");
@@ -113,6 +140,7 @@ function setupMobileNav() {
     document.body.classList.remove("nav-open");
     if (header) header.classList.remove("is-menu-open");
     closeSubmenus();
+    restoreNavToHeaderForDesktop();
   }
 
   toggle.addEventListener("click", function (event) {
@@ -143,10 +171,13 @@ function setupMobileNav() {
   });
 
   window.addEventListener("resize", function () {
-    if (window.matchMedia("(min-width: 981px)").matches && menuIsOpen()) {
-      closeMenu();
+    if (!isMobileNav()) {
+      if (menuIsOpen()) closeMenu();
+      restoreNavToHeaderForDesktop();
     }
   });
+
+  restoreNavToHeaderForDesktop();
 }
 
 function setupSubmenus() {
