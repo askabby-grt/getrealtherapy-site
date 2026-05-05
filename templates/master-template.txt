@@ -34,6 +34,14 @@ Global CSS:
 
 Global JS:
 <script src="/assets/js/site.js"></script>
+IMPORTANT GA4 ID NOTE
+The live Google Analytics 4 Web Stream Measurement ID is:
+G-44SL3FKFTY
+
+Use this ID only inside /assets/js/site.js.
+Do not add manual gtag scripts inside page files.
+Do not use the old temporary ID G-8YW12523HN.
+
 
 Header include placeholder:
 <div id="siteHeader"></div>
@@ -1291,7 +1299,7 @@ Goal:
 Create one global analytics layer that works across the entire site, then add page-specific event attributes to money pages, SEO pages, blog posts, forms, and CTAs.
 
 Global GA4 Measurement ID:
-G-8YW12523HN
+G-44SL3FKFTY
 
 GLOBAL EVENTS TRACKED SITEWIDE
 
