@@ -192,12 +192,12 @@
             <div class="contact-form-grid">
               <div class="field">
                 <label for="first-name">First Name *</label>
-                <input id="first-name" name="first_name" type="text" autocomplete="given-name" placeholder="First Name" required>
+                <input id="first-name" name="first_name" type="text" autocomplete="given-name" placeholder="First Name" required autocapitalize="words" data-format="name">
               </div>
 
               <div class="field">
                 <label for="last-name">Last Name</label>
-                <input id="last-name" name="last_name" type="text" autocomplete="family-name" placeholder="Last Name">
+                <input id="last-name" name="last_name" type="text" autocomplete="family-name" placeholder="Last Name" autocapitalize="words" data-format="name">
               </div>
 
               <div class="field">
@@ -206,13 +206,13 @@
               </div>
 
               <div class="field">
-                <label for="phone">Phone</label>
-                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone">
+                <label for="phone">Phone *</label>
+                <input id="phone" name="phone" type="tel" autocomplete="tel" placeholder="Phone" required inputmode="tel" maxlength="14" pattern="\(\d{3}\) \d{3}-\d{4}">
               </div>
 
               <div class="field field--full">
-                <label for="contact-method">Preferred Method of Contact</label>
-                <select id="contact-method" name="contact_method">
+                <label for="contact-method">Preferred Method of Contact *</label>
+                <select id="contact-method" name="contact_method" required>
                   <option value="">Select one</option>
                   <option value="Email">Email</option>
                   <option value="Phone">Phone</option>
@@ -263,7 +263,7 @@
 
 
             <div class="field field--full">
-              <div class="cf-turnstile" data-turnstile-mount></div>
+              <div class="cf-turnstile" data-sitekey="REPLACE_WITH_YOUR_TURNSTILE_SITE_KEY" data-theme="light"></div>
             </div>
 
             <div id="contactFormStatus" role="status" aria-live="polite"></div>
@@ -398,172 +398,6 @@
   </main>
 
   <div id="siteFooter"></div>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
-<script>
-(function () {
-  const TURNSTILE_SITE_KEY = "0x4AAAAAADMNfXCG0R_VAa5c";
-
-  function getQueryParam(name) {
-    const params = new URLSearchParams(window.location.search);
-    return params.get(name) || "";
-  }
-
-  function getLandingPage() {
-    try {
-      const key = "grt_landing_page";
-      const existing = sessionStorage.getItem(key);
-      if (existing) return existing;
-      sessionStorage.setItem(key, window.location.href);
-      return window.location.href;
-    } catch (error) {
-      return window.location.href;
-    }
-  }
-
-  function attachTurnstile(form) {
-    const mount = form.querySelector("[data-turnstile-mount]");
-    if (!mount || !window.turnstile) return;
-
-    if (mount.dataset.rendered === "true") return;
-    mount.dataset.rendered = "true";
-
-    window.turnstile.render(mount, {
-      sitekey: TURNSTILE_SITE_KEY,
-      theme: "light"
-    });
-  }
-
-  function setStatus(statusNode, message, type) {
-    if (!statusNode) return;
-    statusNode.textContent = message;
-    statusNode.className = type === "success" ? "field-success" : "field-error";
-  }
-
-  function buildPayload(form) {
-    const formData = new FormData(form);
-    const payload = {};
-
-    formData.forEach(function (value, key) {
-      payload[key] = value;
-    });
-
-    payload.form_name = form.dataset.formName || form.getAttribute("name") || "";
-    payload.page_url = window.location.href;
-    payload.page_slug = window.location.pathname;
-    payload.page_type = document.body.dataset.pageType || "";
-    payload.primary_goal = document.body.dataset.primaryGoal || "";
-    payload.utm_source = getQueryParam("utm_source");
-    payload.utm_medium = getQueryParam("utm_medium");
-    payload.utm_campaign = getQueryParam("utm_campaign");
-    payload.utm_term = getQueryParam("utm_term");
-    payload.utm_content = getQueryParam("utm_content");
-    payload.referrer = document.referrer || "";
-    payload.landing_page = getLandingPage();
-    payload.user_agent = navigator.userAgent || "";
-
-    return payload;
-  }
-
-  function setupForm(form) {
-    const endpoint = form.dataset.endpoint;
-    const statusNode = document.getElementById(form.dataset.statusTarget || "");
-
-    if (!endpoint) return;
-
-    const turnstileTimer = setInterval(function () {
-      if (window.turnstile) {
-        clearInterval(turnstileTimer);
-        attachTurnstile(form);
-      }
-    }, 100);
-
-    setTimeout(function () {
-      clearInterval(turnstileTimer);
-      attachTurnstile(form);
-    }, 5000);
-
-    form.addEventListener("submit", async function (event) {
-      event.preventDefault();
-
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        setStatus(statusNode, "Please complete the required fields.", "error");
-        return;
-      }
-
-      const tokenField = form.querySelector('[name="cf-turnstile-response"]');
-      if (!tokenField || !tokenField.value) {
-        setStatus(statusNode, "Please complete the verification before submitting.", "error");
-        return;
-      }
-
-      const submitButton = form.querySelector('[type="submit"]');
-      const originalText = submitButton ? submitButton.dataset.originalText : "";
-
-      if (submitButton) {
-        submitButton.disabled = true;
-        submitButton.textContent = "Sending...";
-      }
-
-      setStatus(statusNode, "Sending your message...", "info");
-
-      try {
-        const response = await fetch(endpoint, {
-          method: "POST",
-          body: JSON.stringify(buildPayload(form)),
-          headers: {
-            "Content-Type": "text/plain;charset=utf-8"
-          }
-        });
-
-        const result = await response.json();
-
-        if (!result.ok) {
-          throw new Error(result.message || "Submission failed.");
-        }
-
-        setStatus(statusNode, "Thank you. Your message was received.", "success");
-        form.reset();
-
-        if (window.turnstile) {
-          window.turnstile.reset();
-        }
-
-        if (window.gtag) {
-          window.gtag("event", "form_submit_success", {
-            form_name: form.dataset.formName || "",
-            page_slug: window.location.pathname
-          });
-        }
-      } catch (error) {
-        setStatus(statusNode, "Something went wrong. Please refresh and try again.", "error");
-
-        if (window.gtag) {
-          window.gtag("event", "form_submit_error", {
-            form_name: form.dataset.formName || "",
-            error_message: String(error.message || error),
-            page_slug: window.location.pathname
-          });
-        }
-      } finally {
-        if (submitButton) {
-          submitButton.disabled = false;
-          submitButton.textContent = originalText || "Submit";
-        }
-      }
-    });
-  }
-
-  document.addEventListener("DOMContentLoaded", function () {
-    document.querySelectorAll("form[data-endpoint]").forEach(function (form) {
-      const submitButton = form.querySelector('[type="submit"]');
-      if (submitButton) submitButton.dataset.originalText = submitButton.textContent;
-      setupForm(form);
-    });
-  });
-})();
-</script>
-
-  <script src="/assets/js/site.js"></script>
+<script src="/assets/js/site.js"></script>
 </body>
 </html>
