@@ -2266,8 +2266,7 @@ select.input-success {
   }
 }
 
-.service-section--plum .final-cta,
-.final-cta {
+.service-section--plum .final-cta {
   color: var(--color-soft-white);
 }
 
@@ -2905,4 +2904,65 @@ button.button:disabled {
   .form-page .consultation-form-grid {
     grid-template-columns: 1fr !important;
   }
+}
+
+/* =========================================
+   FINAL CTA COLOR SCOPING FIX - DEFINITIVE
+   Prevents blog/light-background CTA text from turning white.
+   White text is only used when the final CTA is inside a plum section.
+   Keep this block at the very end of /assets/css/site.css.
+   ========================================= */
+
+.final-cta {
+  color: var(--color-charcoal);
+}
+
+.final-cta h2 {
+  color: var(--color-near-black);
+}
+
+.final-cta p {
+  color: var(--color-charcoal);
+}
+
+.final-cta .button--secondary {
+  color: var(--color-plum);
+  border-color: var(--color-plum);
+}
+
+.final-cta .button--secondary:hover {
+  background: rgba(107, 58, 91, 0.08);
+}
+
+.service-section--plum .final-cta,
+.home-section--plum .final-cta,
+.section--plum .final-cta,
+.cta-panel.final-cta {
+  color: var(--color-soft-white);
+}
+
+.service-section--plum .final-cta h2,
+.service-section--plum .final-cta p,
+.home-section--plum .final-cta h2,
+.home-section--plum .final-cta p,
+.section--plum .final-cta h2,
+.section--plum .final-cta p,
+.cta-panel.final-cta h2,
+.cta-panel.final-cta p {
+  color: var(--color-soft-white) !important;
+}
+
+.service-section--plum .final-cta .button--secondary,
+.home-section--plum .final-cta .button--secondary,
+.section--plum .final-cta .button--secondary,
+.cta-panel.final-cta .button--secondary {
+  color: var(--color-soft-white);
+  border-color: var(--color-soft-white);
+}
+
+.service-section--plum .final-cta .button--secondary:hover,
+.home-section--plum .final-cta .button--secondary:hover,
+.section--plum .final-cta .button--secondary:hover,
+.cta-panel.final-cta .button--secondary:hover {
+  background: rgba(250, 250, 250, 0.12);
 }
