@@ -2637,3 +2637,272 @@ select.input-success {
   margin-top: 18px;
   font-weight: 800;
 }
+
+
+/* =========================================
+   GLOBAL FORM SYSTEM - DEFINITIVE
+   Contact + Book Consultation forms.
+   ========================================= */
+
+.contact-form-shell,
+.consultation-form-shell {
+  width: 100%;
+  background: var(--color-soft-white, #FAFAFA);
+  border: 1px solid rgba(107, 114, 128, 0.16);
+  border-radius: var(--radius-lg, 28px);
+  box-shadow: var(--shadow-soft, 0 14px 40px rgba(26, 26, 26, 0.08));
+  padding: clamp(24px, 4vw, 42px);
+}
+
+.contact-form-grid,
+.consultation-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 20px;
+  margin-top: 28px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.field--full {
+  grid-column: 1 / -1;
+}
+
+.field label,
+.field .field-label {
+  display: inline-block;
+  color: var(--color-plum-dark, #4A243E);
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid rgba(107, 58, 91, 0.22);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: var(--color-soft-white, #FAFAFA);
+  color: var(--color-near-black, #1A1A1A);
+  font-family: var(--font-body, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 1rem;
+  line-height: 1.35;
+  outline: none;
+  box-shadow: 0 1px 0 rgba(26, 26, 26, 0.03);
+  transition: border-color var(--transition-base, 180ms ease), box-shadow var(--transition-base, 180ms ease), background var(--transition-base, 180ms ease);
+}
+
+.field textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--color-cta-teal, #4F9DA6);
+  box-shadow: 0 0 0 4px rgba(79, 157, 166, 0.15);
+  background: #FFFFFF;
+}
+
+.consent {
+  display: grid !important;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 16px 18px;
+  border: 1px solid rgba(107, 58, 91, 0.14);
+  border-radius: 18px;
+  background: rgba(245, 241, 236, 0.72);
+  color: var(--color-charcoal, #2E2E2E);
+  font-size: 0.94rem;
+  font-weight: 500 !important;
+  line-height: 1.55;
+}
+
+.consent input {
+  width: 18px;
+  height: 18px;
+  min-height: 18px;
+  margin-top: 3px;
+  accent-color: var(--color-cta-teal, #4F9DA6);
+}
+
+.cf-turnstile {
+  min-height: 65px;
+  margin-top: 8px;
+}
+
+.field-info,
+#contactFormStatus.field-info,
+#consultationFormStatus.field-info {
+  display: block;
+  margin-top: 8px;
+  color: var(--color-info, #4F9DA6);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.field-success,
+#contactFormStatus.field-success,
+#consultationFormStatus.field-success {
+  display: block;
+  margin-top: 8px;
+  color: var(--color-success, #4C7A67);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.field-error,
+#contactFormStatus.field-error,
+#consultationFormStatus.field-error {
+  display: block;
+  margin-top: 8px;
+  color: var(--color-error, #8C3A4A);
+  font-size: 0.9rem;
+  font-weight: 800;
+  line-height: 1.4;
+}
+
+.contact-helper-list,
+.consultation-helper-list {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  margin: 0 0 24px;
+  list-style: none;
+}
+
+.contact-helper-list li,
+.consultation-helper-list li {
+  position: relative;
+  padding-left: 28px;
+  color: var(--color-charcoal, #2E2E2E);
+  line-height: 1.5;
+}
+
+.contact-helper-list li::before,
+.consultation-helper-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-cta-teal, #4F9DA6);
+  box-shadow: 0 0 0 5px rgba(79, 157, 166, 0.14);
+}
+
+.consultation-mini-note {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(79, 157, 166, 0.1);
+  border: 1px solid rgba(79, 157, 166, 0.18);
+  color: var(--color-charcoal, #2E2E2E);
+  line-height: 1.55;
+}
+
+button.button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+button.button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.contact-form-shell .button-row,
+.consultation-form-shell .button-row {
+  margin-top: 28px;
+}
+
+.contact-form-shell .button,
+.consultation-form-shell .button {
+  min-width: 190px;
+}
+
+@media (max-width: 860px) {
+  .contact-form-grid,
+  .consultation-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-shell,
+  .consultation-form-shell {
+    padding: 24px;
+  }
+
+  .contact-form-shell .button,
+  .consultation-form-shell .button {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+
+/* =========================================
+   FORM PAGE SAFETY OVERRIDES
+   Ensures deployed contact and consultation forms never fall back to browser defaults.
+   ========================================= */
+
+.form-page .contact-form-grid,
+.form-page .consultation-form-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px 20px !important;
+  margin-top: 28px !important;
+}
+
+.form-page .field {
+  display: grid !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+}
+
+.form-page .field--full {
+  grid-column: 1 / -1 !important;
+}
+
+.form-page .field input,
+.form-page .field select,
+.form-page .field textarea {
+  width: 100% !important;
+  min-height: 52px !important;
+  border: 1px solid rgba(107, 58, 91, 0.22) !important;
+  border-radius: 16px !important;
+  padding: 14px 16px !important;
+  background: var(--color-soft-white, #FAFAFA) !important;
+  color: var(--color-near-black, #1A1A1A) !important;
+  font-family: var(--font-body, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+  font-size: 1rem !important;
+  line-height: 1.35 !important;
+}
+
+.form-page .field textarea {
+  min-height: 150px !important;
+}
+
+.form-page .consent {
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+}
+
+@media (max-width: 860px) {
+  .form-page .contact-form-grid,
+  .form-page .consultation-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+}
