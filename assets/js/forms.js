@@ -1,15 +1,10 @@
 /*
   Get Real Therapy - Global Form Handler
-  Handles:
-  - first/last name capitalization
-  - phone formatting: (xxx) xxx-xxxx
-  - required phone + preferred contact method validation
-  - Cloudflare Turnstile token validation
-  - Google Apps Script form submission
-  - GA4 form success/error events
 
   IMPORTANT:
-  Keep this file external. Do not inline this code in page HTML because the site CSP blocks inline scripts.
+  Google Apps Script often writes the sheet successfully but blocks readable CORS responses.
+  This file sends as text/plain JSON and uses no-cors mode.
+  The Apps Script parses the JSON, verifies Turnstile, writes the sheet, and sends emails.
 */
 
 (function () {
@@ -51,11 +46,9 @@
 
   function formatPhone(value) {
     const digits = String(value || "").replace(/\D/g, "").slice(0, 10);
-
     if (digits.length === 0) return "";
     if (digits.length < 4) return "(" + digits;
     if (digits.length < 7) return "(" + digits.slice(0, 3) + ") " + digits.slice(3);
-
     return "(" + digits.slice(0, 3) + ") " + digits.slice(3, 6) + "-" + digits.slice(6);
   }
 
@@ -104,13 +97,12 @@
   }
 
   function setupNameFormatting(form) {
-    const nameFields = form.querySelectorAll('input[name="first_name"], input[name="last_name"]');
+    const fields = form.querySelectorAll('input[name="first_name"], input[name="last_name"]');
 
-    nameFields.forEach(function (input) {
+    fields.forEach(function (input) {
       input.addEventListener("blur", function () {
         input.value = capitalizeName(input.value);
       });
-
       input.addEventListener("change", function () {
         input.value = capitalizeName(input.value);
       });
@@ -121,17 +113,16 @@
     const phone = form.querySelector('input[name="phone"]');
     if (!phone) return;
 
+    phone.required = true;
+    phone.pattern = "\\(\\d{3}\\) \\d{3}-\\d{4}";
+    phone.title = "Please enter a 10-digit phone number.";
     phone.setAttribute("inputmode", "tel");
     phone.setAttribute("autocomplete", "tel");
     phone.setAttribute("maxlength", "14");
     phone.setAttribute("placeholder", "(555) 555-5555");
 
     phone.addEventListener("input", function () {
-      const cursorAtEnd = phone.selectionStart === phone.value.length;
       phone.value = formatPhone(phone.value);
-      if (cursorAtEnd) {
-        phone.setSelectionRange(phone.value.length, phone.value.length);
-      }
     });
 
     phone.addEventListener("blur", function () {
@@ -140,13 +131,6 @@
   }
 
   function setupRequiredFields(form) {
-    const phone = form.querySelector('input[name="phone"]');
-    if (phone) {
-      phone.required = true;
-      phone.pattern = "\\(\\d{3}\\) \\d{3}-\\d{4}";
-      phone.title = "Please enter a 10-digit phone number.";
-    }
-
     const preferredContact =
       form.querySelector('select[name="preferred_contact_method"]') ||
       form.querySelector('select[name="contact_method"]');
@@ -159,7 +143,6 @@
   function setupForm(form) {
     const endpoint = form.dataset.endpoint;
     const statusNode = document.getElementById(form.dataset.statusTarget || "");
-
     if (!endpoint) return;
 
     setupNameFormatting(form);
@@ -203,32 +186,28 @@
       setStatus(statusNode, "Sending your message...", "info");
 
       try {
-        const response = await fetch(endpoint, {
+        await fetch(endpoint, {
           method: "POST",
+          mode: "no-cors",
           body: JSON.stringify(buildPayload(form)),
           headers: {
             "Content-Type": "text/plain;charset=utf-8"
           }
         });
 
-        const result = await response.json();
-
-        if (!result.ok) {
-          throw new Error(result.message || "Submission failed.");
-        }
-
         setStatus(statusNode, "Thank you. Your message was received.", "success");
-        form.reset();
-
-        if (window.turnstile) {
-          window.turnstile.reset();
-        }
 
         if (window.gtag) {
           window.gtag("event", "form_submit_success", {
             form_name: form.dataset.formName || "",
             page_slug: window.location.pathname
           });
+        }
+
+        form.reset();
+
+        if (window.turnstile) {
+          window.turnstile.reset();
         }
       } catch (error) {
         setStatus(statusNode, "Something went wrong. Please refresh and try again.", "error");
