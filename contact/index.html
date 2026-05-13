@@ -74,7 +74,7 @@
       "name": "Get Real Therapy",
       "url": "https://getrealtherapy.com/",
       "logo": "https://getrealtherapy.com/grt_logo_round_transparent.png",
-      "image": "https://getrealtherapy.com/assets/images/grt-abby-002.jpg",
+      "image": "https://getrealtherapy.com/og_image.jpg",
       "contactPoint": {
         "@type": "ContactPoint",
         "contactType": "customer support",
@@ -383,7 +383,7 @@
     <section class="service-section service-section--plum">
       <div class="container">
         <div class="final-cta">
-          <span class="eyebrow" style="color:#CFE3E4;">Start Here</span>
+          <span class="eyebrow">Start Here</span>
           <h2>You Can Begin With One Message</h2>
           <p>
             Whether you know exactly what you need or you are still trying to understand what feels off, reaching out can be a simple first step.
@@ -398,9 +398,6 @@
   </main>
 
   <div id="siteFooter"></div>
-
-  
-  
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 <script>
 (function () {
@@ -412,11 +409,15 @@
   }
 
   function getLandingPage() {
-    const key = "grt_landing_page";
-    const existing = sessionStorage.getItem(key);
-    if (existing) return existing;
-    sessionStorage.setItem(key, window.location.href);
-    return window.location.href;
+    try {
+      const key = "grt_landing_page";
+      const existing = sessionStorage.getItem(key);
+      if (existing) return existing;
+      sessionStorage.setItem(key, window.location.href);
+      return window.location.href;
+    } catch (error) {
+      return window.location.href;
+    }
   }
 
   function attachTurnstile(form) {
@@ -469,12 +470,17 @@
 
     if (!endpoint) return;
 
-    const waitForTurnstile = setInterval(function () {
+    const turnstileTimer = setInterval(function () {
       if (window.turnstile) {
-        clearInterval(waitForTurnstile);
+        clearInterval(turnstileTimer);
         attachTurnstile(form);
       }
     }, 100);
+
+    setTimeout(function () {
+      clearInterval(turnstileTimer);
+      attachTurnstile(form);
+    }, 5000);
 
     form.addEventListener("submit", async function (event) {
       event.preventDefault();
@@ -492,6 +498,8 @@
       }
 
       const submitButton = form.querySelector('[type="submit"]');
+      const originalText = submitButton ? submitButton.dataset.originalText : "";
+
       if (submitButton) {
         submitButton.disabled = true;
         submitButton.textContent = "Sending...";
@@ -540,7 +548,7 @@
       } finally {
         if (submitButton) {
           submitButton.disabled = false;
-          submitButton.textContent = submitButton.dataset.originalText || submitButton.textContent.replace("Sending...", "Submit");
+          submitButton.textContent = originalText || "Submit";
         }
       }
     });
