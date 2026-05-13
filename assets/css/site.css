@@ -2966,3 +2966,106 @@ button.button:disabled {
 .cta-panel.final-cta .button--secondary:hover {
   background: rgba(250, 250, 250, 0.12);
 }
+
+/* =========================================
+   BLOG HUB CARD SYMMETRY SYSTEM
+   Equal image heights, consistent card structure, and aligned link actions.
+   Keep this block at the very end of /assets/css/site.css.
+   ========================================= */
+
+body.blog-hub-page .blog-resource-grid {
+  align-items: stretch;
+}
+
+body.blog-hub-page .blog-resource-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+  overflow: hidden;
+  padding: 0;
+}
+
+body.blog-hub-page .blog-resource-card > img {
+  width: 100%;
+  height: 188px;
+  aspect-ratio: auto;
+  object-fit: cover;
+  object-position: center;
+  border-radius: 0;
+  flex: 0 0 auto;
+}
+
+body.blog-hub-page .blog-resource-card__body {
+  display: grid;
+  gap: 10px;
+  padding: 20px 20px 12px;
+  flex: 1 1 auto;
+}
+
+body.blog-hub-page .blog-resource-card__body .eyebrow {
+  margin-bottom: 0;
+  min-height: 1.1em;
+}
+
+body.blog-hub-page .blog-resource-card__body strong {
+  display: block;
+  min-height: 3.2em;
+  line-height: 1.28;
+}
+
+body.blog-hub-page .blog-resource-card__body > span:not(.eyebrow) {
+  display: block;
+  color: var(--color-charcoal);
+  line-height: 1.5;
+}
+
+body.blog-hub-page .blog-resource-card__actions {
+  display: grid;
+  gap: 8px;
+  padding: 0 20px 20px;
+  margin-top: auto;
+}
+
+body.blog-hub-page .blog-resource-card__actions a {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  line-height: 1.35;
+}
+
+body.blog-hub-page .blog-resource-card__actions a + a {
+  margin-top: 0;
+}
+
+@media (min-width: 981px) {
+  body.blog-hub-page .blog-resource-card > img {
+    height: 190px;
+  }
+}
+
+@media (max-width: 980px) {
+  body.blog-hub-page .blog-resource-card > img {
+    height: 220px;
+  }
+
+  body.blog-hub-page .blog-resource-card__body strong {
+    min-height: 0;
+  }
+}
+
+@media (max-width: 640px) {
+  body.blog-hub-page .blog-resource-card > img {
+    height: 210px;
+  }
+
+  body.blog-hub-page .blog-resource-card__body,
+  body.blog-hub-page .blog-resource-card__actions {
+    padding-left: 18px;
+    padding-right: 18px;
+  }
+
+  body.blog-hub-page .blog-resource-card__actions {
+    padding-bottom: 18px;
+  }
+}
