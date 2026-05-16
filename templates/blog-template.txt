@@ -1,0 +1,173 @@
+GET REAL THERAPY BLOG TEMPLATE
+
+PURPOSE OF THIS TEMPLATE
+Use this structure for every blog post so the site stays consistent, SEO-friendly, and conversion-focused.
+
+--------------------------------------------------
+1. ARTICLE SETUP
+--------------------------------------------------
+
+Working title:
+Primary keyword:
+Secondary keywords:
+Target service page to support:
+Target audience:
+Local target:
+Suggested CTA:
+Suggested URL slug:
+
+--------------------------------------------------
+2. SEO ELEMENTS
+--------------------------------------------------
+
+SEO title:
+Keep under 60 characters.
+Example:
+Trauma Therapy in Fort Lauderdale | Get Real Therapy
+
+Meta description:
+Keep between 145 and 160 characters.
+Example:
+Learn how trauma therapy can help you feel safer, more grounded, and more in control. Get support from Get Real Therapy in Fort Lauderdale.
+
+H1:
+Use a natural, readable title that matches user intent.
+
+--------------------------------------------------
+3. ARTICLE STRUCTURE
+--------------------------------------------------
+
+INTRO
+- Open with the emotional reality of what the reader may be feeling
+- Use the primary keyword naturally
+- Keep this useful, not dramatic
+- Promise clarity or support
+
+H2: WHAT THIS EXPERIENCE CAN LOOK LIKE
+- Explain symptoms, patterns, or situations
+- Reflect the reader's lived experience
+
+H2: WHY IT HAPPENS
+- Give psychoeducation in simple language
+- Avoid jargon unless briefly explained
+
+H2: HOW THERAPY CAN HELP
+- Explain what support looks like
+- Mention specific benefits
+- Link to the most relevant service page
+
+H2: WHAT TO DO NEXT
+- Offer gentle guidance
+- Include a soft CTA to book a consultation
+
+FAQ SECTION
+- Add 4 to 6 real search-style questions
+- Use plain language
+- Answer clearly and briefly
+
+CONCLUSION
+- Reassure the reader
+- Repeat the main keyword naturally
+- End with a soft invitation to reach out
+
+--------------------------------------------------
+4. INTERNAL LINKING RULES
+--------------------------------------------------
+
+Every article should include 3 to 5 internal links.
+
+Always include:
+- 1 link to the most relevant service page
+- 1 link to /what-to-expect or /about
+- 1 link to /contact or /book-consultation
+
+Suggested service page targets:
+- Anxiety-related article -> /anxiety-therapy
+- Trauma-related article -> /trauma-therapy
+- Depression-related article -> /depression-therapy
+- Relationship-related article -> /relationship-counseling
+- Self-growth or motivation article -> /life-coaching
+
+Anchor text best practices:
+- Keep anchor text natural
+- Do not force exact-match anchors repeatedly
+- Examples:
+  "anxiety therapy"
+  "what to expect in therapy"
+  "book a consultation"
+  "support for trauma recovery"
+
+--------------------------------------------------
+5. IMAGE GUIDELINES
+--------------------------------------------------
+
+Every blog post should have:
+- 1 featured image
+- 1 to 3 supporting images if needed
+
+Image style:
+- calming
+- natural
+- warm
+- grounded
+- human
+- non-stock-looking when possible
+
+Image SEO:
+- descriptive filename
+- descriptive alt text
+- compressed image size
+- no generic names like image1.jpg
+
+Example:
+Filename:
+anxiety-therapy-fort-lauderdale.jpg
+
+Alt text:
+Woman sitting calmly during anxiety therapy session in Fort Lauderdale
+
+--------------------------------------------------
+6. CTA RULES
+--------------------------------------------------
+
+Use a soft CTA, not aggressive sales language.
+
+Examples:
+- If you are ready for support, book a consultation.
+- You do not have to navigate this alone.
+- If this feels familiar, therapy may help you move forward.
+
+Mid-article CTA:
+Keep it short and contextual.
+
+End CTA:
+Invite the reader to contact Get Real Therapy or book a consultation.
+
+--------------------------------------------------
+7. BLOG QUALITY CHECKLIST
+--------------------------------------------------
+
+Before publishing, confirm:
+- Primary keyword appears naturally
+- Meta title and description are written
+- URL slug is clean
+- H2s are clear and useful
+- FAQ section is included
+- 3 to 5 internal links are included
+- Service page is supported
+- CTA is present
+- Tone is compassionate and clear
+- No keyword stuffing
+- No exaggerated claims
+- No em dashes
+
+--------------------------------------------------
+8. STARTER TOPICS
+--------------------------------------------------
+
+- How to Know If You Have Anxiety or Just Stress
+- Signs You May Be Carrying Unresolved Trauma
+- What Depression Can Feel Like When It Does Not Look Obvious
+- How Therapy Can Help With Relationship Patterns
+- The Difference Between Therapy and Life Coaching
+- What to Expect From Your First Therapy Consultation

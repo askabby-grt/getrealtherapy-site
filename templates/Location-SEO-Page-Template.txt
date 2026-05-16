@@ -1,0 +1,219 @@
+GET REAL THERAPY – LOCATION SEO PAGE TEMPLATE
+
+URL STRUCTURE:
+/therapy-[city-name]
+
+Example:
+/therapy-fort-lauderdale
+
+
+=====================================
+SEO METADATA
+=====================================
+
+Title:
+Therapy in [City], FL | Anxiety, Trauma & Real Life Change
+
+Meta Description:
+Therapy in [City], FL for anxiety, trauma, and emotional healing. Work with a trauma-informed therapist using EMDR, IFS, and nervous system support. Book a consultation today.
+
+OG Title:
+(Same as Title)
+
+OG Description:
+(Same as Meta)
+
+Schema Name:
+Therapy in [City], FL
+
+Schema Description:
+(Same as Meta)
+
+
+=====================================
+PAGE STRUCTURE
+=====================================
+
+
+-------------------------------------
+1. HERO SECTION
+-------------------------------------
+
+H1:
+Therapy in [City], FL for Anxiety, Trauma, and Real Life Change
+
+Subheadline:
+Feel better. Think clearer. Move forward with support that actually works.
+
+CTA Buttons:
+- Book a Consultation → /book-consultation
+- Start Your Healing Journey → /book-consultation
+
+Optional Local Line:
+Serving individuals in [City] and surrounding South Florida areas.
+
+
+-------------------------------------
+2. LOCAL CONNECTION SECTION
+-------------------------------------
+
+Purpose: Build geographic relevance for SEO
+
+Content:
+If you're looking for therapy in [City], you're not alone. Many people in this area experience anxiety, stress, and emotional overwhelm while trying to keep up with work, relationships, and life transitions.
+
+Even in a place that looks calm on the outside, it's common to feel internally unsettled. Therapy can help you slow down, understand what you're experiencing, and begin to feel more grounded.
+
+Mention:
+- In-person or online sessions (if applicable)
+- Nearby cities subtly (without keyword stuffing)
+
+
+-------------------------------------
+3. PROBLEM SECTION (ANXIETY / TRAUMA HOOK)
+-------------------------------------
+
+Header:
+When Your Mind and Body Feel Like They’re Always “On”
+
+Bullets:
+- Racing thoughts or overthinking
+- Feeling constantly on edge
+- Difficulty relaxing
+- Trouble sleeping
+- Emotional overwhelm
+- Avoidance patterns
+
+Bridge:
+These experiences are not a personal failure. They are often your nervous system trying to keep you safe.
+
+
+-------------------------------------
+4. HOW YOU HELP (METHOD SECTION)
+-------------------------------------
+
+Header:
+A Deeper Approach to Therapy in [City]
+
+Content:
+Explain your approach:
+- Trauma-informed
+- Nervous system regulation
+- Emotional processing
+
+Subsections:
+
+EMDR:
+Helps process past experiences so they stop feeling like present threats.
+
+IFS:
+Helps understand protective patterns and reduce internal conflict.
+
+AEDP:
+Helps safely process emotions and build resilience.
+
+
+-------------------------------------
+5. WHO THIS IS FOR
+-------------------------------------
+
+Header:
+Who This Therapy Is For
+
+Bullets:
+- People experiencing anxiety or overwhelm
+- Those going through life transitions
+- Individuals healing from past experiences
+- Those who feel stuck despite trying to “manage it”
+- People seeking deeper emotional work
+
+Internal Link:
+→ /who-this-is-for
+
+
+-------------------------------------
+6. WHAT TO EXPECT
+-------------------------------------
+
+Header:
+What to Expect in Therapy
+
+Content:
+- Calm, supportive environment
+- Tools for regulation
+- Understanding patterns
+- Gradual emotional processing
+- Increased clarity and stability
+
+Internal Link:
+→ /what-to-expect
+
+
+-------------------------------------
+7. LOCAL CTA SECTION
+-------------------------------------
+
+Header:
+Start Therapy in [City], FL
+
+Content:
+You don’t have to wait until things feel overwhelming. Therapy can help you understand what’s happening beneath the surface and begin to feel more grounded and in control.
+
+CTA Button:
+Book a Consultation → /book-consultation
+
+
+-------------------------------------
+8. FAQ SECTION (LOCAL SEO BOOST)
+-------------------------------------
+
+Include 3–5 questions:
+
+Examples:
+
+Q: Do you offer therapy in [City], FL?
+A: Yes, I work with clients in [City] through in-person or online sessions.
+
+Q: What issues do you help with?
+A: Anxiety, trauma, emotional regulation, and relationships.
+
+Q: How do I get started?
+A: Book a consultation to see if it’s a good fit.
+
+
+-------------------------------------
+9. INTERNAL LINKING (VERY IMPORTANT)
+-------------------------------------
+
+Always include links to:
+
+- /services/anxiety-therapy
+- /services/trauma-therapy
+- /services/depression-therapy
+- /services/relationship-counseling
+- /services/life-coaching
+- /book-consultation
+- /what-to-expect
+- /who-this-is-for
+
+
+-------------------------------------
+10. IMAGE USAGE
+-------------------------------------
+
+Use:
+assets/images/abby_01.jpg
+
+Alt text example:
+Therapy support in [City], Florida for anxiety and trauma
+
+
+=====================================
+NOTES
+=====================================
+
+- Keep keyword "[City], FL" natural, do not stuff
+- Mention location 3–5 times max
+- Prioritize readability and trust
+- Always include strong CTA
+- Keep tone calm, grounded, and supportive

@@ -1,0 +1,1687 @@
+GET REAL THERAPY MASTER PAGE BUILD TEMPLATE
+Version: Consolidated Master System
+
+Use this single template file with future Get Real Therapy page requests.
+
+PURPOSE
+This file consolidates the full build system for:
+- Service / money pages
+- Location SEO pages
+- Blog posts
+- Global QA
+- SEO maximization
+- Analytics tracking
+- Header/footer/global asset rules
+
+CORE RULE
+When building or updating any Get Real Therapy page, produce complete ready-to-upload files only. Do not provide partial snippets unless explicitly requested.
+
+============================================================
+MASTER SITE CONTEXT
+============================================================
+
+Site: Get Real Therapy
+Domain: https://getrealtherapy.com
+Primary goal: book_consultation
+Secondary goal: contact / start healing journey
+Business type: therapy, counseling, coaching, mental health support
+Location focus: Fort Lauderdale + online therapy across Florida
+Language: English only
+No language switch is needed.
+
+Global CSS:
+<link rel="stylesheet" href="/assets/css/site.css">
+
+Global JS:
+<script src="/assets/js/site.js"></script>
+IMPORTANT GA4 ID NOTE
+The live Google Analytics 4 Web Stream Measurement ID is:
+G-44SL3FKFTY
+
+Use this ID only inside /assets/js/site.js.
+Do not add manual gtag scripts inside page files.
+Do not use the old temporary ID G-8YW12523HN.
+
+
+Header include placeholder:
+<div id="siteHeader"></div>
+
+Footer include placeholder:
+<div id="siteFooter"></div>
+
+Never hardcode header or footer inside page files.
+Never add a second include loader.
+Never include /assets/js/site.js more than once.
+Never add page-level analytics scripts.
+Avoid page-level CSS. Use global CSS classes whenever possible.
+
+============================================================
+CURRENT SITEMAP
+============================================================
+
+Home: /
+About: /about
+Services: /services
+Anxiety Therapy: /services/anxiety-therapy
+Trauma Therapy: /services/trauma-therapy
+Depression Therapy: /services/depression-therapy
+Relationship Counseling: /services/relationship-counseling
+Life Coaching: /services/life-coaching
+Who This Is For: /who-this-is-for
+What to Expect: /what-to-expect
+Blog: /blog
+Resources: /resources
+Contact: /contact
+Book Consultation: /book-consultation
+
+Location SEO Pages:
+Fort Lauderdale: /therapy-fort-lauderdale
+Lauderdale by the Sea: /therapy-lauderdale-by-the-sea
+Davie: /therapy-davie
+Pompano Beach: /therapy-pompano-beach
+Deerfield Beach: /therapy-deerfield-beach
+
+============================================================
+PAGE REQUEST INPUT FORMAT
+============================================================
+
+For future requests, provide as much as possible:
+
+Page name:
+Page type:
+URL slug:
+Canonical URL:
+Primary keyword:
+Secondary keywords:
+Target service:
+Related service pages:
+Related blog/resource links:
+Location target, if any:
+Hero image:
+Hero image alt:
+Main content notes:
+CTA priority:
+Any special requirements:
+
+If information is missing, make a best-effort page using the master system.
+
+
+
+============================================================
+
+SERVICE PAGE TEMPLATE
+
+============================================================
+
+
+GET REAL THERAPY SERVICE PAGE BUILD TEMPLATE
+
+Use this prompt when I ask you to create or update a Get Real Therapy service page.
+
+GOAL
+Create a complete, ready-to-publish service page as a downloadable .txt file. The page must maximize SEO, conversion intent, analytics tracking, mobile/desktop UX, accessibility, and ethical therapy-site copy.
+
+SITE CONTEXT
+Site: Get Real Therapy
+Domain: https://getrealtherapy.com
+Location focus: Fort Lauderdale + online therapy across Florida
+Primary conversion: Book Consultation
+Secondary conversion: Contact / Start Your Healing Journey
+Language: English only
+Global CSS: /assets/css/site.css
+Global JS: /assets/js/site.js
+Header include placeholder: <div id="siteHeader"></div>
+Footer include placeholder: <div id="siteFooter"></div>
+
+SITEMAP
+Home: /
+About: /about
+Services: /services
+Anxiety Therapy: /services/anxiety-therapy
+Trauma Therapy: /services/trauma-therapy
+Depression Therapy: /services/depression-therapy
+Relationship Counseling: /services/relationship-counseling
+Life Coaching: /services/life-coaching
+Who This Is For: /who-this-is-for
+What to Expect: /what-to-expect
+Blog: /blog
+Resources: /resources
+Contact: /contact
+Book Consultation: /book-consultation
+
+SERVICE PAGE INFORMATION
+- Service name:
+- URL slug:
+- Canonical URL:
+- Service data slug:
+- Primary keyword:
+- Secondary keywords:
+- Related services:
+- Related blog/resource links:
+- Hero image path:
+- Hero image alt:
+- Priority:
+
+SERVICE DATA SLUGS
+Use these exactly:
+- anxiety_therapy
+- trauma_therapy
+- depression_therapy
+- relationship_counseling
+- life_coaching
+
+BODY STANDARD
+Every service page must use:
+
+<body data-page-type="money_page" data-service="SERVICE_DATA_SLUG" data-primary-goal="book_consultation">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div id="siteHeader"></div>
+  <main id="main" class="site-main">
+    ...
+  </main>
+  <div id="siteFooter"></div>
+  <script src="/assets/js/site.js"></script>
+</body>
+
+Rules:
+- Do not hardcode header or footer markup.
+- Do not add a custom header/footer loader in the page.
+- Do not include /assets/js/site.js more than once.
+- Do not add page-level analytics scripts.
+- Do not add page-level CSS unless absolutely necessary.
+- Use global CSS classes from /assets/css/site.css.
+
+GLOBAL CSS CLASSES TO USE
+Use the existing service page system:
+- money-hero
+- money-hero__grid
+- money-hero__copy
+- money-hero__title
+- money-hero__lead
+- money-hero__media
+- money-hero__card
+- money-hero__image
+- money-hero__note
+- service-section
+- service-section--white
+- service-section--beige
+- service-section--teal
+- service-section--sand
+- service-section--plum
+- container
+- content-grid
+- content-card
+- therapy-card-grid
+- therapy-card
+- resource-grid
+- resource-card
+- faq-list
+- faq-item
+- final-cta
+- button-row
+- button
+- button--primary
+- button--secondary
+- breadcrumbs
+- eyebrow
+- section-title
+- service-intro
+- check-list
+
+REQUIRED PAGE STRUCTURE
+Build the page in this order:
+
+1. Head / SEO metadata
+2. Schema JSON-LD
+3. Body with data attributes
+4. Skip link
+5. #siteHeader
+6. Hero section
+7. Symptom / problem recognition section
+8. Context / why this happens section
+9. What therapy helps with section
+10. Approach section
+11. What to expect section
+12. Reassurance / start before crisis section
+13. Related resources section
+14. FAQ section
+15. Final CTA section
+16. #siteFooter
+17. /assets/js/site.js
+
+SEO HEAD STANDARD
+Every service page must include:
+- unique <title>
+- unique meta description
+- meta keywords if currently used on this site
+- meta author
+- theme-color
+- canonical URL
+- Open Graph metadata
+- Twitter metadata
+- favicon links
+- global stylesheet
+
+Example title format:
+SERVICE in Florida | Benefit-Oriented Phrase | Get Real Therapy
+
+Examples:
+Anxiety Therapy in Florida | EMDR, IFS & Nervous System Support
+Trauma Therapy in Florida | EMDR, IFS & Trauma-Informed Support
+Depression Therapy in Florida | Support for Heaviness, Stuckness & Change
+Relationship Counseling in Florida | Communication, Trust & Real Connection
+Life Coaching in Florida | Support for Transitions, Identity & Growth
+
+SCHEMA STANDARD
+Include JSON-LD with:
+- WebPage
+- Service
+- BreadcrumbList
+- FAQPage
+
+Service schema must include:
+- name
+- description
+- provider: Get Real Therapy
+- areaServed: Florida and Fort Lauderdale
+- serviceType
+
+Breadcrumb must be:
+Home > Service Name
+
+FAQ schema must match visible FAQs exactly.
+
+HERO SECTION STANDARD
+Hero must include:
+- breadcrumbs
+- service-specific eyebrow
+- clear H1
+- emotionally resonant lead paragraph
+- primary CTA: Book a Consultation
+- secondary CTA: Start Your Healing Journey
+- hero image
+- short hero note
+
+Primary CTA:
+<a class="button button--primary"
+   href="/book-consultation"
+   data-track-event="cta_click_book_consultation"
+   data-track-category="conversion"
+   data-track-label="Book a Consultation"
+   data-cta-location="hero"
+   data-destination-page="/book-consultation">Book a Consultation</a>
+
+Secondary CTA:
+<a class="button button--secondary"
+   href="/contact"
+   data-track-event="cta_click_start_healing_journey"
+   data-track-category="conversion"
+   data-track-label="Start Your Healing Journey"
+   data-cta-location="hero"
+   data-destination-page="/contact">Start Your Healing Journey</a>
+
+ANALYTICS STANDARD
+Use existing Get Real Therapy attributes:
+- data-track-event
+- data-track-category
+- data-track-label
+- data-cta-location
+- data-destination-page
+
+Do not use:
+- data-analytics-event
+- data-analytics-label
+
+Required tracked events on service pages:
+- cta_click_book_consultation
+- cta_click_start_healing_journey
+- internal_link_click
+- service_interest_click
+- related_blog_click
+- faq_view through .faq-item class
+- form tracking only if the page contains a form
+
+CTA TRACKING RULES
+Book Consultation:
+data-track-event="cta_click_book_consultation"
+data-track-category="conversion"
+
+Start Your Healing Journey:
+data-track-event="cta_click_start_healing_journey"
+data-track-category="conversion"
+
+Related service links:
+data-track-event="service_interest_click"
+data-track-category="service_interest"
+
+Related blog/resource links:
+data-track-event="related_blog_click"
+data-track-category="internal_link"
+
+Normal internal links:
+data-track-event="internal_link_click"
+data-track-category="internal_link"
+
+SECTION CONTENT REQUIREMENTS
+
+1. Problem Recognition Section
+Purpose: Help the visitor feel understood.
+Must include:
+- H2 naming the lived experience
+- 3 to 5 paragraphs
+- side card with symptom list
+Tone:
+- validating
+- non-shaming
+- emotionally specific
+- no diagnosis claims
+
+2. Context / Why This Happens Section
+Purpose: Explain without overpromising.
+Must include:
+- nervous system / emotional pattern / attachment / stress context where appropriate
+- 3 cards with common life contexts
+- one internal link to Who This Is For or a related service
+
+3. What Therapy Helps With Section
+Purpose: Explain outcomes as possibilities, not guarantees.
+Must include:
+- H2 focused on support
+- side card with "In therapy, we work toward:"
+- 6 to 9 bullets
+Avoid:
+- "cure"
+- "guaranteed"
+- "fix permanently"
+
+4. Approach Section
+Purpose: Show credibility and depth.
+Use 3 cards:
+- Internal Family Systems (IFS)
+- EMDR Therapy
+- AEDP Therapy
+Or adapt for service if needed.
+
+Each card should be 2 to 3 short paragraphs.
+
+5. What to Expect Section
+Purpose: Reduce anxiety about starting.
+Must include:
+- supportive copy
+- links to /what-to-expect and /who-this-is-for
+
+6. Reassurance Section
+Purpose: Encourage early support before crisis.
+Must include:
+- "You do not need to wait..."
+- ethical, calm, grounded language
+
+7. Related Resources Section
+Purpose: SEO and internal funnel.
+Use resource-grid with 4 to 6 cards.
+Each card must include:
+- title
+- short description
+- tracked link
+
+Use related_blog_click for blog links.
+
+8. FAQ Section
+Use .faq-list and .faq-item.
+Must include 4 to 6 FAQs.
+FAQ copy must match FAQ schema exactly.
+FAQ items should be visible by default unless an accordion pattern already exists globally.
+
+9. Final CTA Section
+Use service-section--plum and final-cta.
+Include:
+- emotional H2
+- short paragraph
+- Book Consultation CTA
+- Start Your Healing Journey CTA
+
+MOBILE / DESKTOP UX STANDARD
+Ensure:
+- hero grid works on desktop
+- hero stacks on mobile
+- buttons are full-width on mobile through global CSS
+- cards stack on mobile
+- no horizontal overflow
+- content is not too dense
+- paragraphs are not too long
+- side cards are scannable
+
+ACCESSIBILITY STANDARD
+Ensure:
+- one H1 only
+- headings follow order
+- links are descriptive
+- images have alt text
+- skip link exists
+- button text is meaningful
+- no empty anchors
+- no unlabeled form fields if form exists
+
+ETHICAL THERAPY COPY STANDARD
+Do:
+- validate experience
+- use warm grounded language
+- say "may help" and "can support"
+- encourage consultation
+- avoid shame
+- avoid urgency manipulation
+
+Do not:
+- promise cures
+- guarantee outcomes
+- diagnose visitors
+- imply therapy replaces emergency support
+- use fear-based copy
+- exaggerate conditions
+
+INTERNAL LINKING REQUIREMENTS
+Every service page should link to:
+- /book-consultation
+- /contact
+- /what-to-expect
+- /who-this-is-for
+- at least one related service
+- at least 3 related blog/resource pages
+- /blog or /resources
+
+SEO KEYWORD PLACEMENT
+Use primary keyword naturally in:
+- title
+- meta description
+- H1
+- first 100 words
+- one H2
+- schema name/serviceType
+- image alt if natural
+
+Use secondary keywords naturally across body copy.
+Avoid keyword stuffing.
+
+SERVICE PAGE CONTENT ANGLES
+
+ANXIETY THERAPY
+Primary keyword: anxiety therapy in Florida
+Themes:
+- chronic worry
+- overthinking
+- panic
+- nervous system activation
+- uncertainty
+- EMDR / IFS / AEDP
+Image suggestion: /assets/images/grt-anxiety.jpg
+
+TRAUMA THERAPY
+Primary keyword: trauma therapy in Florida
+Themes:
+- unresolved experiences
+- survival mode
+- emotional triggers
+- nervous system safety
+- trauma-informed support
+- EMDR / IFS
+Image suggestion: /assets/images/grt-trauma.jpg
+
+DEPRESSION THERAPY
+Primary keyword: depression therapy in Florida
+Themes:
+- heaviness
+- disconnection
+- low motivation
+- emotional numbness
+- stuckness
+- support before things worsen
+Image suggestion: /assets/images/grt-depression.jpg
+
+RELATIONSHIP COUNSELING
+Primary keyword: relationship counseling in Florida
+Themes:
+- communication
+- trust
+- conflict
+- attachment patterns
+- disconnection
+- emotional safety
+Image suggestion: /assets/images/grt-relationship.jpg
+
+LIFE COACHING
+Primary keyword: life coaching in Florida
+Themes:
+- transitions
+- identity shifts
+- burnout
+- personal growth
+- stuckness
+- meaningful change
+Image suggestion: /assets/images/grt-life-coaching.jpg
+
+FINAL QA CHECKLIST BEFORE HANDOFF
+Confirm:
+- [ ] Complete HTML document
+- [ ] Valid doctype
+- [ ] html lang="en"
+- [ ] Unique title
+- [ ] Unique meta description
+- [ ] Correct canonical
+- [ ] og:url matches canonical
+- [ ] Open Graph complete
+- [ ] Twitter metadata complete
+- [ ] Favicon links included
+- [ ] Global CSS loaded
+- [ ] No unnecessary page-level CSS
+- [ ] Schema valid and page-specific
+- [ ] One H1
+- [ ] Body data-page-type="money_page"
+- [ ] Body data-service is correct
+- [ ] Body data-primary-goal="book_consultation"
+- [ ] Skip link exists
+- [ ] #siteHeader exists
+- [ ] #siteFooter exists
+- [ ] /assets/js/site.js loaded once
+- [ ] No hardcoded header/footer
+- [ ] Primary CTA tracked
+- [ ] Secondary CTA tracked
+- [ ] Related resources tracked
+- [ ] Internal links tracked
+- [ ] FAQ visible and schema-matched
+- [ ] Mobile layout optimized
+- [ ] Desktop layout optimized
+- [ ] Accessibility reviewed
+- [ ] Ethical therapy copy reviewed
+- [ ] No unresolved placeholders
+
+FINAL RESPONSE FORMAT
+When returning files, always state:
+
+Ready to go live: YES or NO
+
+Then list:
+- Downloadable service page .txt file
+
+Then give a short QA summary:
+- SEO metadata: passed/failed
+- Schema: passed/failed
+- Global CSS: passed/failed
+- Header/footer: passed/failed
+- Analytics: passed/failed
+- Mobile/desktop: passed/failed
+- Accessibility: passed/failed
+- Ethical therapy copy: passed/failed
+
+
+============================================================
+
+GLOBAL QA + ANALYTICS + SEO TEMPLATE
+
+============================================================
+
+
+GET REAL THERAPY GLOBAL QA + ANALYTICS + SEO MAXIMIZATION TEMPLATE
+
+Use this prompt whenever I upload one or more Get Real Therapy HTML pages and ask you to audit, update, or prepare them for launch.
+
+GOAL
+Audit and fully update the uploaded page files so they are ready to go live. Return complete downloadable .txt files. Do not return partial snippets unless I explicitly ask for snippets.
+
+SITE CONTEXT
+Site: Get Real Therapy
+Domain: https://getrealtherapy.com
+Primary goal: book_consultation
+Secondary goal: contact / start healing journey
+Business type: therapy, counseling, coaching, mental health support
+Location focus: Fort Lauderdale + online therapy across Florida
+Language: English only
+No language switch is needed.
+
+SITEMAP
+Home: /
+About: /about
+Services: /services
+Anxiety Therapy: /services/anxiety-therapy
+Trauma Therapy: /services/trauma-therapy
+Depression Therapy: /services/depression-therapy
+Relationship Counseling: /services/relationship-counseling
+Life Coaching: /services/life-coaching
+Who This Is For: /who-this-is-for
+What to Expect: /what-to-expect
+Blog: /blog
+Resources: /resources
+Contact: /contact
+Book Consultation: /book-consultation
+
+PAGE INFORMATION
+- Page URL:
+- Page type:
+- Service:
+- Primary goal:
+- Priority:
+
+PAGE TYPES
+Use these page types consistently in body data attributes and analytics:
+- trust_page: Home, About, Who This Is For, What to Expect
+- services_hub: /services
+- money_page: individual service pages
+- blog_hub: /blog
+- blog_post: individual blog pages
+- resources_page: /resources
+- contact_page: /contact
+- booking_page: /book-consultation
+- legal_page: policies, disclaimers, privacy pages if created
+
+CENTRAL EXECUTION STANDARD
+All analytics execution must be centralized in:
+/assets/js/site.js
+
+Page files should NOT duplicate page-level analytics scripts for:
+- page_view_enhanced / site_page_view
+- scroll_depth
+- click listeners for [data-track-event]
+- form tracking
+- FAQ tracking
+
+Each page should only provide:
+- correct body data-page-type, data-service, and data-primary-goal
+- correct data-track-* attributes on tracked elements
+- correct #siteHeader / #siteFooter placeholders
+- one global script include for /assets/js/site.js
+- correct canonical / Open Graph / Twitter metadata
+- correct schema
+- correct global CSS link
+
+GLOBAL HEADER / FOOTER STANDARD
+Every page must include these placeholders:
+
+<div id="siteHeader"></div>
+<div id="siteFooter"></div>
+
+Every page must load the global script once:
+
+<script src="/assets/js/site.js"></script>
+
+Rules:
+- Do not hardcode the header or footer inside individual pages.
+- Do not duplicate header/footer markup per page.
+- Do not add page-specific header/footer injection scripts if /assets/js/site.js already loads includes.
+- The current site.js already loads /assets/includes/header.html and /assets/includes/footer.html through loadIncludes().
+- Do not add a second include loader.
+- Do not include /assets/js/site.js more than once.
+- Header and footer links should remain tracked through their existing data-track-* attributes.
+
+GLOBAL CSS STANDARD
+Every page must use the global stylesheet:
+
+<link rel="stylesheet" href="/assets/css/site.css">
+
+Rules:
+- Use existing global classes from site.css whenever possible.
+- Do not add page-level CSS unless absolutely necessary.
+- Do not restyle header or footer in page files.
+- Do not create one-off layout systems when current global classes can handle the page.
+- If page-level CSS remains, explain why in the QA summary.
+- Optimize for both mobile and desktop using global patterns already present in site.css.
+
+CURRENT GLOBAL ASSETS TO RESPECT
+Header include:
+- /assets/includes/header.html
+
+Footer include:
+- /assets/includes/footer.html
+
+Global CSS:
+- /assets/css/site.css
+
+Global JS:
+- /assets/js/site.js
+
+Current site.js responsibilities:
+- Loads global header/footer includes.
+- Sets footer year.
+- Loads GA4 with measurement ID G-44SL3FKFTY.
+- Sets up mobile navigation and submenus.
+- Sends a page-level event.
+- Tracks [data-track-event] clicks.
+- Tracks outbound links.
+- Tracks scroll_depth at 25, 50, 75, 90.
+- Tracks form_start and form_submit_attempt.
+- Tracks form validation errors.
+- Tracks FAQ visibility.
+
+Before handoff, confirm:
+- [ ] /assets/js/site.js is loaded exactly once
+- [ ] no conflicting page-level analytics script exists
+- [ ] no duplicate include loader exists
+- [ ] important CTAs have data-track-event
+- [ ] important internal links have data-track-event
+- [ ] outbound links are handled or explicitly tracked
+- [ ] forms have data-form-name where applicable
+- [ ] FAQ blocks use .faq-item or details so site.js can track FAQ engagement
+- [ ] global CSS is used
+
+ANALYTICS NAMING STANDARD
+
+Current legacy attributes are:
+- data-track-event
+- data-track-category
+- data-track-label
+- data-cta-location
+- data-destination-page
+
+Continue using these unless we intentionally refactor site.js later.
+
+Do not mix in Experience Ecuador attributes such as:
+- data-analytics-event
+- data-analytics-label
+- data-analytics-page-type
+
+For Get Real Therapy, use:
+- data-track-event
+- data-track-category
+- data-track-label
+- data-cta-location
+- data-destination-page
+- data-form-name where applicable
+
+BODY DATA ATTRIBUTES
+Every page must include:
+<body data-page-type="PAGE_TYPE" data-service="SERVICE_SLUG" data-primary-goal="book_consultation">
+
+Examples:
+Homepage:
+<body data-page-type="trust_page" data-service="general" data-primary-goal="book_consultation">
+
+Anxiety page:
+<body data-page-type="money_page" data-service="anxiety_therapy" data-primary-goal="book_consultation">
+
+Trauma page:
+<body data-page-type="money_page" data-service="trauma_therapy" data-primary-goal="book_consultation">
+
+Service hub:
+<body data-page-type="services_hub" data-service="all_services" data-primary-goal="book_consultation">
+
+Contact:
+<body data-page-type="contact_page" data-service="general" data-primary-goal="contact">
+
+Booking:
+<body data-page-type="booking_page" data-service="general" data-primary-goal="book_consultation">
+
+SITEWIDE ANALYTICS REQUIRED
+Confirm which of these apply:
+- site_page_view
+- scroll_depth
+- internal_link_click
+- outbound_link_click
+- header_nav_click
+- cta_click_book_consultation
+- cta_click_start_healing_journey
+- form_start
+- form_submit_attempt
+- form_validation_error
+- form_submit_success, if page-level form system supports success callback
+- form_submit_error, if page-level form system supports error callback
+- faq_view
+- faq_expand, if FAQ is interactive/collapsible
+- related_blog_click
+- service_interest_click
+- service_to_cta_click
+- blog_to_service_click
+- contact_method_click
+
+CONVERSION EVENTS
+Use these consistently:
+- cta_click_book_consultation
+- cta_click_start_healing_journey
+- contact_method_click
+- form_start
+- form_submit_attempt
+- form_validation_error
+- form_submit_success
+- form_submit_error
+
+SERVICE / MONEY PAGE EVENTS
+Use these consistently:
+- service_interest_click
+- service_to_cta_click
+- related_blog_click
+- internal_link_click
+- faq_view
+- faq_expand if interactive
+
+BLOG / RESOURCE EVENTS
+Use these consistently:
+- related_blog_click
+- blog_to_service_click
+- blog_to_consultation_click
+- internal_link_click
+- cta_click_book_consultation
+
+HEADER / FOOTER EVENTS
+Header is already using:
+- header_logo_click
+- header_nav_click
+- cta_click_book_consultation
+
+Footer links should use either:
+- footer_nav_click
+- internal_link_click
+- outbound_link_click
+- cta_click_book_consultation
+
+REQUIRED DATA ATTRIBUTES FOR TRACKED LINKS
+Add these to tracked elements where relevant:
+- data-track-event
+- data-track-category
+- data-track-label
+- data-cta-location
+- data-destination-page
+
+Examples:
+
+Primary booking CTA:
+<a class="button button--primary"
+   href="/book-consultation"
+   data-track-event="cta_click_book_consultation"
+   data-track-category="conversion"
+   data-track-label="Book a Consultation"
+   data-cta-location="hero"
+   data-destination-page="/book-consultation">Book a Consultation</a>
+
+Contact CTA:
+<a class="button button--secondary"
+   href="/contact"
+   data-track-event="cta_click_start_healing_journey"
+   data-track-category="conversion"
+   data-track-label="Start Your Healing Journey"
+   data-cta-location="hero"
+   data-destination-page="/contact">Start Your Healing Journey</a>
+
+Service card:
+<a href="/services/trauma-therapy"
+   data-track-event="service_interest_click"
+   data-track-category="service_interest"
+   data-track-label="Trauma Therapy"
+   data-cta-location="services_grid"
+   data-destination-page="/services/trauma-therapy">Explore Trauma Therapy</a>
+
+Related blog:
+<a href="/blog/signs-of-unresolved-trauma"
+   data-track-event="related_blog_click"
+   data-track-category="internal_link"
+   data-track-label="Signs of Unresolved Trauma"
+   data-cta-location="related_resources"
+   data-destination-page="/blog/signs-of-unresolved-trauma">Read the article</a>
+
+CTA / LINK TRACKING RULES
+- Primary Book Consultation CTAs use cta_click_book_consultation.
+- Start Your Healing Journey / Contact CTAs use cta_click_start_healing_journey.
+- Service page links from hub/home use service_interest_click.
+- Related blog links use related_blog_click.
+- Blog to service links use blog_to_service_click.
+- Blog to booking links use blog_to_consultation_click.
+- Normal internal links use internal_link_click.
+- Header links use header_nav_click.
+- Footer links use footer_nav_click or internal_link_click.
+- External links use outbound_link_click, or rely on site.js outbound tracking if no explicit attribute exists.
+- FAQ cards should use .faq-item so site.js can track faq_view.
+- If FAQs are expandable details elements, track faq_expand.
+
+FORM TRACKING STANDARD
+Every form should include:
+- id
+- name
+- data-form-name
+
+Example:
+<form id="consultationForm" name="consultationForm" data-form-name="book_consultation_form">
+
+Minimum tracked form states:
+- form_start
+- form_submit_attempt
+- form_validation_error
+- form_submit_success if supported
+- form_submit_error if supported
+
+Success and error messages must be visible and accessible:
+- role="status" or aria-live="polite"
+- clear success state
+- clear error state
+
+SEO MAXIMIZATION STANDARD
+Every page must include:
+- <!DOCTYPE html>
+- <html lang="en">
+- unique <title>
+- unique meta description
+- canonical URL
+- robots index,follow unless intentionally noindex
+- Open Graph title, description, URL, image, image alt
+- Twitter card title, description, image
+- favicon links
+- theme-color
+- global CSS
+- JSON-LD schema
+- one clear H1
+- logical H2/H3 hierarchy
+- internal links to relevant services, blog posts, resources, contact, and booking
+- descriptive image alt text
+- no keyword stuffing
+- no duplicate titles/descriptions across pages
+
+SCHEMA STANDARD
+Use the most appropriate schema:
+Homepage:
+- WebSite
+- WebPage
+- Organization
+
+Service pages:
+- WebPage
+- Service
+- BreadcrumbList
+- FAQPage when FAQ exists
+
+About page:
+- AboutPage
+- Organization
+- Person if appropriate
+- BreadcrumbList
+
+Contact page:
+- ContactPage
+- Organization
+- BreadcrumbList
+
+Book consultation page:
+- WebPage
+- Service or ContactPage where appropriate
+- BreadcrumbList
+
+Blog posts:
+- BlogPosting
+- BreadcrumbList
+- FAQPage if FAQ exists
+
+Schema URLs must match canonical URLs exactly.
+
+LOCAL SEO STANDARD
+Where relevant, include:
+- Florida
+- Fort Lauderdale
+- online therapy across Florida
+- service-specific phrase, for example anxiety therapy in Florida
+- trauma-informed therapy
+- consultation / therapy support language
+
+Do not overdo local terms. Use naturally.
+
+MOBILE + DESKTOP QA
+Confirm:
+- responsive layout works with global CSS
+- no page-level CSS breaks mobile
+- hero image scales correctly
+- buttons stack nicely on mobile
+- cards stack correctly on mobile
+- touch targets are large enough
+- header drawer works because site.js loads
+- no duplicate nav
+- no horizontal overflow
+- form fields are mobile-friendly
+
+ACCESSIBILITY QA
+Confirm:
+- skip link exists
+- images have useful alt text
+- buttons/links have clear labels
+- form fields have labels
+- FAQ structure is semantic
+- color contrast is acceptable
+- only one H1
+- headings follow logical order
+
+CONTENT QUALITY QA
+Confirm:
+- copy is warm, grounded, and ethical for a therapy site
+- no medical overpromising
+- no guaranteed outcomes
+- no manipulative urgency
+- no stigmatizing language
+- no language that suggests crisis services unless crisis resources are actually provided
+- clear boundary that therapy/consultation is the next step, not instant diagnosis
+
+REQUIRED FINAL QA CHECKLIST
+Before saying ready, confirm:
+- [ ] Valid HTML structure and doctype
+- [ ] Correct html lang
+- [ ] Correct body data-page-type
+- [ ] Correct body data-service
+- [ ] Correct body data-primary-goal
+- [ ] #siteHeader exists
+- [ ] #siteFooter exists
+- [ ] /assets/js/site.js loaded once
+- [ ] No duplicate header/footer include loader
+- [ ] No page-level duplicate analytics engine
+- [ ] /assets/css/site.css loaded
+- [ ] No unnecessary page-level CSS
+- [ ] Canonical is correct
+- [ ] og:url matches canonical
+- [ ] Schema URLs match canonical
+- [ ] Breadcrumb schema is correct where applicable
+- [ ] FAQ schema matches visible FAQ where applicable
+- [ ] Important CTAs tracked
+- [ ] Important internal links tracked
+- [ ] Service links tracked
+- [ ] Related blog links tracked
+- [ ] Forms have data-form-name where applicable
+- [ ] Mobile layout passes
+- [ ] Desktop layout passes
+- [ ] No unresolved placeholders
+- [ ] No broken obvious internal paths
+- [ ] No duplicate H1
+- [ ] SEO metadata is unique and compelling
+- [ ] Therapy copy is ethical and does not overpromise
+
+FINAL RESPONSE FORMAT
+When returning files, always state:
+
+Ready to go live: YES or NO
+
+Then list:
+- Updated file(s)
+
+Then give a short QA summary:
+- Header/footer: passed/failed
+- Global CSS: passed/failed
+- Analytics: passed/failed
+- SEO metadata: passed/failed
+- Schema: passed/failed
+- Mobile/desktop: passed/failed
+- Accessibility: passed/failed
+- Ethical therapy copy: passed/failed
+
+If not ready, explain exactly what is still blocking.
+
+
+============================================================
+
+BLOG TEMPLATE
+
+============================================================
+
+
+GET REAL THERAPY BLOG TEMPLATE
+
+PURPOSE OF THIS TEMPLATE
+Use this structure for every blog post so the site stays consistent, SEO-friendly, and conversion-focused.
+
+--------------------------------------------------
+1. ARTICLE SETUP
+--------------------------------------------------
+
+Working title:
+Primary keyword:
+Secondary keywords:
+Target service page to support:
+Target audience:
+Local target:
+Suggested CTA:
+Suggested URL slug:
+
+--------------------------------------------------
+2. SEO ELEMENTS
+--------------------------------------------------
+
+SEO title:
+Keep under 60 characters.
+Example:
+Trauma Therapy in Fort Lauderdale | Get Real Therapy
+
+Meta description:
+Keep between 145 and 160 characters.
+Example:
+Learn how trauma therapy can help you feel safer, more grounded, and more in control. Get support from Get Real Therapy in Fort Lauderdale.
+
+H1:
+Use a natural, readable title that matches user intent.
+
+--------------------------------------------------
+3. ARTICLE STRUCTURE
+--------------------------------------------------
+
+INTRO
+- Open with the emotional reality of what the reader may be feeling
+- Use the primary keyword naturally
+- Keep this useful, not dramatic
+- Promise clarity or support
+
+H2: WHAT THIS EXPERIENCE CAN LOOK LIKE
+- Explain symptoms, patterns, or situations
+- Reflect the reader's lived experience
+
+H2: WHY IT HAPPENS
+- Give psychoeducation in simple language
+- Avoid jargon unless briefly explained
+
+H2: HOW THERAPY CAN HELP
+- Explain what support looks like
+- Mention specific benefits
+- Link to the most relevant service page
+
+H2: WHAT TO DO NEXT
+- Offer gentle guidance
+- Include a soft CTA to book a consultation
+
+FAQ SECTION
+- Add 4 to 6 real search-style questions
+- Use plain language
+- Answer clearly and briefly
+
+CONCLUSION
+- Reassure the reader
+- Repeat the main keyword naturally
+- End with a soft invitation to reach out
+
+--------------------------------------------------
+4. INTERNAL LINKING RULES
+--------------------------------------------------
+
+Every article should include 3 to 5 internal links.
+
+Always include:
+- 1 link to the most relevant service page
+- 1 link to /what-to-expect or /about
+- 1 link to /contact or /book-consultation
+
+Suggested service page targets:
+- Anxiety-related article -> /anxiety-therapy
+- Trauma-related article -> /trauma-therapy
+- Depression-related article -> /depression-therapy
+- Relationship-related article -> /relationship-counseling
+- Self-growth or motivation article -> /life-coaching
+
+Anchor text best practices:
+- Keep anchor text natural
+- Do not force exact-match anchors repeatedly
+- Examples:
+  "anxiety therapy"
+  "what to expect in therapy"
+  "book a consultation"
+  "support for trauma recovery"
+
+--------------------------------------------------
+5. IMAGE GUIDELINES
+--------------------------------------------------
+
+Every blog post should have:
+- 1 featured image
+- 1 to 3 supporting images if needed
+
+Image style:
+- calming
+- natural
+- warm
+- grounded
+- human
+- non-stock-looking when possible
+
+Image SEO:
+- descriptive filename
+- descriptive alt text
+- compressed image size
+- no generic names like image1.jpg
+
+Example:
+Filename:
+anxiety-therapy-fort-lauderdale.jpg
+
+Alt text:
+Woman sitting calmly during anxiety therapy session in Fort Lauderdale
+
+--------------------------------------------------
+6. CTA RULES
+--------------------------------------------------
+
+Use a soft CTA, not aggressive sales language.
+
+Examples:
+- If you are ready for support, book a consultation.
+- You do not have to navigate this alone.
+- If this feels familiar, therapy may help you move forward.
+
+Mid-article CTA:
+Keep it short and contextual.
+
+End CTA:
+Invite the reader to contact Get Real Therapy or book a consultation.
+
+--------------------------------------------------
+7. BLOG QUALITY CHECKLIST
+--------------------------------------------------
+
+Before publishing, confirm:
+- Primary keyword appears naturally
+- Meta title and description are written
+- URL slug is clean
+- H2s are clear and useful
+- FAQ section is included
+- 3 to 5 internal links are included
+- Service page is supported
+- CTA is present
+- Tone is compassionate and clear
+- No keyword stuffing
+- No exaggerated claims
+- No em dashes
+
+--------------------------------------------------
+8. STARTER TOPICS
+--------------------------------------------------
+
+- How to Know If You Have Anxiety or Just Stress
+- Signs You May Be Carrying Unresolved Trauma
+- What Depression Can Feel Like When It Does Not Look Obvious
+- How Therapy Can Help With Relationship Patterns
+- The Difference Between Therapy and Life Coaching
+- What to Expect From Your First Therapy Consultation
+
+
+============================================================
+
+ANALYTICS PLAN
+
+============================================================
+
+
+GET REAL THERAPY - GLOBAL ANALYTICS PLAN
+
+Goal:
+Create one global analytics layer that works across the entire site, then add page-specific event attributes to money pages, SEO pages, blog posts, forms, and CTAs.
+
+Global GA4 Measurement ID:
+G-44SL3FKFTY
+
+GLOBAL EVENTS TRACKED SITEWIDE
+
+1. site_page_view
+Tracks every page view after the global JS loads.
+
+Parameters:
+- page_type
+- service
+- page_slug
+- page_title
+- primary_goal
+
+2. scroll_depth
+Tracks 25%, 50%, 75%, and 90% page scroll.
+
+Parameters:
+- scroll_percent
+- page_type
+- service
+- page_slug
+
+3. outbound_link_click
+Tracks clicks to external URLs such as Instagram, YouTube, X, Spotify, etc.
+
+Parameters:
+- event_label
+- link_url
+- page_slug
+
+4. form_start
+Tracks when someone first interacts with a form.
+
+Parameters:
+- form_name
+- page_type
+- page_slug
+
+5. form_validation_error
+Tracks when a form is submitted with invalid or missing required fields.
+
+Parameters:
+- form_name
+- invalid_field_count
+- invalid_fields
+- page_slug
+
+6. form_submit_attempt
+Tracks when a valid form submission is attempted.
+
+Parameters:
+- form_name
+- page_slug
+
+7. faq_view
+Tracks when FAQ blocks enter the viewport.
+
+Parameters:
+- faq_question
+- page_slug
+
+PAGE-SPECIFIC MONEY PAGE EVENTS
+
+1. cta_click_book_consultation
+Tracks clicks to /book-consultation.
+
+Parameters:
+- cta_location
+- destination_page
+- service
+- page_type
+
+2. cta_click_start_healing_journey
+Tracks clicks to /contact.
+
+Parameters:
+- cta_location
+- destination_page
+- service
+- page_type
+
+3. related_blog_click
+Tracks links from service pages to supporting blog posts.
+
+Parameters:
+- event_label
+- cta_location
+- destination_page
+- service
+
+4. internal_link_click
+Tracks strategic internal links to related service/support pages.
+
+Parameters:
+- event_label
+- cta_location
+- destination_page
+
+BODY DATA ATTRIBUTES FOR EACH PAGE
+
+Money page example:
+<body data-page-type="money_page" data-service="anxiety_therapy" data-primary-goal="book_consultation">
+
+Blog post example:
+<body data-page-type="blog_post" data-service="anxiety_therapy" data-primary-goal="service_page_click">
+
+Support page example:
+<body data-page-type="support_page" data-service="" data-primary-goal="book_consultation">
+
+RECOMMENDED PAGE TYPES
+
+- money_page
+- blog_post
+- support_page
+- trust_page
+- contact_page
+- booking_page
+- resources_page
+
+RECOMMENDED SERVICES
+
+- anxiety_therapy
+- trauma_therapy
+- depression_therapy
+- relationship_counseling
+- life_coaching
+- general
+
+NEXT IMPLEMENTATION STEPS
+
+1. Replace /assets/js/site.js with the updated complete analytics JS.
+2. Replace /anxiety-therapy/index.html with the updated complete page that includes body data attributes and tracked CTA links.
+3. Update the global header and footer links with data-track-event attributes next.
+4. Update Contact and Book Consultation forms with form names and validation-friendly fields.
+5. Build all future money pages using the same data attributes and CTA tracking pattern.
+
+
+============================================================
+
+LOCATION SEO PAGE TEMPLATE
+
+============================================================
+
+
+GET REAL THERAPY – LOCATION SEO PAGE TEMPLATE
+
+URL STRUCTURE:
+/therapy-[city-name]
+
+Example:
+/therapy-fort-lauderdale
+
+
+=====================================
+SEO METADATA
+=====================================
+
+Title:
+Therapy in [City], FL | Anxiety, Trauma & Real Life Change
+
+Meta Description:
+Therapy in [City], FL for anxiety, trauma, and emotional healing. Work with a trauma-informed therapist using EMDR, IFS, and nervous system support. Book a consultation today.
+
+OG Title:
+(Same as Title)
+
+OG Description:
+(Same as Meta)
+
+Schema Name:
+Therapy in [City], FL
+
+Schema Description:
+(Same as Meta)
+
+
+=====================================
+PAGE STRUCTURE
+=====================================
+
+
+-------------------------------------
+1. HERO SECTION
+-------------------------------------
+
+H1:
+Therapy in [City], FL for Anxiety, Trauma, and Real Life Change
+
+Subheadline:
+Feel better. Think clearer. Move forward with support that actually works.
+
+CTA Buttons:
+- Book a Consultation → /book-consultation
+- Start Your Healing Journey → /book-consultation
+
+Optional Local Line:
+Serving individuals in [City] and surrounding South Florida areas.
+
+
+-------------------------------------
+2. LOCAL CONNECTION SECTION
+-------------------------------------
+
+Purpose: Build geographic relevance for SEO
+
+Content:
+If you're looking for therapy in [City], you're not alone. Many people in this area experience anxiety, stress, and emotional overwhelm while trying to keep up with work, relationships, and life transitions.
+
+Even in a place that looks calm on the outside, it's common to feel internally unsettled. Therapy can help you slow down, understand what you're experiencing, and begin to feel more grounded.
+
+Mention:
+- In-person or online sessions (if applicable)
+- Nearby cities subtly (without keyword stuffing)
+
+
+-------------------------------------
+3. PROBLEM SECTION (ANXIETY / TRAUMA HOOK)
+-------------------------------------
+
+Header:
+When Your Mind and Body Feel Like They’re Always “On”
+
+Bullets:
+- Racing thoughts or overthinking
+- Feeling constantly on edge
+- Difficulty relaxing
+- Trouble sleeping
+- Emotional overwhelm
+- Avoidance patterns
+
+Bridge:
+These experiences are not a personal failure. They are often your nervous system trying to keep you safe.
+
+
+-------------------------------------
+4. HOW YOU HELP (METHOD SECTION)
+-------------------------------------
+
+Header:
+A Deeper Approach to Therapy in [City]
+
+Content:
+Explain your approach:
+- Trauma-informed
+- Nervous system regulation
+- Emotional processing
+
+Subsections:
+
+EMDR:
+Helps process past experiences so they stop feeling like present threats.
+
+IFS:
+Helps understand protective patterns and reduce internal conflict.
+
+AEDP:
+Helps safely process emotions and build resilience.
+
+
+-------------------------------------
+5. WHO THIS IS FOR
+-------------------------------------
+
+Header:
+Who This Therapy Is For
+
+Bullets:
+- People experiencing anxiety or overwhelm
+- Those going through life transitions
+- Individuals healing from past experiences
+- Those who feel stuck despite trying to “manage it”
+- People seeking deeper emotional work
+
+Internal Link:
+→ /who-this-is-for
+
+
+-------------------------------------
+6. WHAT TO EXPECT
+-------------------------------------
+
+Header:
+What to Expect in Therapy
+
+Content:
+- Calm, supportive environment
+- Tools for regulation
+- Understanding patterns
+- Gradual emotional processing
+- Increased clarity and stability
+
+Internal Link:
+→ /what-to-expect
+
+
+-------------------------------------
+7. LOCAL CTA SECTION
+-------------------------------------
+
+Header:
+Start Therapy in [City], FL
+
+Content:
+You don’t have to wait until things feel overwhelming. Therapy can help you understand what’s happening beneath the surface and begin to feel more grounded and in control.
+
+CTA Button:
+Book a Consultation → /book-consultation
+
+
+-------------------------------------
+8. FAQ SECTION (LOCAL SEO BOOST)
+-------------------------------------
+
+Include 3–5 questions:
+
+Examples:
+
+Q: Do you offer therapy in [City], FL?
+A: Yes, I work with clients in [City] through in-person or online sessions.
+
+Q: What issues do you help with?
+A: Anxiety, trauma, emotional regulation, and relationships.
+
+Q: How do I get started?
+A: Book a consultation to see if it’s a good fit.
+
+
+-------------------------------------
+9. INTERNAL LINKING (VERY IMPORTANT)
+-------------------------------------
+
+Always include links to:
+
+- /services/anxiety-therapy
+- /services/trauma-therapy
+- /services/depression-therapy
+- /services/relationship-counseling
+- /services/life-coaching
+- /book-consultation
+- /what-to-expect
+- /who-this-is-for
+
+
+-------------------------------------
+10. IMAGE USAGE
+-------------------------------------
+
+Use:
+assets/images/abby_01.jpg
+
+Alt text example:
+Therapy support in [City], Florida for anxiety and trauma
+
+
+=====================================
+NOTES
+=====================================
+
+- Keep keyword "[City], FL" natural, do not stuff
+- Mention location 3–5 times max
+- Prioritize readability and trust
+- Always include strong CTA
+- Keep tone calm, grounded, and supportive
+
+============================================================
+CONSOLIDATED FINAL RESPONSE RULE
+============================================================
+
+When returning any completed file, always include:
+
+Ready to go live: YES or NO
+
+Then list downloadable files.
+
+Then provide a short QA summary:
+- Header/footer: passed/failed
+- Global CSS: passed/failed
+- Analytics: passed/failed
+- SEO metadata: passed/failed
+- Schema: passed/failed
+- Mobile/desktop: passed/failed
+- Accessibility: passed/failed
+- Ethical therapy copy: passed/failed
+
+If not ready, clearly state what is still blocking.
