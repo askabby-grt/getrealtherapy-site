@@ -1,0 +1,322 @@
+/* =========================================
+   CLUSTER STYLESHEET: CONVERSION PAGES
+   Load AFTER /assets/css/site.css (global) on every page whose
+   page_cluster_css = cluster-conversion-pages.css (template_type =
+   contact_page or booking_page: /contact/, /book-a-consultation/)
+
+   Two systems, both zero-new-authoring extractions of code that already
+   existed in the source site.css but was unused/orphaned there:
+
+   1. .hero / .hero-inner - a generic hero component that was defined
+      early in the source file but never actually referenced by any
+      named page system (.home-hero and .money-hero are separate,
+      fully-built components). Repurposed here as the contact/booking
+      page hero since these pages need a simple hero, not the
+      2-column hero+media-card pattern the money/home hero uses.
+   2. The full contact + consultation form system - forms only live on
+      these two page types, so the whole system belongs in this
+      cluster rather than global. NOTE: .field-error/.field-success/
+      .field-info status-message colors are already in global site.css
+      (shared with inline validation elsewhere) - not repeated here.
+   ========================================= */
+
+.hero {
+  padding: 48px 0 96px;
+}
+
+.hero-inner {
+  display: grid;
+  grid-template-columns: 1.1fr 0.9fr;
+  align-items: center;
+  gap: 48px;
+}
+
+.hero-copy {
+  max-width: 620px;
+}
+
+.hero-title {
+  margin: 0 0 18px;
+  font-family: var(--font-heading);
+  font-size: clamp(2.8rem, 6vw, 5.2rem);
+  line-height: 0.98;
+  color: var(--color-near-black);
+}
+
+.hero-subheadline {
+  font-size: clamp(1.05rem, 1.6vw, 1.2rem);
+  color: var(--color-charcoal);
+  max-width: 560px;
+}
+
+.hero-media {
+  position: relative;
+}
+
+.hero-card {
+  background: var(--color-soft-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-soft);
+}
+
+.hero-image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.hero-note {
+  position: absolute;
+  left: -18px;
+  bottom: 22px;
+  background: var(--color-warm-sand);
+  color: var(--color-near-black);
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-soft);
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+@media (max-width: 980px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    padding-top: 24px;
+  }
+
+  .hero-note {
+    position: static;
+  }
+}
+
+/* CONTACT + CONSULTATION FORM SYSTEM */
+
+.contact-form-shell,
+.consultation-form-shell {
+  width: 100%;
+  background: var(--color-soft-white, #FAFAFA);
+  border: 1px solid rgba(107, 114, 128, 0.16);
+  border-radius: var(--radius-lg, 28px);
+  box-shadow: var(--shadow-soft, 0 14px 40px rgba(26, 26, 26, 0.08));
+  padding: clamp(24px, 4vw, 42px);
+}
+
+.contact-form-grid,
+.consultation-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px 20px;
+  margin-top: 28px;
+}
+
+.field {
+  display: grid;
+  gap: 8px;
+  min-width: 0;
+}
+
+.field--full {
+  grid-column: 1 / -1;
+}
+
+.field label,
+.field .field-label {
+  display: inline-block;
+  color: var(--color-plum-dark, #4A243E);
+  font-size: 0.92rem;
+  font-weight: 800;
+  line-height: 1.25;
+}
+
+.field input,
+.field select,
+.field textarea {
+  width: 100%;
+  min-height: 52px;
+  border: 1px solid rgba(107, 58, 91, 0.22);
+  border-radius: 16px;
+  padding: 14px 16px;
+  background: var(--color-soft-white, #FAFAFA);
+  color: var(--color-near-black, #1A1A1A);
+  font-family: var(--font-body, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif);
+  font-size: 1rem;
+  line-height: 1.35;
+  outline: none;
+  box-shadow: 0 1px 0 rgba(26, 26, 26, 0.03);
+  transition: border-color var(--transition-base, 180ms ease), box-shadow var(--transition-base, 180ms ease), background var(--transition-base, 180ms ease);
+}
+
+.field textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  border-color: var(--color-cta-teal, #4F9DA6);
+  box-shadow: 0 0 0 4px rgba(79, 157, 166, 0.15);
+  background: #FFFFFF;
+}
+
+.consent {
+  display: grid !important;
+  grid-template-columns: auto 1fr;
+  gap: 12px;
+  align-items: start;
+  padding: 16px 18px;
+  border: 1px solid rgba(107, 58, 91, 0.14);
+  border-radius: 18px;
+  background: rgba(245, 241, 236, 0.72);
+  color: var(--color-charcoal, #2E2E2E);
+  font-size: 0.94rem;
+  font-weight: 500 !important;
+  line-height: 1.55;
+}
+
+.consent input {
+  width: 18px;
+  height: 18px;
+  min-height: 18px;
+  margin-top: 3px;
+  accent-color: var(--color-cta-teal, #4F9DA6);
+}
+
+.cf-turnstile {
+  min-height: 65px;
+  margin-top: 8px;
+}
+
+.contact-helper-list,
+.consultation-helper-list {
+  display: grid;
+  gap: 12px;
+  padding: 0;
+  margin: 0 0 24px;
+  list-style: none;
+}
+
+.contact-helper-list li,
+.consultation-helper-list li {
+  position: relative;
+  padding-left: 28px;
+  color: var(--color-charcoal, #2E2E2E);
+  line-height: 1.5;
+}
+
+.contact-helper-list li::before,
+.consultation-helper-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.55em;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--color-cta-teal, #4F9DA6);
+  box-shadow: 0 0 0 5px rgba(79, 157, 166, 0.14);
+}
+
+.consultation-mini-note {
+  margin-top: 18px;
+  padding: 16px 18px;
+  border-radius: 18px;
+  background: rgba(79, 157, 166, 0.1);
+  border: 1px solid rgba(79, 157, 166, 0.18);
+  color: var(--color-charcoal, #2E2E2E);
+  line-height: 1.55;
+}
+
+button.button {
+  border: 0;
+  cursor: pointer;
+  font: inherit;
+}
+
+button.button:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
+.contact-form-shell .button-row,
+.consultation-form-shell .button-row {
+  margin-top: 28px;
+}
+
+.contact-form-shell .button,
+.consultation-form-shell .button {
+  min-width: 190px;
+}
+
+@media (max-width: 860px) {
+  .contact-form-grid,
+  .consultation-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-shell,
+  .consultation-form-shell {
+    padding: 24px;
+  }
+
+  .contact-form-shell .button,
+  .consultation-form-shell .button {
+    width: 100%;
+    min-width: 0;
+  }
+}
+
+/* FORM PAGE SAFETY OVERRIDES - ensures the deployed contact and
+   consultation forms never fall back to browser defaults. */
+.form-page .contact-form-grid,
+.form-page .consultation-form-grid {
+  display: grid !important;
+  grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+  gap: 18px 20px !important;
+  margin-top: 28px !important;
+}
+
+.form-page .field {
+  display: grid !important;
+  gap: 8px !important;
+  min-width: 0 !important;
+}
+
+.form-page .field--full {
+  grid-column: 1 / -1 !important;
+}
+
+.form-page .field input,
+.form-page .field select,
+.form-page .field textarea {
+  width: 100% !important;
+  min-height: 52px !important;
+  border: 1px solid rgba(107, 58, 91, 0.22) !important;
+  border-radius: 16px !important;
+  padding: 14px 16px !important;
+  background: var(--color-soft-white, #FAFAFA) !important;
+  color: var(--color-near-black, #1A1A1A) !important;
+  font-family: var(--font-body, Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif) !important;
+  font-size: 1rem !important;
+  line-height: 1.35 !important;
+}
+
+.form-page .field textarea {
+  min-height: 150px !important;
+}
+
+.form-page .consent {
+  display: grid !important;
+  grid-template-columns: auto 1fr !important;
+}
+
+@media (max-width: 860px) {
+  .form-page .contact-form-grid,
+  .form-page .consultation-form-grid {
+    grid-template-columns: 1fr !important;
+  }
+}

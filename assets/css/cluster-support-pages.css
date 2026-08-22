@@ -1,0 +1,150 @@
+/* =========================================
+   CLUSTER STYLESHEET: SUPPORT PAGES
+   Load AFTER /assets/css/site.css (global) on every page whose
+   page_cluster_css = cluster-support-pages.css (template_type =
+   faq_hub, testimonials_page, modality_page, format_page,
+   resources_page, or legal_page: /faqs/, /testimonials/,
+   /emdr-therapy/, /ifs-therapy/, /aedp-therapy/, /online-therapy/,
+   resource pages, legal pages, etc.)
+
+   *** NEW COMPONENT - NOT AN EXTRACTION ***
+   .page-hero does not exist anywhere in the source site.css. The
+   "GLOBAL TYPOGRAPHY SCALE" block in site.css already anticipates it
+   and is the reason its two dimensions come from two different
+   places: .page-hero__title is grouped with .blog-hero__title and
+   sized off --h1-blog (the smallest of the four hero title tokens -
+   these are lower-funnel/informational pages, so a calmer, smaller
+   hero title is intentional), while .page-hero__lead is grouped with
+   .home-hero__lead/.money-hero__lead/.location-hero__lead off
+   --lead-text. Structurally this file mirrors .money-hero (2-column
+   grid, media card, note chip) rather than the single-column
+   .blog-hero, since these pages typically do carry a supporting image
+   (a modality diagram, a therapist photo for testimonials, etc.).
+   Review before build - this combination of "money-hero's layout,
+   blog-hero's title scale" is a real design call, not an extraction.
+   ========================================= */
+
+.page-hero {
+  padding: 56px 0 76px;
+  background:
+    radial-gradient(circle at top left, rgba(207, 227, 228, 0.5), transparent 34%),
+    linear-gradient(180deg, var(--color-beige), #fbf8f5);
+}
+
+.page-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(300px, 0.9fr);
+  gap: 44px;
+  align-items: center;
+}
+
+.page-hero__copy {
+  max-width: 640px;
+}
+
+.page-hero__title {
+  margin: 0 0 16px;
+  font-family: var(--font-heading);
+  font-size: var(--h1-blog);
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  color: var(--color-near-black);
+}
+
+.page-hero__lead {
+  max-width: 600px;
+  font-size: var(--lead-text);
+  line-height: 1.65;
+  color: var(--color-charcoal);
+}
+
+.page-hero__media {
+  position: relative;
+}
+
+.page-hero__card {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-soft-white);
+  box-shadow: var(--shadow-soft);
+}
+
+.page-hero__image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.page-hero__note {
+  position: absolute;
+  left: -18px;
+  bottom: 22px;
+  max-width: 300px;
+  padding: 14px 16px;
+  border-radius: var(--radius-md);
+  background: var(--color-warm-sand);
+  color: var(--color-near-black);
+  box-shadow: var(--shadow-soft);
+  font-size: 0.92rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* No-image fallback: FAQ hub, legal pages, and some format pages won't
+   always have a media asset. Drop .page-hero__grid to a single column
+   by adding this modifier class in markup when there's no image. */
+.page-hero__grid--no-media {
+  grid-template-columns: 1fr;
+}
+
+/* RESPONSIVE - page-hero only, mirrors money-hero's breakpoints. */
+@media (min-width: 981px) and (max-width: 1180px) {
+  .page-hero {
+    padding: 48px 0 62px;
+  }
+
+  .page-hero__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.78fr);
+    gap: 38px;
+  }
+
+  .page-hero__image {
+    max-height: 480px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 980px) {
+  .page-hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .page-hero__note {
+    position: static;
+    margin-top: 14px;
+  }
+}
+
+@media (max-width: 640px) {
+  .page-hero {
+    padding: 24px 0 48px;
+  }
+
+  .page-hero__card {
+    border-radius: 22px;
+  }
+
+  .page-hero__image {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .page-hero__note {
+    position: static;
+    max-width: none;
+    margin-top: 12px;
+  }
+}

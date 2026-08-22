@@ -1,0 +1,147 @@
+/* =========================================
+   CLUSTER STYLESHEET: MONEY PAGES
+   Load AFTER /assets/css/site.css (global) on every page whose
+   page_cluster_css = cluster-money-pages.css (template_type = money_page:
+   e.g. /services/anxiety-therapy/, /services/depression-therapy/, etc.)
+
+   Contains ONLY the .money-hero component. Everything else this page
+   type uses (.service-section variants, .content-grid, .content-card,
+   .check-list, .therapy-card-grid/card, .resource-grid/card, .faq-list/
+   item, .breadcrumbs, buttons, forms-adjacent alerts) is shared across
+   multiple clusters and lives in the global site.css - do not duplicate
+   those here.
+
+   Extracted verbatim from the money-page hero system in the source
+   site.css (single definition there was scattered across three
+   responsive blocks tied to the same selectors as .home-hero; those
+   money-hero-only rules are consolidated below instead of copy-pasted
+   in three separate places, since .home-hero's copies now live in
+   cluster-trust-pages.css instead).
+   ========================================= */
+
+.money-hero {
+  padding: 64px 0 86px;
+  background:
+    radial-gradient(circle at top left, rgba(207, 227, 228, 0.55), transparent 34%),
+    linear-gradient(180deg, var(--color-beige), #fbf8f5);
+}
+
+.money-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.money-hero__copy {
+  max-width: 680px;
+}
+
+.money-hero__title {
+  margin: 0 0 18px;
+  font-family: var(--font-heading);
+  font-size: var(--h1-money);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--color-near-black);
+}
+
+.money-hero__lead {
+  max-width: 620px;
+  font-size: clamp(1.05rem, 1.65vw, 1.22rem);
+  color: var(--color-charcoal);
+}
+
+.money-hero__media {
+  position: relative;
+}
+
+.money-hero__card {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-soft-white);
+  box-shadow: var(--shadow-soft);
+}
+
+.money-hero__image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.money-hero__note {
+  position: absolute;
+  left: -18px;
+  bottom: 24px;
+  max-width: 310px;
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  background: var(--color-warm-sand);
+  color: var(--color-near-black);
+  box-shadow: var(--shadow-soft);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* RESPONSIVE - money-hero only. NOTE: the cross-cluster typography
+   overrides in site.css's "GLOBAL TYPOGRAPHY SCALE" block still apply
+   on top of these (font-size/line-height/letter-spacing/padding at
+   min-width:981px, and the --h1-money token value itself at the two
+   mobile breakpoints below) - that block is intentionally the single
+   source of truth for hero type sizing across all 5 hero variants, so
+   it is not repeated here. */
+@media (min-width: 981px) and (max-width: 1180px) {
+  .money-hero {
+    padding: 54px 0 68px;
+  }
+
+  .money-hero__grid {
+    grid-template-columns: minmax(0, 0.94fr) minmax(340px, 0.82fr);
+    gap: 42px;
+  }
+
+  .money-hero__lead {
+    font-size: clamp(1rem, 1.25vw, 1.12rem);
+    max-width: 580px;
+  }
+
+  .money-hero__image {
+    max-height: 520px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 980px) {
+  .money-hero__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .money-hero__note {
+    position: static;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .money-hero {
+    padding: 26px 0 52px;
+  }
+
+  .money-hero__card {
+    border-radius: 22px;
+  }
+
+  .money-hero__image {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .money-hero__note {
+    position: static;
+    max-width: none;
+    margin-top: 14px;
+  }
+}

@@ -1,0 +1,176 @@
+/* =========================================
+   CLUSTER STYLESHEET: LOCATION PAGES
+   Load AFTER /assets/css/site.css (global) on every page whose
+   page_cluster_css = cluster-location-pages.css (template_type =
+   location_page or location_condition_page: /therapy-fort-lauderdale/,
+   /therapy-fort-lauderdale/anxiety-therapy/, etc.)
+
+   *** NEW COMPONENT - NOT AN EXTRACTION ***
+   .location-hero does not exist anywhere in the source site.css yet.
+   The "GLOBAL TYPOGRAPHY SCALE" block in site.css already anticipates
+   it (.money-hero__title and .location-hero__title are grouped
+   together there, both sized off --h1-location), but the actual layout
+   - grid, copy column, media card, image, note - was never written.
+   This file authors it, deliberately mirroring .money-hero's structure
+   (same grid ratio, same card/note pattern, same spacing scale) so
+   location pages feel like the same design system as the service
+   pages they sit next to in navigation, not a new visual language.
+   Review this before build - it's a real design decision, not a
+   copy-paste. The one intentional visual difference: the note chip
+   uses the teal tint instead of warm sand, as a quiet way to let
+   someone glancing at the page recognize "this is a location page"
+   the way color already does for the plum service-section variant.
+   ========================================= */
+
+.location-hero {
+  padding: 64px 0 86px;
+  background:
+    radial-gradient(circle at top left, rgba(207, 227, 228, 0.55), transparent 34%),
+    linear-gradient(180deg, var(--color-beige), #fbf8f5);
+}
+
+.location-hero__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(320px, 0.94fr);
+  gap: 48px;
+  align-items: center;
+}
+
+.location-hero__copy {
+  max-width: 680px;
+}
+
+.location-hero__title {
+  margin: 0 0 18px;
+  font-family: var(--font-heading);
+  font-size: var(--h1-location);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  color: var(--color-near-black);
+}
+
+.location-hero__lead {
+  max-width: 620px;
+  font-size: clamp(1.05rem, 1.65vw, 1.22rem);
+  color: var(--color-charcoal);
+}
+
+.location-hero__media {
+  position: relative;
+}
+
+.location-hero__card {
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  background: var(--color-soft-white);
+  box-shadow: var(--shadow-soft);
+}
+
+.location-hero__image {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+.location-hero__note {
+  position: absolute;
+  left: -18px;
+  bottom: 24px;
+  max-width: 310px;
+  padding: 16px 18px;
+  border-radius: var(--radius-md);
+  background: var(--color-soft-teal-tint);
+  color: var(--color-near-black);
+  box-shadow: var(--shadow-soft);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+/* LOCATION-SPECIFIC CONTENT BLOCK - for neighborhood/service-area
+   callouts (e.g. "Also serving Lauderdale-by-the-Sea, Pompano Beach,
+   Deerfield Beach, Davie"). Optional per-page; safe to leave unused. */
+.location-area-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 0;
+  margin: 24px 0 0;
+  list-style: none;
+}
+
+.location-area-list li {
+  padding: 14px 18px;
+  border-radius: var(--radius-md);
+  background: rgba(111, 175, 178, 0.12);
+  border: 1px solid rgba(111, 175, 178, 0.24);
+  color: var(--color-charcoal);
+  font-weight: 600;
+}
+
+.location-area-list li a {
+  color: var(--color-plum);
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+
+/* RESPONSIVE - location-hero only, mirrors money-hero's breakpoints.
+   The cross-cluster typography block in site.css still governs title
+   font-size/line-height/letter-spacing and the --h1-location token
+   value at each breakpoint - not repeated here. */
+@media (min-width: 981px) and (max-width: 1180px) {
+  .location-hero {
+    padding: 54px 0 68px;
+  }
+
+  .location-hero__grid {
+    grid-template-columns: minmax(0, 0.94fr) minmax(340px, 0.82fr);
+    gap: 42px;
+  }
+
+  .location-hero__lead {
+    font-size: clamp(1rem, 1.25vw, 1.12rem);
+    max-width: 580px;
+  }
+
+  .location-hero__image {
+    max-height: 520px;
+    object-fit: cover;
+    object-position: center top;
+    border-radius: 0;
+  }
+}
+
+@media (max-width: 980px) {
+  .location-hero__grid,
+  .location-area-list {
+    grid-template-columns: 1fr;
+  }
+
+  .location-hero__note {
+    position: static;
+    margin-top: 16px;
+  }
+}
+
+@media (max-width: 640px) {
+  .location-hero {
+    padding: 26px 0 52px;
+  }
+
+  .location-hero__card {
+    border-radius: 22px;
+  }
+
+  .location-hero__image {
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+    object-position: center top;
+  }
+
+  .location-hero__note {
+    position: static;
+    max-width: none;
+    margin-top: 14px;
+  }
+}
